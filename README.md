@@ -50,3 +50,44 @@ erDiagram
         uuid receiver_id FK
         int current_step
     }
+```
+
+## 📊 4. Pilha Tecnológica
+
+```mermaid
+graph LR
+    A["Frontend: Angular 19+"] --- B["Estilização: Tailwind CSS"]
+    A --- C["Backend: Supabase (Auth/DB)"]
+    A --- D["Metodologia: SDD & IA Assisted"]
+    
+    style A fill:#dd0031,stroke:#fff,color:#fff
+    style C fill:#3ecf8e,stroke:#fff,color:#fff
+```
+## 5. Checklist de Funcionalidades (IDs)
+[ ] RA1: Protótipo Figma e Configuração PWA (Manifest).
+
+[ ] RA2: Componentes Standalone e Fluxo de Controle @for/@if.
+
+[ ] RA3: Estado Reativo com Signals, computed e model().
+
+[ ] RA4: Comunicação entre componentes via input() e output().
+
+[ ] RA6: Integração completa com Supabase Auth e CRUD.
+
+[ ] RA7/8: Gitflow e Orquestração de IA documentada.
+
+## 🚀 6. Início Rápido (Desenvolvimento Local)
+Clonar o repositório:
+
+Bash
+git clone https://github.com/GabrielCamposManzole/secret-santa.git
+cd secret-santa
+Instalar dependências:
+
+Bash
+npm install
+Executar o projeto:
+
+Bash
+ng serve
+Acesse http://localhost:4200 no seu navegador.
