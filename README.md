@@ -14,20 +14,13 @@
 ---
 
 ## 🔗 Informações Gerais
-<<<<<<< HEAD
 
-- **🌐 Link em Produção:** [Aguardando Deploy no GitHub Pages/Vercel]
-- **👤 Autores:** Gabriel Campos Manzole e [Adicione os outros nomes aqui]
-- **🎓 Instituição:** UTFPR - Campus Guarapuava (TSI)
-- **🚀 Status:** Entrega 1 - Concepção e Planejamento
-=======
 * **🌐 Link em Produção:** [Aguardando Deploy no GitHub Pages/Vercel]
 * **Prototipação:** https://www.figma.com/design/9nGp0mNqjyH0X3mUH2SR3f/SecretSanta?node-id=35-2&m=dev&t=J3b5kwTG5DVzmoRu-1
 * **Kanban:** https://github.com/users/GabrielCamposManzole/projects/2/views/1
 * **👤 Autores:** Emilly Zatti, Gabriel Campos Manzole e Marcos Vinicius Olenka de Macedo
 * **🎓 Instituição:** UTFPR - Campus Guarapuava (TSI)
 * **🚀 Status:** Entrega 1 - Concepção e Planejamento
->>>>>>> f60bca7ccce275076da37b8033f9d6bd506d5953
 
 ---
 
