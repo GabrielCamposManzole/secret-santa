@@ -14,16 +14,25 @@
 ---
 
 ## 🔗 Informações Gerais
+<<<<<<< HEAD
+
+- **🌐 Link em Produção:** [Aguardando Deploy no GitHub Pages/Vercel]
+- **👤 Autores:** Gabriel Campos Manzole e [Adicione os outros nomes aqui]
+- **🎓 Instituição:** UTFPR - Campus Guarapuava (TSI)
+- **🚀 Status:** Entrega 1 - Concepção e Planejamento
+=======
 * **🌐 Link em Produção:** [Aguardando Deploy no GitHub Pages/Vercel]
 * **Prototipação:** https://www.figma.com/design/9nGp0mNqjyH0X3mUH2SR3f/SecretSanta?node-id=35-2&m=dev&t=J3b5kwTG5DVzmoRu-1
 * **Kanban:** https://github.com/users/GabrielCamposManzole/projects/2/views/1
 * **👤 Autores:** Emilly Zatti, Gabriel Campos Manzole e Marcos Vinicius Olenka de Macedo
 * **🎓 Instituição:** UTFPR - Campus Guarapuava (TSI)
 * **🚀 Status:** Entrega 1 - Concepção e Planejamento
+>>>>>>> f60bca7ccce275076da37b8033f9d6bd506d5953
 
 ---
 
 ## 🎯 1. Visão Geral
+
 O **SecretSanta** é uma aplicação web progressiva (PWA) que reinventa a dinâmica do Amigo Secreto. Em vez de apenas revelar um nome, o sistema introduz o conceito de **"The Quest"**: um jogo de dedução onde o participante deve adivinhar quem tirou através de pistas baseadas em características pessoais.
 
 A aplicação utiliza o ecossistema **Angular 19** para garantir uma experiência reativa e fluida, integrada ao **Supabase** para autenticação e banco de dados em tempo real.
@@ -31,10 +40,12 @@ A aplicação utiliza o ecossistema **Angular 19** para garantir uma experiênci
 ---
 
 ## 📚 2. Documentação Oficial (Docs as Code)
+
 Toda a engenharia do sistema está detalhada na pasta `/docs`:
-* [📄 **PRD (Product Requirements Document)**](./docs/prd.md)
-* [📐 **SDD (Software Design Document)**](./docs/sdd.md)
-* [🎨 **Protótipo no Figma**](LINK_DO_SEU_FIGMA_AQUI)
+
+- [📄 **PRD (Product Requirements Document)**](./docs/prd.md)
+- [📐 **SDD (Software Design Document)**](./docs/sdd.md)
+- [🎨 **Protótipo no Figma**](LINK_DO_SEU_FIGMA_AQUI)
 
 ---
 
@@ -61,24 +72,13 @@ graph LR
     A["Frontend: Angular 19+"] --- B["Estilização: Tailwind CSS"]
     A --- C["Backend: Supabase (Auth/DB)"]
     A --- D["Metodologia: SDD & IA Assisted"]
-    
+
     style A fill:#dd0031,stroke:#fff,color:#fff
     style C fill:#3ecf8e,stroke:#fff,color:#fff
 ```
-## 5. Checklist de Funcionalidades (IDs)
-[ ] RA1: Protótipo Figma e Configuração PWA (Manifest).
 
-[ ] RA2: Componentes Standalone e Fluxo de Controle @for/@if.
+## 🚀 5. Início Rápido (Desenvolvimento Local)
 
-[ ] RA3: Estado Reativo com Signals, computed e model().
-
-[ ] RA4: Comunicação entre componentes via input() e output().
-
-[ ] RA6: Integração completa com Supabase Auth e CRUD.
-
-[ ] RA7/8: Gitflow e Orquestração de IA documentada.
-
-## 🚀 6. Início Rápido (Desenvolvimento Local)
 Clonar o repositório:
 
 Bash
