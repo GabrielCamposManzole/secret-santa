@@ -38,7 +38,7 @@ Toda a engenharia do sistema está detalhada na pasta `/docs`:
 
 - [📄 **PRD (Product Requirements Document)**](./docs/prd.md)
 - [📐 **SDD (Software Design Document)**](./docs/sdd.md)
-- [🎨 **Protótipo no Figma**](LINK_DO_SEU_FIGMA_AQUI)
+- [🎨 **Protótipo no Figma**] https://www.figma.com/design/9nGp0mNqjyH0X3mUH2SR3f/SecretSanta?node-id=35-2&m=dev&t=J3b5kwTG5DVzmoRu-1
 
 ---
 
