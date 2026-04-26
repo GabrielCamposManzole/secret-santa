@@ -53,7 +53,7 @@ Toda a engenharia do sistema está detalhada na pasta `/docs`:
 
 Clonar o repositório:
 
-Bash
+```Bash
 git clone https://github.com/GabrielCamposManzole/secret-santa.git
 cd secret-santa
 Instalar dependências:
