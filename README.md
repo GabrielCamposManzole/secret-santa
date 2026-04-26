@@ -44,10 +44,10 @@ Toda a engenharia do sistema está detalhada na pasta `/docs`:
 
 ## 📊 3. Stack Tecnológica
 
-Arquitetura: Monorepo (Back, Front e Extensão no mesmo repositório).
-Backend (API):TypeScript
-Banco de Dados: PostgreSQL (Nuvem) com supabase.
-Frontend (Mobile App): Angular.
+* **Arquitetura:** Monorepo (Back, Front e Extensão no mesmo repositório).
+* **Backend (API):** TypeScript
+* **Banco de Dados:** PostgreSQL (Nuvem) com supabase.
+* **Frontend (Mobile App):** Angular.
 
 ## 🚀 5. Início Rápido (Desenvolvimento Local)
 
