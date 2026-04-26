@@ -42,33 +42,12 @@ Toda a engenharia do sistema está detalhada na pasta `/docs`:
 
 ---
 
-## 📊 3. Modelagem de Dados (Diagrama ER)
+## 📊 3. Stack Tecnológica
 
-```mermaid
-erDiagram
-    PROFILES ||--o{ TRAITS : "cadastra"
-    GROUPS ||--o{ GROUP_MEMBERS : "possui"
-    PROFILES ||--o{ GROUP_MEMBERS : "participa"
-    DRAWS {
-        uuid id PK
-        uuid group_id FK
-        uuid giver_id FK
-        uuid receiver_id FK
-        int current_step
-    }
-```
-
-## 📊 4. Pilha Tecnológica
-
-```mermaid
-graph LR
-    A["Frontend: Angular 19+"] --- B["Estilização: Tailwind CSS"]
-    A --- C["Backend: Supabase (Auth/DB)"]
-    A --- D["Metodologia: SDD & IA Assisted"]
-
-    style A fill:#dd0031,stroke:#fff,color:#fff
-    style C fill:#3ecf8e,stroke:#fff,color:#fff
-```
+Arquitetura: Monorepo (Back, Front e Extensão no mesmo repositório).
+Backend (API):TypeScript
+Banco de Dados: PostgreSQL (Nuvem) com supabase.
+Frontend (Mobile App): Angular.
 
 ## 🚀 5. Início Rápido (Desenvolvimento Local)
 
@@ -84,5 +63,5 @@ npm install
 Executar o projeto:
 
 Bash
-ng serve
+npm run dev:web
 Acesse http://localhost:4200 no seu navegador.
