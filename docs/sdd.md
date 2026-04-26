@@ -64,8 +64,8 @@ erDiagram
     traits {
         uuid id PK
         uuid profile_id FK
-        string label "Ex: Hobby"
-        string value "Ex: Programar"
+        string label
+        string value
     }
 
 🎨 4. Design Tokens
