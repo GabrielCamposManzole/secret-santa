@@ -89,7 +89,7 @@ A fonte Plus Jakarta Sans deve ser utilizada em todos os títulos e textos.
 Bordas e Raio:
 Componentes como botões e inputs devem utilizar bordas arredondadas (estilo pílula), reforçando a identidade visual amigável do sistema.
 Sombras (Elevação):
-Utilize sombras suaves para indicar profundidade e hierarquia entre elementos (cards, modais, botões).
+Utilize sombras suaves para indicar profundidade e hierarquia entre elementos (cards, modais, botões .).
 Estados de Interação:
 Defina variações visuais para estados como hover, foco, ativo e desabilitado, garantindo feedback claro para o usuário.
 ```
