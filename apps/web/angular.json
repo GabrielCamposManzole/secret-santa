@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "secret-santa": {
+    "web": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -26,15 +26,7 @@
             ],
             "styles": [
               "src/styles.css"
-            ],
-            "server": "src/main.server.ts",
-            "outputMode": "server",
-            "security": {
-              "allowedHosts": []
-            },
-            "ssr": {
-              "entry": "src/server.ts"
-            }
+            ]
           },
           "configurations": {
             "production": {
@@ -64,10 +56,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "secret-santa:build:production"
+              "buildTarget": "web:build:production"
             },
             "development": {
-              "buildTarget": "secret-santa:build:development"
+              "buildTarget": "web:build:development"
             }
           },
           "defaultConfiguration": "development"

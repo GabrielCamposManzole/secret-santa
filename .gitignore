@@ -1,0 +1,21 @@
+# Pastas de dependências em qualquer subdiretório
+node_modules/
+
+# Pastas de Build e Cache
+dist/
+.angular/
+.nx/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment
+.env
+.env.*
+
+# Editor / SO
+.vscode/
+.idea/
+.DS_Store

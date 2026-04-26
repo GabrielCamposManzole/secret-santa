@@ -14,6 +14,7 @@
 - **Core:** Angular 19+ (Signals para reatividade de estado).
 - **Auth:** Supabase Auth Helpers.
 - **UI Components:** Lucide-Angular (ícones), Tailwind Merge (utilitários de classe).
+- **UI Framework:** DaisyUI (componentes pré-estilizados)
 
 ## 🗄️ 3. Arquitetura de Dados
 
