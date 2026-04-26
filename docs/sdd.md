@@ -28,6 +28,7 @@
 
 ### 📊 3.2. Diagrama ER (Mermaid)
 
+```mermaid
 erDiagram
 
     profiles ||--o{ traits : "possui"
@@ -66,6 +67,7 @@ erDiagram
         string label "Ex: Hobby"
         string value "Ex: Programar"
     }
+
 🎨 4. Design Tokens
 
 Os Design Tokens representam as decisões visuais fundamentais do sistema, garantindo consistência e facilidade de manutenção ao longo do desenvolvimento.
