@@ -1,7 +1,7 @@
 # 🛠️ Software Design Document (SDD) - SecretSanta
 
 **Projeto:** SecretSanta
-**Versão:** 1.0.0 v
+**Versão:** 1.0.0
 **Status:** ⚪ Aguardando Geração de Especificações.
 
 ## 🤖 1. Orquestração e Contexto de IA (MCP)
@@ -28,11 +28,29 @@
 
 ### 📊 3.2. Diagrama ER (Mermaid)
 
-```mermaid
 erDiagram
+
     profiles ||--o{ traits : "possui"
     profiles ||--o{ group_members : "participa"
     groups ||--o{ group_members : "contem"
+    groups ||--o{ draws : "possui"
+    profiles ||--o{ draws : "giver"
+    profiles ||--o{ draws : "receiver"
+
+    profiles {
+        uuid id PK
+    }
+
+    groups {
+        uuid id PK
+    }
+
+    group_members {
+        uuid id PK
+        uuid profile_id FK
+        uuid group_id FK
+    }
+
     draws {
         uuid id PK
         uuid group_id FK
@@ -41,13 +59,13 @@ erDiagram
         boolean quest_completed
         int current_step
     }
+
     traits {
         uuid id PK
         uuid profile_id FK
         string label "Ex: Hobby"
         string value "Ex: Programar"
     }
-
 🎨 4. Design Tokens
 
 Os Design Tokens representam as decisões visuais fundamentais do sistema, garantindo consistência e facilidade de manutenção ao longo do desenvolvimento.
