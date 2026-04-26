@@ -1,7 +1,7 @@
 # 🛠️ Software Design Document (SDD) - SecretSanta
 
 **Projeto:** SecretSanta
-**Versão:** 1.0.0  
+**Versão:** 1.0.0 v
 **Status:** ⚪ Aguardando Geração de Especificações.
 
 ## 🤖 1. Orquestração e Contexto de IA (MCP)
