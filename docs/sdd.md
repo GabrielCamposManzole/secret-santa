@@ -33,41 +33,46 @@
 ```mermaid
 erDiagram
 
-    profiles ||--o{ traits : possui
-    profiles ||--o{ group_members : participa
-    groups ||--o{ group_members : contem
-    groups ||--o{ draws : possui
-    profiles ||--o{ draws : giver
-    profiles ||--o{ draws : receiver
-
-    profiles {
-        uuid id PK
+    USUARIO {
+        int id PK
+        string nome_completo
+        int idade
+        string email
+        string senha
     }
 
-    groups {
-        uuid id PK
+    GRUPO {
+        int id PK
+        string token
     }
 
-    group_members {
-        uuid id PK
-        uuid profile_id FK
-        uuid group_id FK
+    USUARIO_GRUPO {
+        int id PK
+        int usuario_id FK
+        int grupo_id FK
     }
 
-    draws {
-        uuid id PK
-        uuid group_id FK
-        uuid giver_id FK
-        uuid receiver_id FK
-        boolean quest_completed
-        int current_step
+    CARACTERISTICAS {
+        int id PK
+        string nome
+        string descricao
+        int usuario_id FK
     }
 
-    traits {
-        uuid id PK
-        uuid profile_id FK
-        string label
-        string value
+    GAME {
+        int id PK
+        int grupo_id FK
+        date data_jogo
+        boolean iniciado
+        boolean finalizado
+    }
+
+    GAME_RODADA {
+        int id PK
+        int game_id FK
+        int giver_id FK
+        int receiver_id FK
+        boolean acertou
     }
 ```
 🎨 4. Design Tokens
