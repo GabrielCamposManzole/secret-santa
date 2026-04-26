@@ -28,15 +28,16 @@
 
 ### 📊 3.2. Diagrama ER (Mermaid)
 
+
 ```mermaid
 erDiagram
 
-    profiles ||--o{ traits : "possui"
-    profiles ||--o{ group_members : "participa"
-    groups ||--o{ group_members : "contem"
-    groups ||--o{ draws : "possui"
-    profiles ||--o{ draws : "giver"
-    profiles ||--o{ draws : "receiver"
+    profiles ||--o{ traits : possui
+    profiles ||--o{ group_members : participa
+    groups ||--o{ group_members : contem
+    groups ||--o{ draws : possui
+    profiles ||--o{ draws : giver
+    profiles ||--o{ draws : receiver
 
     profiles {
         uuid id PK
@@ -67,7 +68,7 @@ erDiagram
         string label
         string value
     }
-
+```
 🎨 4. Design Tokens
 
 Os Design Tokens representam as decisões visuais fundamentais do sistema, garantindo consistência e facilidade de manutenção ao longo do desenvolvimento.
