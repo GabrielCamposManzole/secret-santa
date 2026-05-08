@@ -1,5 +1,24 @@
-/* You can add global styles to this file, and also import other style files */
-
 @import "tailwindcss";
-@config "../tailwind.config.js";
 @plugin "daisyui";
+
+@theme {
+    /* Cores do SDD */
+    --color-primary: #D42426;
+    /* Vermelho Festivo */
+    --color-secondary: #1A1C1C;
+    /* Preto Profundo */
+    --color-surface: #F8F9F9;
+    /* Cinza Claro */
+
+    /* Arredondamentos (Estilo Pílula) */
+    --radius-btn: 2rem;
+    --radius-card: 1.5rem;
+}
+
+/* Opcional: Configurar o DaisyUI para usar essas cores */
+:root {
+    --p: var(--color-primary);
+    --s: var(--color-secondary);
+    --b1: var(--color-surface);
+    --rounded-btn: var(--radius-btn);
+}

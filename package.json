@@ -7,9 +7,20 @@
     "apps/*"
   ],
   "scripts": {
-    "dev:web": "npm run start -w apps/web"
+    "dev:web": "npm run start -w apps/web",
+    "build:web": "npm run build -w apps/web",
+    "test:web": "npm run test -w apps/web"
   },
-  "keywords": ["angular", "supabase", "monorepo"],
+  "keywords": [
+    "angular",
+    "supabase",
+    "monorepo"
+  ],
   "author": "Sua Equipe",
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.2.4",
+    "postcss": "^8.5.14",
+    "tailwindcss": "^4.2.4"
+  }
 }
