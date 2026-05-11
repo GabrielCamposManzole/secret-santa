@@ -1,28 +1,17 @@
-<div class="min-h-screen bg-[#F8F9F9] flex flex-col items-center justify-center p-6 gap-10 font-['Plus_Jakarta_Sans']">
+<div class="min-h-screen bg-surface flex flex-col items-center justify-center p-6 gap-10 font-['Plus_Jakarta_Sans']">
 
   <div class="text-center">
-    <h1 class="text-4xl md:text-5xl font-bold text-[#1A1C1C] tracking-tight">
-      Secret<span class="text-[#D42426]">Santa</span>
+    <h1 class="text-4xl md:text-5xl font-bold text-secondary tracking-tight">
+      Secret<span class="text-primary">Santa</span>
     </h1>
     <p class="mt-3 text-lg text-gray-600">Teste de Interface e Design Tokens</p>
   </div>
 
   <div class="flex flex-wrap justify-center gap-4">
-
-    <button
-      class="btn border-none bg-[#D42426] hover:bg-[#b51f21] text-white rounded-full px-8 shadow-md transition-all">
-      Sortear Agora
-    </button>
-
-    <button class="btn border-none bg-[#1A1C1C] hover:bg-black text-white rounded-full px-8 shadow-md transition-all">
-      Ver Grupos
-    </button>
-
-    <button
-      class="btn btn-outline border-[#D42426] text-[#D42426] hover:bg-[#D42426] hover:border-[#D42426] rounded-full px-8 transition-all">
-      Meu Perfil
-    </button>
-
+    <app-button variant="primary">Sortear Agora</app-button>
+    <app-button variant="secondary">Ver Grupos</app-button>
+    <app-button variant="outline">Meu Perfil</app-button>
+    <app-save-button [label]="'Salvar Alterações'"></app-save-button>
   </div>
 
   <div class="card w-full max-w-md bg-white shadow-xl rounded-2xl border border-gray-100">
