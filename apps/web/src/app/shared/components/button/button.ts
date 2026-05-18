@@ -32,7 +32,7 @@ export class ButtonComponent {
   variant = input<ButtonVariant>('primary');
   loading = input<boolean>(false);
   disabled = input<boolean>(false);
-  
+
   // Classe dinâmica via sinal computado
   buttonClasses = computed(() => {
     switch (this.variant()) {
