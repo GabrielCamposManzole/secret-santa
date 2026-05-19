@@ -1,11 +1,11 @@
 import { Component, input, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LucideAngularModule, Save } from 'lucide-angular';
+import { LucideSave } from '@lucide/angular';
 
 @Component({
   selector: 'app-save-button',
   standalone: true,
-  imports: [CommonModule, LucideAngularModule],
+  imports: [CommonModule, LucideSave],
   template: `
     <button
       [disabled]="disabled() || loading()"
@@ -17,7 +17,7 @@ import { LucideAngularModule, Save } from 'lucide-angular';
         <span class="loading loading-spinner loading-sm"></span>
         <span>Salvando...</span>
       } @else {
-        <lucide-icon [img]="SaveIcon" size="18" strokeWidth="2"></lucide-icon>
+        <svg lucideSave size="18" strokeWidth="2"></svg>
         <span>{{ label() }}</span>
       }
     </button>
@@ -29,9 +29,6 @@ import { LucideAngularModule, Save } from 'lucide-angular';
   `]
 })
 export class SaveButtonComponent {
-  // Ícone Lucide disponibilizado para o template
-  readonly SaveIcon = Save;
-
   // Signal Inputs (Angular 17.1+)
   loading = input<boolean>(false);
   disabled = input<boolean>(false);
