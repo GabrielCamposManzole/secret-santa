@@ -30,24 +30,24 @@ O **SecretSanta** é uma aplicação web progressiva (PWA) que reinventa o amigo
 > - 🔴 **[Deprecated]**: Funcionalidade removida ou substituída.
 
 - **🟡 US01 - Autenticação:**
-  **Ator** Usuário autenticado | **História:** Como usuário, quero poder criar uma conta com e-mail/senha para manter meus dados seguros.
-  **✅ Critérios de Aceitação:**
+- **Ator** Usuário autenticado | **História:** Como usuário, quero poder criar uma conta com e-mail/senha para manter meus dados seguros.
+- **✅ Critérios de Aceitação:**
 - [ ] O usuário deve ser capaz de criar uma conta com e-mail/senha.
 - [ ] O usuário deve ser capaz de fazer login com e-mail/senha.
 - [ ] O usuário deve ser capaz de fazer logout.
 - [ ] O usuário deve ser capaz de redefinir a senha.
 
 - **🟡 US02 - Perfil do usuário Autenticado:**
-  **Ator** Usuário autenticado | **História:** Como usuário autenticado, quero poder atualizar meu cadastro, preenchendo nome completo, idade, minhas características pré-definidas e alteração de senha.
-  **✅ Critérios de Aceitação:**
+- **Ator** Usuário autenticado | **História:** Como usuário autenticado, quero poder atualizar meu cadastro, preenchendo nome completo, idade, minhas características pré-definidas e alteração de senha.
+- **✅ Critérios de Aceitação:**
 - [ ] O usuário deve ser capaz de atualizar seu nome completo.
 - [ ] O usuário deve ser capaz de atualizar sua idade.
 - [ ] O usuário deve ser capaz de atualizar suas características pré-definidas.
 - [ ] O usuário deve ser capaz de alterar sua senha.
 
 - **🟡 US03 - Gestão de Grupos:**
-  **Ator** Usuário autenticado | **História:** Como usuário autenticado, quero criar múltiplos grupos (ex: "Família", "Trabalho") e gerar um código de convite que será enviado ao participante via email. Devo poder adicionar/remover participantes do grupo, fazer o sorteio dos jogadores, verificar o status de preenchimento das caracteristicas dos jogadores e iniciar jogos dos grupos.
-  **✅ Critérios de Aceitação:**
+- **Ator** Usuário autenticado | **História:** Como usuário autenticado, quero criar múltiplos grupos (ex: "Família", "Trabalho") e gerar um código de convite que será enviado ao participante via email. Devo poder adicionar/remover participantes do grupo, fazer o sorteio dos jogadores, verificar o status de preenchimento das caracteristicas dos jogadores e iniciar jogos dos grupos.
+- **✅ Critérios de Aceitação:**
 - [ ] O usuário deve ser capaz de criar um grupo.
 - [ ] O usuário deve ser capaz de adicionar participantes ao grupo.
 - [ ] O usuário deve ser capaz de remover participantes do grupo.
@@ -56,27 +56,27 @@ O **SecretSanta** é uma aplicação web progressiva (PWA) que reinventa o amigo
 - [ ] O usuário deve ser capaz de iniciar jogos dos grupos.
 
 - **🟡 US04 - Perfil de Características:**
-  **Ator** Usuário autenticado/Jogador | **História:** Como participante, quero preencher um formulário com 5 características (Cor, Hobby, Comida, Filme, Fato Curioso...) antes do sorteio ser realizado, através do email recebido.
-  **✅ Critérios de Aceitação:**
+- **Ator** Usuário autenticado/Jogador | **História:** Como participante, quero preencher um formulário com 5 características (Cor, Hobby, Comida, Filme, Fato Curioso...) antes do sorteio ser realizado, através do email recebido.
+- **✅ Critérios de Aceitação:**
 - [ ] O usuário deve ser capaz de preencher um formulário com 5 características.
 - [ ] O usuário deve ser capaz de salvar suas características.
 
 - **🟡 US05 - O Sorteio:**
-  **Ator** Usuário autenticado | **História:** Como dono do grupo, quero acionar o sorteio para que o sistema distribua os pares sem que ninguém tire a si mesmo.
-  **✅ Critérios de Aceitação:**
+- **Ator** Usuário autenticado | **História:** Como dono do grupo, quero acionar o sorteio para que o sistema distribua os pares sem que ninguém tire a si mesmo.
+- **✅ Critérios de Aceitação:**
 - [ ] O usuário deve ser capaz de acionar o sorteio.
 - [ ] O usuário deve ser capaz de verificar o status de preenchimento das caracteristicas dos jogadores.
 
 - **🟡 US06 - Interface de Gamificação:**
-  **Ator** Usuário autenticado/Jogador | **História:** Como usuário, quero acessar uma tela de jogo onde as pistas aparecem uma por uma, bloqueadas por um campo de resposta.
-  **✅ Critérios de Aceitação:**
+- **Ator** Usuário autenticado/Jogador | **História:** Como usuário, quero acessar uma tela de jogo onde as pistas aparecem uma por uma, bloqueadas por um campo de resposta.
+- **✅ Critérios de Aceitação:**
 - [ ] O usuário deve ser capaz de acessar a tela de jogo.
 - [ ] O usuário deve ser capaz de ver as pistas.
 - [ ] O usuário deve ser capaz de preencher o campo de resposta.
 
 - **🟡 US07 - Revelação Final:**
-  **Ator** Usuário autenticado/Jogador | **História:** Como usuário, quero realizar o chute final e ver a identidade da pessoa, independente de ter acertado todos os palpites.
-  **✅ Critérios de Aceitação:**
+- **Ator** Usuário autenticado/Jogador | **História:** Como usuário, quero realizar o chute final e ver a identidade da pessoa, independente de ter acertado todos os palpites.
+- **✅ Critérios de Aceitação:**
 - [ ] O usuário deve ser capaz de realizar o chute final.
 - [ ] O usuário deve ser capaz de ver a identidade da pessoa.
 
