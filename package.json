@@ -4,12 +4,15 @@
   "description": "Monorepo do projeto da disciplina",
   "private": true,
   "workspaces": [
-    "apps/*"
+    "apps/*",
+    "libs/*"
   ],
   "scripts": {
+    "dev:api": "echo 'Backend não configurado. Rode o Workflow 2.'",
     "dev:web": "npm run start -w apps/web",
     "build:web": "npm run build -w apps/web",
-    "test:web": "npm run test -w apps/web"
+    "test:web": "npm run test -w apps/web",
+    "format": "prettier --write \"**/*.{ts,js,json,css,scss,md}\""
   },
   "keywords": [
     "angular",
@@ -21,6 +24,7 @@
   "devDependencies": {
     "@tailwindcss/postcss": "^4.2.4",
     "postcss": "^8.5.14",
+    "prettier": "^3.8.3",
     "tailwindcss": "^4.2.4"
   }
 }

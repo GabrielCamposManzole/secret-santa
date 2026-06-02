@@ -58,7 +58,7 @@ Signals are Angular's fine-grained reactivity system, replacing zone.js-based ch
 ### Core Concepts
 
 ```typescript
-import { signal, computed, effect } from "@angular/core";
+import { signal, computed, effect } from '@angular/core';
 
 // Writable signal
 const count = signal(0);
@@ -82,10 +82,10 @@ effect(() => {
 ### Signal-Based Inputs and Outputs
 
 ```typescript
-import { Component, input, output, model } from "@angular/core";
+import { Component, input, output, model } from '@angular/core';
 
 @Component({
-  selector: "app-user-card",
+  selector: 'app-user-card',
   standalone: true,
   template: `
     <div class="card">
@@ -99,7 +99,7 @@ export class UserCardComponent {
   // Signal inputs (read-only)
   id = input.required<string>();
   name = input.required<string>();
-  role = input<string>("User"); // With default
+  role = input<string>('User'); // With default
 
   // Output
   select = output<string>();
@@ -115,15 +115,10 @@ export class UserCardComponent {
 ### Signal Queries (ViewChild/ContentChild)
 
 ```typescript
-import {
-  Component,
-  viewChild,
-  viewChildren,
-  contentChild,
-} from "@angular/core";
+import { Component, viewChild, viewChildren, contentChild } from '@angular/core';
 
 @Component({
-  selector: "app-container",
+  selector: 'app-container',
   standalone: true,
   template: `
     <input #searchInput />
@@ -132,7 +127,7 @@ import {
 })
 export class ContainerComponent {
   // Signal-based queries
-  searchInput = viewChild<ElementRef>("searchInput");
+  searchInput = viewChild<ElementRef>('searchInput');
   items = viewChildren(ItemComponent);
   projectedContent = contentChild(HeaderDirective);
 
@@ -162,12 +157,12 @@ Standalone components are self-contained and don't require NgModule declarations
 ### Creating Standalone Components
 
 ```typescript
-import { Component } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { RouterLink } from "@angular/router";
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: "app-header",
+  selector: 'app-header',
   standalone: true,
   imports: [CommonModule, RouterLink], // Direct imports
   template: `
@@ -184,11 +179,11 @@ export class HeaderComponent {}
 
 ```typescript
 // main.ts
-import { bootstrapApplication } from "@angular/platform-browser";
-import { provideRouter } from "@angular/router";
-import { provideHttpClient } from "@angular/common/http";
-import { AppComponent } from "./app/app.component";
-import { routes } from "./app/app.routes";
+import { bootstrapApplication } from '@angular/platform-browser';
+import { provideRouter } from '@angular/router';
+import { provideHttpClient } from '@angular/common/http';
+import { AppComponent } from './app/app.component';
+import { routes } from './app/app.routes';
 
 bootstrapApplication(AppComponent, {
   providers: [provideRouter(routes), provideHttpClient()],
@@ -199,20 +194,17 @@ bootstrapApplication(AppComponent, {
 
 ```typescript
 // app.routes.ts
-import { Routes } from "@angular/router";
+import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
-    path: "dashboard",
+    path: 'dashboard',
     loadComponent: () =>
-      import("./dashboard/dashboard.component").then(
-        (m) => m.DashboardComponent,
-      ),
+      import('./dashboard/dashboard.component').then((m) => m.DashboardComponent),
   },
   {
-    path: "admin",
-    loadChildren: () =>
-      import("./admin/admin.routes").then((m) => m.ADMIN_ROUTES),
+    path: 'admin',
+    loadChildren: () => import('./admin/admin.routes').then((m) => m.ADMIN_ROUTES),
   },
 ];
 ```
@@ -227,9 +219,9 @@ Zoneless applications don't use zone.js, improving performance and debugging.
 
 ```typescript
 // main.ts
-import { bootstrapApplication } from "@angular/platform-browser";
-import { provideZonelessChangeDetection } from "@angular/core";
-import { AppComponent } from "./app/app.component";
+import { bootstrapApplication } from '@angular/platform-browser';
+import { provideZonelessChangeDetection } from '@angular/core';
+import { AppComponent } from './app/app.component';
 
 bootstrapApplication(AppComponent, {
   providers: [provideZonelessChangeDetection()],
@@ -239,10 +231,10 @@ bootstrapApplication(AppComponent, {
 ### Zoneless Component Patterns
 
 ```typescript
-import { Component, signal, ChangeDetectionStrategy } from "@angular/core";
+import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-  selector: "app-counter",
+  selector: 'app-counter',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
@@ -281,11 +273,8 @@ ng add @angular/ssr
 
 ```typescript
 // app.config.ts
-import { ApplicationConfig } from "@angular/core";
-import {
-  provideClientHydration,
-  withEventReplay,
-} from "@angular/platform-browser";
+import { ApplicationConfig } from '@angular/core';
+import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideClientHydration(withEventReplay())],
@@ -295,10 +284,10 @@ export const appConfig: ApplicationConfig = {
 ### Incremental Hydration (v20+)
 
 ```typescript
-import { Component } from "@angular/core";
+import { Component } from '@angular/core';
 
 @Component({
-  selector: "app-page",
+  selector: 'app-page',
   standalone: true,
   template: `
     <app-hero />
@@ -333,9 +322,9 @@ export class PageComponent {}
 
 ```typescript
 // auth.guard.ts
-import { inject } from "@angular/core";
-import { Router, CanActivateFn } from "@angular/router";
-import { AuthService } from "./auth.service";
+import { inject } from '@angular/core';
+import { Router, CanActivateFn } from '@angular/router';
+import { AuthService } from './auth.service';
 
 export const authGuard: CanActivateFn = (route, state) => {
   const auth = inject(AuthService);
@@ -345,7 +334,7 @@ export const authGuard: CanActivateFn = (route, state) => {
     return true;
   }
 
-  return router.createUrlTree(["/login"], {
+  return router.createUrlTree(['/login'], {
     queryParams: { returnUrl: state.url },
   });
 };
@@ -353,8 +342,8 @@ export const authGuard: CanActivateFn = (route, state) => {
 // Usage in routes
 export const routes: Routes = [
   {
-    path: "dashboard",
-    loadComponent: () => import("./dashboard.component"),
+    path: 'dashboard',
+    loadComponent: () => import('./dashboard.component'),
     canActivate: [authGuard],
   },
 ];
@@ -412,18 +401,18 @@ export class UserComponent {
 ### Injection Tokens for Configuration
 
 ```typescript
-import { InjectionToken, inject } from "@angular/core";
+import { InjectionToken, inject } from '@angular/core';
 
 // Define token
-export const API_BASE_URL = new InjectionToken<string>("API_BASE_URL");
+export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL');
 
 // Provide in config
 bootstrapApplication(AppComponent, {
-  providers: [{ provide: API_BASE_URL, useValue: "https://api.example.com" }],
+  providers: [{ provide: API_BASE_URL, useValue: 'https://api.example.com' }],
 });
 
 // Inject in service
-@Injectable({ providedIn: "root" })
+@Injectable({ providedIn: 'root' })
 export class ApiService {
   private baseUrl = inject(API_BASE_URL);
 
@@ -496,28 +485,26 @@ export class ButtonComponent {}
 ### Signal-Based State Service
 
 ```typescript
-import { Injectable, signal, computed } from "@angular/core";
+import { Injectable, signal, computed } from '@angular/core';
 
 interface AppState {
   user: User | null;
-  theme: "light" | "dark";
+  theme: 'light' | 'dark';
   notifications: Notification[];
 }
 
-@Injectable({ providedIn: "root" })
+@Injectable({ providedIn: 'root' })
 export class StateService {
   // Private writable signals
   private _user = signal<User | null>(null);
-  private _theme = signal<"light" | "dark">("light");
+  private _theme = signal<'light' | 'dark'>('light');
   private _notifications = signal<Notification[]>([]);
 
   // Public read-only computed
   readonly user = computed(() => this._user());
   readonly theme = computed(() => this._theme());
   readonly notifications = computed(() => this._notifications());
-  readonly unreadCount = computed(
-    () => this._notifications().filter((n) => !n.read).length,
-  );
+  readonly unreadCount = computed(() => this._notifications().filter((n) => !n.read).length);
 
   // Actions
   setUser(user: User | null) {
@@ -525,7 +512,7 @@ export class StateService {
   }
 
   toggleTheme() {
-    this._theme.update((t) => (t === "light" ? "dark" : "light"));
+    this._theme.update((t) => (t === 'light' ? 'dark' : 'light'));
   }
 
   addNotification(notification: Notification) {
@@ -537,9 +524,9 @@ export class StateService {
 ### Component Store Pattern with Signals
 
 ```typescript
-import { Injectable, signal, computed, inject } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { toSignal } from "@angular/core/rxjs-interop";
+import { Injectable, signal, computed, inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Injectable()
 export class ProductStore {
@@ -548,22 +535,20 @@ export class ProductStore {
   // State
   private _products = signal<Product[]>([]);
   private _loading = signal(false);
-  private _filter = signal("");
+  private _filter = signal('');
 
   // Selectors
   readonly products = computed(() => this._products());
   readonly loading = computed(() => this._loading());
   readonly filteredProducts = computed(() => {
     const filter = this._filter().toLowerCase();
-    return this._products().filter((p) =>
-      p.name.toLowerCase().includes(filter),
-    );
+    return this._products().filter((p) => p.name.toLowerCase().includes(filter));
   });
 
   // Actions
   loadProducts() {
     this._loading.set(true);
-    this.http.get<Product[]>("/api/products").subscribe({
+    this.http.get<Product[]>('/api/products').subscribe({
       next: (products) => {
         this._products.set(products);
         this._loading.set(false);
@@ -585,11 +570,11 @@ export class ProductStore {
 ### Current Reactive Forms
 
 ```typescript
-import { Component, inject } from "@angular/core";
-import { FormBuilder, Validators, ReactiveFormsModule } from "@angular/forms";
+import { Component, inject } from '@angular/core';
+import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
-  selector: "app-user-form",
+  selector: 'app-user-form',
   standalone: true,
   imports: [ReactiveFormsModule],
   template: `
@@ -604,8 +589,8 @@ export class UserFormComponent {
   private fb = inject(FormBuilder);
 
   form = this.fb.group({
-    name: ["", Validators.required],
-    email: ["", [Validators.required, Validators.email]],
+    name: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
   });
 
   onSubmit() {
@@ -713,10 +698,10 @@ import { NgOptimizedImage } from '@angular/common';
 ### Testing Signal Components
 
 ```typescript
-import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { CounterComponent } from "./counter.component";
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { CounterComponent } from './counter.component';
 
-describe("CounterComponent", () => {
+describe('CounterComponent', () => {
   let component: CounterComponent;
   let fixture: ComponentFixture<CounterComponent>;
 
@@ -730,7 +715,7 @@ describe("CounterComponent", () => {
     fixture.detectChanges();
   });
 
-  it("should increment count", () => {
+  it('should increment count', () => {
     expect(component.count()).toBe(0);
 
     component.increment();
@@ -738,12 +723,12 @@ describe("CounterComponent", () => {
     expect(component.count()).toBe(1);
   });
 
-  it("should update DOM on signal change", () => {
+  it('should update DOM on signal change', () => {
     component.count.set(5);
     fixture.detectChanges();
 
-    const el = fixture.nativeElement.querySelector(".count");
-    expect(el.textContent).toContain("5");
+    const el = fixture.nativeElement.querySelector('.count');
+    expect(el.textContent).toContain('5');
   });
 });
 ```
@@ -751,11 +736,11 @@ describe("CounterComponent", () => {
 ### Testing with Signal Inputs
 
 ```typescript
-import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { ComponentRef } from "@angular/core";
-import { UserCardComponent } from "./user-card.component";
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentRef } from '@angular/core';
+import { UserCardComponent } from './user-card.component';
 
-describe("UserCardComponent", () => {
+describe('UserCardComponent', () => {
   let fixture: ComponentFixture<UserCardComponent>;
   let componentRef: ComponentRef<UserCardComponent>;
 
@@ -768,15 +753,15 @@ describe("UserCardComponent", () => {
     componentRef = fixture.componentRef;
 
     // Set signal inputs via setInput
-    componentRef.setInput("id", "123");
-    componentRef.setInput("name", "John Doe");
+    componentRef.setInput('id', '123');
+    componentRef.setInput('name', 'John Doe');
 
     fixture.detectChanges();
   });
 
-  it("should display user name", () => {
-    const el = fixture.nativeElement.querySelector("h3");
-    expect(el.textContent).toContain("John Doe");
+  it('should display user name', () => {
+    const el = fixture.nativeElement.querySelector('h3');
+    expect(el.textContent).toContain('John Doe');
   });
 });
 ```
@@ -818,6 +803,7 @@ describe("UserCardComponent", () => {
 | SSR fetch fails                | Use `TransferState` or `withFetch()`                |
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.

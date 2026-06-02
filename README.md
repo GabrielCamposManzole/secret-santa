@@ -15,12 +15,12 @@
 
 ## 🔗 Informações Gerais
 
-* **🌐 Link em Produção:** [Aguardando Deploy no GitHub Pages/Vercel]
-* **Prototipação:** https://www.figma.com/design/9nGp0mNqjyH0X3mUH2SR3f/SecretSanta?node-id=35-2&m=dev&t=J3b5kwTG5DVzmoRu-1
-* **Kanban:** https://github.com/users/GabrielCamposManzole/projects/2/views/1
-* **👤 Autores:** Emilly Zatti, Gabriel Campos Manzole e Marcos Vinicius Olenka de Macedo
-* **🎓 Instituição:** UTFPR - Campus Guarapuava (TSI)
-* **🚀 Status:** Entrega 1 - Concepção e Planejamento
+- **🌐 Link em Produção:** [Aguardando Deploy no GitHub Pages/Vercel]
+- **Prototipação:** https://www.figma.com/design/9nGp0mNqjyH0X3mUH2SR3f/SecretSanta?node-id=35-2&m=dev&t=J3b5kwTG5DVzmoRu-1
+- **Kanban:** https://github.com/users/GabrielCamposManzole/projects/2/views/1
+- **👤 Autores:** Emilly Zatti, Gabriel Campos Manzole e Marcos Vinicius Olenka de Macedo
+- **🎓 Instituição:** UTFPR - Campus Guarapuava (TSI)
+- **🚀 Status:** Entrega 1 - Concepção e Planejamento
 
 ---
 
@@ -44,10 +44,10 @@ Toda a engenharia do sistema está detalhada na pasta `/docs`:
 
 ## 📊 3. Stack Tecnológica
 
-* **Arquitetura:** Monorepo (Back, Front e Extensão no mesmo repositório).
-* **Backend (API):** TypeScript
-* **Banco de Dados:** PostgreSQL (Nuvem) com supabase.
-* **Frontend (Mobile App):** Angular.
+- **Arquitetura:** Monorepo (Back, Front e Extensão no mesmo repositório).
+- **Backend (API):** TypeScript
+- **Banco de Dados:** PostgreSQL (Nuvem) com supabase.
+- **Frontend (Mobile App):** Angular.
 
 ## 🚀 5. Início Rápido (Desenvolvimento Local)
 
@@ -65,3 +65,4 @@ Executar o projeto:
 Bash
 npm run dev:web
 Acesse http://localhost:4200 no seu navegador.
+```
