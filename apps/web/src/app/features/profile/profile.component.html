@@ -1,0 +1,19 @@
+<div class="p-6 bg-base-200 rounded-box shadow-lg max-w-md mx-auto mt-10">
+  <h2 class="text-2xl font-bold mb-4">Perfil do Usuário</h2>
+
+  <!-- Uso do Control Flow @if (Angular 21) -->
+  @if (userName()) {
+    <p class="text-lg">
+      Bem-vindo, 
+      <!-- Texto Azul via Tailwind CSS v4 -->
+      <span class="text-blue-600 font-semibold">{{ userName() }}</span>!
+    </p>
+  } @else {
+    <p class="text-error">Usuário não identificado.</p>
+  }
+  
+  <div class="mt-6">
+    <button class="btn btn-primary" (click)="userName.set(null)">Limpar Nome</button>
+    <button class="btn btn-ghost ml-2" (click)="userName.set('Marcos Olenka')">Restaurar</button>
+  </div>
+</div>
