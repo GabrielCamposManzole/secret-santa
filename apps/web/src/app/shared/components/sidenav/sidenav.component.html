@@ -1,0 +1,21 @@
+<div class="drawer-side z-20">
+  <label for="main-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
+  <ul class="menu p-4 w-60 min-h-full bg-base-200 text-base-content border-r border-base-300">
+    <!-- Título visível no mobile quando o drawer abre -->
+    <li class="menu-title text-lg font-bold mb-4 lg:hidden">Secret Santa 🎅</li>
+    
+    <li class="menu-title hidden lg:block">Navegação</li>
+    
+    <li>
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        Home
+      </a>
+    </li>
+    <li>
+      <a>Grupos</a>
+    </li>
+    <li>
+      <a>Perfil</a>
+    </li>
+  </ul>
+</div>

@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Angular-19+-DD0031?style=for-the-badge&logo=angular" alt="Angular">
+  <img src="https://img.shields.io/badge/Angular-21+-DD0031?style=for-the-badge&logo=angular" alt="Angular">
   <img src="https://img.shields.io/badge/Supabase-Auth%20%26%20DB-3ECF8E?style=for-the-badge&logo=supabase" alt="Supabase">
   <img src="https://img.shields.io/badge/Tailwind-CSS-38B2AC?style=for-the-badge&logo=tailwind-css" alt="Tailwind">
   <img src="https://img.shields.io/badge/Status-Entrega%201-orange?style=for-the-badge" alt="Status">
@@ -28,7 +28,7 @@
 
 O **SecretSanta** é uma aplicação web progressiva (PWA) que reinventa a dinâmica do Amigo Secreto. Em vez de apenas revelar um nome, o sistema introduz o conceito de **"The Quest"**: um jogo de dedução onde o participante deve adivinhar quem tirou através de pistas baseadas em características pessoais.
 
-A aplicação utiliza o ecossistema **Angular 19** para garantir uma experiência reativa e fluida, integrada ao **Supabase** para autenticação e banco de dados em tempo real.
+A aplicação utiliza o ecossistema **Angular 21** para garantir uma experiência reativa e fluida, integrada ao **Supabase** para autenticação e banco de dados em tempo real.
 
 ---
 
@@ -57,11 +57,10 @@ Clonar o repositório:
 git clone https://github.com/GabrielCamposManzole/secret-santa.git
 cd secret-santa
 Instalar dependências:
-
 Bash
 npm install
-Executar o projeto:
 
+Executar o projeto:
 Bash
 npm run dev:web
 Acesse http://localhost:4200 no seu navegador.
