@@ -1,0 +1,1 @@
+(A Fundação: Instanciado 1x só. Vai guardar Guards, Interceptors e lógicas globais).
