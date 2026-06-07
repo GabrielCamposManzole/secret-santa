@@ -21,12 +21,12 @@
 
 ### 📖 3.1. Glossário Técnico
 
-| Termo PRD (PT-BR) | Entidade Técnica (EN) | Descrição                                   |
-| :---------------- | :-------------------- | :------------------------------------------ |
-| Participante      | `profiles`            | Dados básicos do usuário.                   |
-| Grupo             | `groups`              | Nome, código de acesso e status do sorteio. |
-| Característica    | `traits`              | Par pergunta/resposta do usuário.           |
-| Sorteio           | `draws`               | Tabela pivô com `giver_id` e `receiver_id`. |
+| Termo PRD (PT-BR) | Entidade Técnica (EN) | Descrição                                              |
+| :---------------- | :-------------------- | :----------------------------------------------------- |
+| Usuário           | `USUARIO`             | Dados de conta do participante.                        |
+| Grupo             | `GRUPO`               | Nome, token de convite e estado global do jogo.        |
+| Participação      | `USUARIO_GRUPO`       | Quem está no grupo, quem sorteou e se já jogou.        |
+| Características   | `CARACTERISTICAS`     | Dicas cadastradas pelo usuário para serem descobertas. |
 
 ### 📊 3.2. Diagrama ER (Mermaid)
 
@@ -36,43 +36,32 @@ erDiagram
     USUARIO {
         int id PK
         string nome_completo
-        int idade
         string email
         string senha
     }
 
     GRUPO {
         int id PK
+        string nome
         string token
+        boolean sorteado
+        boolean finalizado
     }
 
     USUARIO_GRUPO {
         int id PK
         int usuario_id FK
         int grupo_id FK
+        int id_pessoa_sorteada FK
+        boolean preenchido_caracteristicas
+        boolean jogado
+        boolean resultado
     }
 
     CARACTERISTICAS {
         int id PK
-        string nome
         string descricao
         int usuario_id FK
-    }
-
-    GAME {
-        int id PK
-        int grupo_id FK
-        date data_jogo
-        boolean iniciado
-        boolean finalizado
-    }
-
-    GAME_RODADA {
-        int id PK
-        int game_id FK
-        int giver_id FK
-        int receiver_id FK
-        boolean acertou
     }
 ```
 
@@ -146,19 +135,18 @@ Serviços que mantêm o estado global da aplicação e se comunicam com o Supaba
 Os Design Tokens representam as decisões visuais fundamentais do sistema, garantindo consistência e facilidade de manutenção ao longo do desenvolvimento.
 
 Cores:
-Primary Color: #D42426 (O vermelho festivo do SecretSanta)
-Secondary Color: #1A1C1C (Preto profundo para textos e contrastes)
-Surface Color: #F8F9F9 (O cinza claro que padronizamos para todos os fundos)
+Primary Color: #D42426 (O vermelho festivo do SecretSanta padronizado nos botões)
+Secondary Color: #e6e6e6 (Cinza)
+tertiary Color: #1a1c1c (preto)
+quaternary Color: #f8f9f9 (O cinza claro que padronizamos para todos os fundos)
+base Color: #f5f5f5 (O cinza background)
 
 Tipografia:
-A fonte Plus Jakarta Sans deve ser utilizada em todos os títulos e textos.
+A fonte Plus Jakarta Sans deve ser utilizada em todos os títulos e subtitulos.
+A fonte inter deve ser utilizada nos textos.
 Bordas e Raio:
 Componentes como botões e inputs devem utilizar bordas arredondadas (estilo pílula), reforçando a identidade visual amigável do sistema.
 Sombras (Elevação):
 Utilize sombras suaves para indicar profundidade e hierarquia entre elementos (cards, modais, botões .).
 Estados de Interação:
 Defina variações visuais para estados como hover, foco, ativo e desabilitado, garantindo feedback claro para o usuário.
-
-```
-
-```
