@@ -1,15 +1,22 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { HeaderComponent } from './shared/components/header/header.component';
-import { SidenavComponent } from './shared/components/sidenav/sidenav.component';
-import { FooterComponent } from './shared/components/footer/footer.component';
+import { Component, inject } from '@angular/core';
+import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { map, filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, HeaderComponent, SidenavComponent, FooterComponent],
+  standalone: true,
+  imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.css',
 })
 export class App {
-  protected readonly title = signal('web');
+  private readonly router = inject(Router);
+
+  readonly isLandingPage = toSignal(
+    this.router.events.pipe(
+      filter((event) => event instanceof NavigationEnd),
+      map(() => this.router.url === '/' || this.router.url === '/home')
+    ),
+    { initialValue: true }
+  );
 }

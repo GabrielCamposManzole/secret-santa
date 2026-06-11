@@ -1,0 +1,56 @@
+<!-- TopHeader -->
+<header class="bg-[#f8f9f9] px-6 py-6 flex items-center justify-start border-b border-gray-100 w-full">
+  <h1 class="text-[#D42426] font-extrabold text-2xl tracking-tight font-heading">SecretSanta</h1>
+</header>
+
+<!-- Main Content -->
+<main class="flex-grow flex flex-col items-center justify-center px-6 py-8 w-full">
+  <!-- SuccessCard -->
+  <div class="bg-white w-full max-w-md rounded-[2.5rem] p-8 flex flex-col items-center text-center shadow-md border border-gray-100">
+    <!-- Icon Illustration -->
+    <div class="relative mb-6">
+      <!-- Circle Red Envelope -->
+      <div class="w-24 h-24 bg-[#D42426] rounded-full flex items-center justify-center shadow-lg shadow-red-200">
+        <svg class="text-white w-12 h-12" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Text Content -->
+    <h2 class="text-3xl font-extrabold mb-4 text-gray-900 font-heading">E-mail Enviado!</h2>
+    <p class="text-gray-500 font-body text-base leading-relaxed mb-8 px-2">
+      Enviamos um link de recuperação para o seu e-mail. Verifique sua caixa de entrada e siga as instruções.
+    </p>
+
+    <!-- Primary Action -->
+    <a class="w-full bg-[#D42426] hover:bg-[#b01e20] text-white font-bold py-4 rounded-full text-base transition-colors mb-6 flex items-center justify-center shadow-md font-heading" routerLink="/login">
+      Voltar para o Login
+    </a>
+
+    <!-- Secondary Action -->
+    <button class="flex items-center gap-2 text-emerald-600 font-semibold hover:text-emerald-700 transition-colors py-2 text-sm">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+      <span>Não recebeu? Reenviar e-mail</span>
+    </button>
+  </div>
+
+  <!-- InfoNotice -->
+  <div class="mt-8 w-full max-w-md bg-gray-100 rounded-3xl p-6 flex gap-4 items-start border border-gray-200">
+    <div class="bg-[#D42426]/10 p-2 rounded-full mt-1">
+      <svg class="w-5 h-5 text-[#D42426]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+    </div>
+    <p class="text-gray-600 font-body text-sm leading-snug">
+      Se você não encontrar o e-mail em alguns minutos, verifique sua pasta de Spam ou Promoções.
+    </p>
+  </div>
+</main>
+
+<!-- Bottom Footer -->
+<footer class="bg-[#f8f9f9] py-8 px-6 text-center mt-auto w-full">
+  <p class="text-gray-400 text-xs font-medium">© 2024 Secret Santa Editorial. All rights reserved.</p>
+</footer>

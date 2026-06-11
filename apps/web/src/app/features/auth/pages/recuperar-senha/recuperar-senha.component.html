@@ -1,0 +1,92 @@
+<!-- TopHeader -->
+<header class="bg-[#f8f9f9] px-6 py-5 border-b border-gray-100 w-full">
+  <div class="max-w-md mx-auto w-full">
+    <h1 class="text-2xl font-extrabold text-[#D42426] tracking-tight font-heading">SecretSanta</h1>
+  </div>
+</header>
+
+<!-- Main Content -->
+<main class="flex-grow flex flex-col items-center justify-center px-6 py-10 w-full">
+  <div class="w-full max-w-md space-y-8 flex flex-col items-center">
+    <!-- Icon Container -->
+    <div class="relative">
+      <div class="w-24 h-24 bg-[#D42426] rounded-full flex items-center justify-center shadow-lg shadow-red-200">
+        <svg class="h-10 w-10 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" stroke-linecap="round" stroke-linejoin="round"></path>
+          <circle cx="12" cy="13" fill="white" r="1" stroke="white"></circle>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Text Header -->
+    <div class="text-center space-y-2">
+      <h2 class="text-3xl font-bold text-gray-900 font-heading">Recuperar Senha</h2>
+      <p class="text-gray-500 font-body text-sm max-w-[280px] mx-auto">
+        Digite seu e-mail para receber as instruções de recuperação.
+      </p>
+    </div>
+
+    <!-- Error Alert -->
+    @if (errorMessage()) {
+      <div class="w-full p-4 text-sm text-white bg-red-600 rounded-full flex items-center justify-between shadow-md">
+        <span class="font-medium px-4">{{ errorMessage() }}</span>
+        <button (click)="errorMessage.set(null)" class="text-white pr-4">✕</button>
+      </div>
+    }
+
+    <!-- Recovery Form -->
+    <form (ngSubmit)="onSubmit()" class="w-full space-y-6">
+      <!-- Email Input Group -->
+      <div class="relative pt-2">
+        <label class="absolute left-8 px-2 bg-white text-[#D42426] text-xs font-bold z-10 rounded -top-1 font-body" for="email">
+          E-mail
+        </label>
+        <div class="relative flex items-center">
+          <div class="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
+            <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+            </svg>
+          </div>
+          <input
+            class="block w-full pl-12 pr-4 py-4 bg-gray-100 border border-transparent rounded-full text-gray-700 placeholder-gray-400 focus:bg-white focus:border-[#D42426] focus:ring-2 focus:ring-[#D42426]/20 focus:outline-none transition-all duration-200"
+            id="email"
+            name="email"
+            [(ngModel)]="email"
+            placeholder="seu@email.com"
+            type="email"
+            required
+          />
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <button
+        class="w-full flex items-center justify-center gap-2 py-4 bg-[#D42426] hover:bg-[#b01e20] text-white font-bold text-lg rounded-full shadow-lg shadow-red-200 active:scale-[0.98] transition-all duration-200 disabled:bg-gray-400 disabled:cursor-not-allowed"
+        type="submit"
+        [disabled]="isLoading()"
+      >
+        @if (isLoading()) {
+          <span class="loading loading-spinner loading-md"></span>
+        } @else {
+          <span class="font-heading">Enviar Link</span>
+          <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path clip-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" fill-rule="evenodd"></path>
+          </svg>
+        }
+      </button>
+    </form>
+
+    <!-- Navigation Link -->
+    <div class="pt-2 text-center">
+      <p class="text-sm text-gray-500 font-medium">
+        Lembrou a senha?
+        <a class="text-[#D42426] font-bold hover:underline" routerLink="/login">Fazer Login</a>
+      </p>
+    </div>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="bg-[#f8f9f9] py-8 px-6 border-t border-gray-100 w-full text-center mt-auto">
+  <p class="text-xs text-gray-400">© 2024 Secret Santa Editorial. All rights reserved.</p>
+</footer>

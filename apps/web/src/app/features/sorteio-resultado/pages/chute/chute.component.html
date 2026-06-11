@@ -1,0 +1,121 @@
+<!-- TopAppBar -->
+<header class="sticky top-0 z-50 bg-[#f8f9f9] shadow-sm flex items-center w-full px-5 h-16 justify-between border-b border-gray-100">
+  <div class="flex items-center gap-2">
+    <button [routerLink]="['/sorteio', groupId(), 'jogo']" class="p-1 text-gray-500 hover:text-gray-900 transition-colors">
+      <span class="material-symbols-outlined">arrow_back</span>
+    </button>
+    <h1 class="text-xl font-bold text-[#D42426] font-heading">Secret Santa</h1>
+  </div>
+</header>
+
+<main class="max-w-md mx-auto px-5 py-8 space-y-8 font-body w-full pb-24">
+  <!-- Alerts -->
+  @if (successMessage()) {
+    <div class="p-4 mb-6 text-sm text-white bg-green-600 rounded-full flex items-center justify-between shadow-md">
+      <span class="font-medium px-4">{{ successMessage() }}</span>
+      <button (click)="successMessage.set(null)" class="text-white pr-4">✕</button>
+    </div>
+  }
+  @if (errorMessage()) {
+    <div class="p-4 mb-6 text-sm text-white bg-red-600 rounded-full flex items-center justify-between shadow-md">
+      <span class="font-medium px-4">{{ errorMessage() }}</span>
+      <button (click)="errorMessage.set(null)" class="text-white pr-4">✕</button>
+    </div>
+  }
+
+  <!-- Loading spinner -->
+  @if (isLoading() && participants().length === 0) {
+    <div class="flex justify-center items-center py-12">
+      <span class="loading loading-spinner loading-lg text-[#D42426]"></span>
+    </div>
+  } @else {
+    <!-- Main Content Area -->
+    <div class="space-y-6">
+      <h1 class="text-3xl font-extrabold text-gray-900 leading-tight text-center tracking-tight font-heading">
+        Quem é o seu Amigo Secreto?
+      </h1>
+
+      <!-- Warning Banner -->
+      <div class="bg-red-50 text-[#D42426] p-4 rounded-xl flex items-center gap-3 shadow-sm border border-red-200">
+        <span class="material-symbols-outlined text-[#D42426] font-bold">warning</span>
+        <p class="text-xs font-bold leading-tight uppercase tracking-wider font-heading">
+          CUIDADO: VOCÊ SÓ TEM UMA CHANCE NO CHUTE FINAL!
+        </p>
+      </div>
+
+      <!-- Search Bar -->
+      <div class="relative font-body">
+        <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">search</span>
+        <input
+          class="w-full pl-12 pr-4 py-4 bg-white border border-gray-200 rounded-full shadow-sm focus:border-[#D42426] focus:ring-2 focus:ring-[#D42426]/20 focus:outline-none text-sm placeholder:text-gray-400 text-gray-800"
+          placeholder="Procurar participante..."
+          type="text"
+          name="searchTerm"
+          [(ngModel)]="searchTerm"
+          (input)="onSearch()"
+        />
+      </div>
+
+      <!-- Participant List -->
+      <div class="space-y-3 font-heading">
+        @for (participant of filteredParticipants(); track participant.id) {
+          @if (selectedParticipantId() === participant.id) {
+            <!-- Selected Participant -->
+            <button
+              (click)="onSelect(participant.id)"
+              class="w-full flex items-center justify-between p-4 bg-[#D42426] hover:bg-[#b01e20] text-white rounded-full shadow-md transform active:scale-95 transition-all duration-200"
+            >
+              <span class="font-semibold text-lg ml-4">{{ participant.nome_completo }}</span>
+              <div class="bg-yellow-400 rounded-full p-1 flex items-center justify-center mr-2">
+                <span class="material-symbols-outlined text-black text-sm font-bold">check</span>
+              </div>
+            </button>
+          } @else {
+            <!-- Inactive Participant -->
+            <button
+              (click)="onSelect(participant.id)"
+              class="w-full flex items-center p-4 bg-white text-gray-800 rounded-full shadow-sm border border-gray-200 hover:bg-gray-50 transition-colors active:scale-95 duration-150"
+            >
+              <span class="font-medium text-lg ml-4">{{ participant.nome_completo }}</span>
+            </button>
+          }
+        }
+
+        @if (filteredParticipants().length === 0) {
+          <p class="text-center text-sm text-gray-500 py-6">Nenhum participante encontrado.</p>
+        }
+      </div>
+    </div>
+
+    <!-- Footer Action Button -->
+    <div class="pt-6 font-heading">
+      <button
+        (click)="onConfirmGuess()"
+        [disabled]="isLoading() || !selectedParticipantId()"
+        class="w-full bg-[#D42426] hover:bg-[#b01e20] text-white py-5 rounded-full flex items-center justify-center gap-3 font-bold text-lg shadow-md active:scale-95 transition-transform disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        <span class="material-symbols-outlined font-bold">verified</span>
+        Confirmar Chute
+      </button>
+    </div>
+  }
+</main>
+
+<!-- BottomNavBar -->
+<nav class="absolute bottom-0 left-0 w-full z-40 bg-white shadow-[0px_-2px_8px_rgba(0,0,0,0.05)] flex justify-around items-center px-4 py-2 border-t border-gray-100 font-body">
+  <!-- Início -->
+  <a class="flex flex-col items-center justify-center text-gray-500 px-5 py-1 hover:bg-gray-50 transition-all active:scale-90 duration-150" routerLink="/sorteios">
+    <span class="material-symbols-outlined">home</span>
+    <span class="text-[10px] font-medium mt-1">Início</span>
+  </a>
+  <!-- Grupos -->
+  <a class="flex flex-col items-center justify-center text-gray-500 px-5 py-1 hover:bg-gray-50 transition-all active:scale-90 duration-150" routerLink="/sorteios">
+    <span class="material-symbols-outlined">group</span>
+    <span class="text-[10px] font-medium mt-1 font-body">Grupos</span>
+  </a>
+  <!-- Perfil -->
+  <a class="flex flex-col items-center justify-center text-gray-500 px-5 py-1 hover:bg-gray-50 transition-all active:scale-90 duration-150" routerLink="/perfil">
+    <span class="material-symbols-outlined">person</span>
+    <span class="text-[10px] font-medium mt-1 font-body">Perfil</span>
+  </a>
+</nav>

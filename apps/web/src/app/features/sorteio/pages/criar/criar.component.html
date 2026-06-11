@@ -1,0 +1,82 @@
+<!-- TopHeader -->
+<header class="bg-[#f8f9f9] py-6 px-6 border-b border-gray-100 w-full">
+  <div class="max-w-md mx-auto">
+    <h1 class="text-[#D42426] font-extrabold text-2xl tracking-tight font-heading">SecretSanta</h1>
+  </div>
+</header>
+
+<!-- MainContent -->
+<main class="flex-grow px-6 pt-8 pb-24 w-full">
+  <!-- TitleSection -->
+  <section class="mb-8">
+    <h2 class="text-3xl font-extrabold text-gray-900 mb-2 font-heading">Criar Novo Grupo</h2>
+    <p class="text-gray-500 font-medium leading-relaxed font-body text-sm">
+      Comece sua tradição de Natal reunindo as pessoas que você ama.
+    </p>
+  </section>
+
+  <!-- Error Alert -->
+  @if (errorMessage()) {
+    <div class="p-4 mb-6 text-sm text-white bg-red-600 rounded-full flex items-center justify-between shadow-md">
+      <span class="font-medium px-4">{{ errorMessage() }}</span>
+      <button (click)="errorMessage.set(null)" class="text-white pr-4">✕</button>
+    </div>
+  }
+
+  <!-- Form -->
+  <form (ngSubmit)="onSubmit()" class="space-y-6">
+    <!-- GroupNameInput -->
+    <section class="bg-white rounded-[2rem] p-8 shadow-sm border border-gray-100 font-body">
+      <label class="block text-[#D42426] font-bold text-sm mb-3 font-heading" for="group-name">Nome do Grupo</label>
+      <input
+        class="w-full bg-gray-100 border border-transparent rounded-full py-4 px-6 focus:bg-white focus:border-[#D42426] focus:ring-2 focus:ring-[#D42426]/20 focus:outline-none text-gray-700 placeholder-gray-400"
+        id="group-name"
+        name="groupName"
+        [(ngModel)]="groupName"
+        placeholder="Ex: Família Silva 2024"
+        type="text"
+        required
+      />
+    </section>
+
+    <!-- ActionButtons -->
+    <section class="text-center">
+      <button
+        type="submit"
+        [disabled]="isLoading()"
+        class="w-full bg-[#D42426] hover:bg-[#b01e20] text-white font-bold text-lg py-4 rounded-full flex items-center justify-center gap-3 shadow-md active:scale-95 transition-all duration-200 font-heading"
+      >
+        @if (isLoading()) {
+          <span class="loading loading-spinner loading-md"></span>
+        } @else {
+          <span>Salvar e Criar Grupo</span>
+          <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path>
+          </svg>
+        }
+      </button>
+      <p class="text-gray-400 text-xs mt-4 font-medium px-4 font-body">
+        Após criar, você poderá copiar o link de convite para compartilhar com os participantes.
+      </p>
+    </section>
+  </form>
+</main>
+
+<!-- BottomNavBar -->
+<nav class="absolute bottom-0 left-0 w-full z-40 bg-white shadow-[0px_-2px_8px_rgba(0,0,0,0.05)] flex justify-around items-center px-4 py-2 border-t border-gray-100">
+  <!-- Início -->
+  <a class="flex flex-col items-center justify-center text-gray-500 px-5 py-1 hover:bg-gray-50 transition-all active:scale-90 duration-150" routerLink="/sorteios">
+    <span class="material-symbols-outlined">home</span>
+    <span class="text-[10px] font-medium mt-1">Início</span>
+  </a>
+  <!-- Grupos (Active State) -->
+  <a class="flex flex-col items-center justify-center bg-[#D42426]/10 text-[#D42426] rounded-full px-5 py-1 transition-all active:scale-90 duration-150" routerLink="/sorteios">
+    <span class="material-symbols-outlined font-bold">group</span>
+    <span class="text-[10px] font-bold mt-1">Grupos</span>
+  </a>
+  <!-- Perfil -->
+  <a class="flex flex-col items-center justify-center text-gray-500 px-5 py-1 hover:bg-gray-50 transition-all active:scale-90 duration-150" routerLink="/perfil">
+    <span class="material-symbols-outlined">person</span>
+    <span class="text-[10px] font-medium mt-1 font-body">Perfil</span>
+  </a>
+</nav>

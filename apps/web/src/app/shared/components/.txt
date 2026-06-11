@@ -1,1 +1,0 @@
-(A Caixa de Ferramentas: Componentes visuais genéricos que não sabem nada de regra de negócio, pipes, etc).

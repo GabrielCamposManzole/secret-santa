@@ -1,20 +1,9 @@
-<div class="flex flex-col min-h-screen bg-base-100">
-  <!-- 1. Header -->
-  <app-header />
-
-  <!-- 2. Estrutura Div Principal (Drawer para Sidenav e Content) -->
-  <div class="drawer lg:drawer-open grow">
-    <input id="main-drawer" type="checkbox" class="drawer-toggle" />
-    
-    <div class="drawer-content flex flex-col">
-      <main class="grow p-4 md:p-8">
-        <router-outlet />
-      </main>
+@if (isLandingPage()) {
+  <router-outlet />
+} @else {
+  <div class="min-h-screen bg-gray-100 flex justify-center items-start">
+    <div class="w-full max-w-[480px] bg-white min-h-screen relative flex flex-col overflow-hidden shadow-2xl">
+      <router-outlet />
     </div>
-
-    <app-sidenav />
   </div>
-
-  <!-- 3. Footer -->
-  <app-footer />
-</div>
+}

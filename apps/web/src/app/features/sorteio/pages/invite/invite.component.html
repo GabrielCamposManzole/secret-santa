@@ -1,0 +1,45 @@
+<!-- TopHeader -->
+<header class="bg-[#f8f9f9] py-6 px-6 border-b border-gray-100 w-full">
+  <div class="max-w-md mx-auto">
+    <h1 class="text-[#D42426] font-extrabold text-2xl tracking-tight font-heading">SecretSanta</h1>
+  </div>
+</header>
+
+<main class="flex-grow px-6 pt-12 pb-24 w-full flex flex-col items-center justify-center text-center">
+  <div class="w-full max-w-md bg-white rounded-[2.5rem] p-8 shadow-sm border border-gray-100 flex flex-col items-center">
+    <div class="w-20 h-20 bg-[#D42426]/10 text-[#D42426] rounded-full flex items-center justify-center mb-6">
+      <span class="material-symbols-outlined text-4xl">group_add</span>
+    </div>
+
+    <h2 class="text-2xl font-bold text-gray-900 mb-2 font-heading">Processando Convite</h2>
+
+    @if (isLoading()) {
+      <div class="flex flex-col items-center space-y-4 py-6">
+        <span class="loading loading-spinner loading-lg text-[#D42426]"></span>
+        <p class="text-sm text-gray-500 font-body">Entrando no grupo secreto...</p>
+      </div>
+    }
+
+    @if (successMessage()) {
+      <div class="p-4 bg-green-100 text-green-700 rounded-full font-body text-sm font-semibold w-full my-4">
+        {{ successMessage() }}
+      </div>
+    }
+
+    @if (errorMessage()) {
+      <div class="p-4 bg-red-100 text-red-700 rounded-full font-body text-sm font-semibold w-full my-4">
+        {{ errorMessage() }}
+      </div>
+      <a
+        routerLink="/sorteios"
+        class="w-full bg-[#D42426] hover:bg-[#b01e20] text-white font-bold py-4 rounded-full text-base transition-colors flex items-center justify-center mt-6 font-heading"
+      >
+        Ir para Meus Grupos
+      </a>
+    }
+  </div>
+</main>
+
+<footer class="bg-[#f8f9f9] py-8 px-6 text-center mt-auto w-full">
+  <p class="text-xs text-gray-400">© 2024 Secret Santa Editorial. All rights reserved.</p>
+</footer>
