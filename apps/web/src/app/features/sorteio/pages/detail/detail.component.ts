@@ -78,7 +78,7 @@ export class DetailComponent implements OnInit {
       },
       () => {
         this.errorMessage.set('Erro ao copiar link de convite.');
-      }
+      },
     );
   }
 

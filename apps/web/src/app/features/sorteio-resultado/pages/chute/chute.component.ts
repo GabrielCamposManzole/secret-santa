@@ -66,7 +66,7 @@ export class ChuteComponent implements OnInit {
       return;
     }
     const filtered = this.participants().filter((p) =>
-      p.nome_completo.toLowerCase().includes(term)
+      p.nome_completo.toLowerCase().includes(term),
     );
     this.filteredParticipants.set(filtered);
   }

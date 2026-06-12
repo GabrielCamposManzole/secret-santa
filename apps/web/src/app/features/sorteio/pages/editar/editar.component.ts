@@ -121,66 +121,73 @@ export class EditarComponent implements OnInit {
     this.errorMessage.set(null);
 
     // 1. Check if user already exists
-    this.http.get<Usuario[]>(`${this.apiUrl}/usuarios?email=${this.newParticipantEmail().trim()}`).pipe(
-      switchMap((users) => {
-        if (users.length > 0) {
-          // User exists, add membership directly
-          return this.addMembership(users[0].id, id);
-        } else {
-          // Create a new placeholder user account
-          const newUser: Omit<Usuario, 'id'> = {
-            nome_completo: this.newParticipantName().trim(),
-            email: this.newParticipantEmail().trim(),
-            senha: '123', // temporary default password
-            idade: 18,
-            cabelo_cor: '',
-            cabelo_tipo: '',
-            cabelo_comprimento: '',
-            olhos_cor: '',
-            altura: 170,
-          };
-          return this.http.post<Usuario>(`${this.apiUrl}/usuarios`, newUser).pipe(
-            switchMap((createdUser) => this.addMembership(createdUser.id, id))
-          );
-        }
-      })
-    ).subscribe({
-      next: () => {
-        this.newParticipantName.set('');
-        this.newParticipantEmail.set('');
-        this.loadGroupDetails();
-        this.successMessage.set('Participante adicionado com sucesso!');
-        setTimeout(() => this.successMessage.set(null), 3000);
-      },
-      error: (err) => {
-        this.isLoading.set(false);
-        this.errorMessage.set(err.message || 'Erro ao adicionar participante.');
-      },
-    });
+    this.http
+      .get<Usuario[]>(`${this.apiUrl}/usuarios?email=${this.newParticipantEmail().trim()}`)
+      .pipe(
+        switchMap((users) => {
+          if (users.length > 0) {
+            // User exists, add membership directly
+            return this.addMembership(users[0].id, id);
+          } else {
+            // Create a new placeholder user account
+            const newUser: Omit<Usuario, 'id'> = {
+              nome_completo: this.newParticipantName().trim(),
+              email: this.newParticipantEmail().trim(),
+              senha: '123', // temporary default password
+              idade: 18,
+              cabelo_cor: '',
+              cabelo_tipo: '',
+              cabelo_comprimento: '',
+              olhos_cor: '',
+              altura: 170,
+            };
+            return this.http
+              .post<Usuario>(`${this.apiUrl}/usuarios`, newUser)
+              .pipe(switchMap((createdUser) => this.addMembership(createdUser.id, id)));
+          }
+        }),
+      )
+      .subscribe({
+        next: () => {
+          this.newParticipantName.set('');
+          this.newParticipantEmail.set('');
+          this.loadGroupDetails();
+          this.successMessage.set('Participante adicionado com sucesso!');
+          setTimeout(() => this.successMessage.set(null), 3000);
+        },
+        error: (err) => {
+          this.isLoading.set(false);
+          this.errorMessage.set(err.message || 'Erro ao adicionar participante.');
+        },
+      });
   }
 
   private addMembership(userId: string, groupId: string) {
     // Check if membership already exists
-    return this.http.get<UsuarioGrupo[]>(
-      `${this.apiUrl}/usuario_grupo?usuario_id=${userId}&grupo_id=${groupId}`
-    ).pipe(
-      switchMap((memberships) => {
-        if (memberships.length > 0) {
-          throw new Error('Este participante já está no grupo.');
-        }
-        const newMembership: Omit<UsuarioGrupo, 'id'> = {
-          usuario_id: userId,
-          grupo_id: groupId,
-          id_pessoa_sorteada: null,
-          preenchido_caracteristicas: false,
-          jogado: false,
-          resultado: false,
-          chute_id: null,
-        };
-        return this.http.post<UsuarioGrupo>(`${this.apiUrl}/usuario_grupo`, newMembership);
-      })
-    );
+    return this.http
+      .get<UsuarioGrupo[]>(`${this.apiUrl}/usuario_grupo`)
+      .pipe(
+        switchMap((allMemberships) => {
+          const memberships = allMemberships.filter(
+            (m) => String(m.usuario_id) === String(userId) && String(m.grupo_id) === String(groupId)
+          );
+          if (memberships.length > 0) {
+            throw new Error('Este participante já está no grupo.');
+          }
+          const newMembership: Omit<UsuarioGrupo, 'id'> = {
+            usuario_id: userId,
+            grupo_id: groupId,
+            id_pessoa_sorteada: null,
+            preenchido_caracteristicas: false,
+            jogado: false,
+            resultado: false,
+            chute_id: null,
+          };
+          return this.http.post<UsuarioGrupo>(`${this.apiUrl}/usuario_grupo`, newMembership);
+        }),
+      );
   }
+
 
   onSaveGroup(): void {
     if (!this.groupName().trim()) {
@@ -206,6 +213,34 @@ export class EditarComponent implements OnInit {
       error: (err) => {
         this.isLoading.set(false);
         this.errorMessage.set(err.message || 'Erro ao salvar grupo.');
+      },
+    });
+  }
+
+  onDeleteGroup(): void {
+    const id = this.groupId();
+    if (!id) return;
+
+    const confirmed = confirm(
+      'Tem certeza que deseja excluir permanentemente este grupo e todos os seus participantes do sorteio? Esta ação não pode ser desfeita.',
+    );
+    if (!confirmed) return;
+
+    this.isLoading.set(true);
+    this.errorMessage.set(null);
+
+    this.groupService.deleteGroup(id).subscribe({
+      next: () => {
+        this.isLoading.set(false);
+        this.successMessage.set('Grupo excluído com sucesso!');
+        setTimeout(() => {
+          this.successMessage.set(null);
+          this.router.navigate(['/sorteios']);
+        }, 1500);
+      },
+      error: (err) => {
+        this.isLoading.set(false);
+        this.errorMessage.set(err.message || 'Erro ao excluir o grupo.');
       },
     });
   }

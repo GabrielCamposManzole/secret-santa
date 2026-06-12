@@ -6,7 +6,7 @@ import { AuthService } from '../../../../core/services/auth.service';
 import { GroupService } from '../../../../core/services/group.service';
 import { Usuario, UsuarioGrupo, Grupo } from '../../../../core/models';
 import { environment } from '../../../../../environments/environment';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, map } from 'rxjs/operators';
 
 interface CharacteristicStep {
   label: string;
@@ -55,40 +55,46 @@ export class GameComponent implements OnInit {
     this.isLoading.set(true);
 
     // Get group info
-    this.http.get<Grupo>(`${this.apiUrl}/grupos/${id}`).pipe(
-      switchMap((grp) => {
-        this.group.set(grp);
-        // Get user membership in the group
-        return this.http.get<UsuarioGrupo[]>(
-          `${this.apiUrl}/usuario_grupo?usuario_id=${userId}&grupo_id=${id}`
-        );
-      }),
-      switchMap((memberships) => {
-        if (memberships.length === 0) {
-          throw new Error('Você não participa deste grupo.');
-        }
-        const membership = memberships[0];
-        if (!membership.id_pessoa_sorteada) {
-          throw new Error('O sorteio ainda não foi realizado para este grupo.');
-        }
-        if (membership.jogado) {
-          // Already played! Redirect to reveal or result screen
-          this.router.navigate([`/sorteio/${id}/resultado`]);
-        }
-        // Fetch target user (the person drawn)
-        return this.http.get<Usuario>(`${this.apiUrl}/usuarios/${membership.id_pessoa_sorteada}`);
-      })
-    ).subscribe({
-      next: (target) => {
-        this.targetUser.set(target);
-        this.setupSteps(target);
-        this.isLoading.set(false);
-      },
-      error: (err) => {
-        this.errorMessage.set(err.message || 'Erro ao carregar dados do jogo.');
-        this.isLoading.set(false);
-      },
-    });
+    this.http
+      .get<Grupo>(`${this.apiUrl}/grupos/${id}`)
+      .pipe(
+        switchMap((grp) => {
+          this.group.set(grp);
+          return this.http.get<UsuarioGrupo[]>(`${this.apiUrl}/usuario_grupo`).pipe(
+            map((allMemberships) =>
+              allMemberships.filter(
+                (m) => String(m.usuario_id) === String(userId) && String(m.grupo_id) === String(id)
+              )
+            )
+          );
+        }),
+        switchMap((memberships) => {
+          if (memberships.length === 0) {
+            throw new Error('Você não participa deste grupo.');
+          }
+          const membership = memberships[0];
+          if (!membership.id_pessoa_sorteada) {
+            throw new Error('O sorteio ainda não foi realizado para este grupo.');
+          }
+          if (membership.jogado) {
+            // Already played! Redirect to reveal or result screen
+            this.router.navigate([`/sorteio/${id}/resultado`]);
+          }
+          // Fetch target user (the person drawn)
+          return this.http.get<Usuario>(`${this.apiUrl}/usuarios/${membership.id_pessoa_sorteada}`);
+        }),
+      )
+      .subscribe({
+        next: (target) => {
+          this.targetUser.set(target);
+          this.setupSteps(target);
+          this.isLoading.set(false);
+        },
+        error: (err) => {
+          this.errorMessage.set(err.message || 'Erro ao carregar dados do jogo.');
+          this.isLoading.set(false);
+        },
+      });
   }
 
   setupSteps(user: Usuario): void {

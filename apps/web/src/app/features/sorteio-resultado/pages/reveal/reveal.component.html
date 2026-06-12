@@ -1,5 +1,5 @@
 <!-- TopAppBar -->
-<header class="sticky top-0 z-50 bg-[#f8f9f9] shadow-sm flex items-center w-full px-5 h-16 justify-between border-b border-gray-100">
+<header class="sticky top-0 z-50 bg-[#f8f9f9] shadow-sm flex items-center w-full px-5 h-16 justify-between border-b border-gray-100 md:hidden">
   <div class="flex items-center gap-2">
     <button routerLink="/sorteios" class="p-1 text-gray-500 hover:text-gray-900 transition-colors">
       <span class="material-symbols-outlined">arrow_back</span>
@@ -8,7 +8,15 @@
   </div>
 </header>
 
-<main class="flex-grow px-5 pt-8 pb-24 w-full max-w-md mx-auto font-body">
+<main class="flex-grow px-5 pt-8 pb-24 w-full max-w-md md:max-w-lg mx-auto font-body md:pt-10">
+  <!-- Desktop Back Button -->
+  <div class="hidden md:flex w-full items-center gap-2 mb-6">
+    <button routerLink="/sorteios" class="flex items-center gap-2 text-gray-500 hover:text-gray-900 transition-colors font-semibold text-sm">
+      <span class="material-symbols-outlined text-[18px]">arrow_back</span>
+      <span>Voltar para Grupos</span>
+    </button>
+  </div>
+
   <!-- Loading State -->
   @if (isLoading()) {
     <div class="flex justify-center items-center py-12">
@@ -56,7 +64,7 @@
       </p>
 
       <!-- Person Reveal Card -->
-      <div class="w-full bg-gray-50 rounded-[2rem] py-10 px-6 flex flex-col items-center border border-gray-100">
+      <div class="w-full bg-gray-50 rounded-[2rem] py-10 px-6 flex flex-col items-center border border-gray-100 font-body">
         <!-- Avatar with Red Border -->
         <div class="relative mb-4">
           <div class="w-24 h-24 rounded-full border-[6px] border-[#D42426] p-1 flex items-center justify-center bg-white shadow-sm">
@@ -73,10 +81,10 @@
     </div>
 
     <!-- Back to List button -->
-    <div class="pt-8">
+    <div class="pt-8 font-heading">
       <a
         routerLink="/sorteios"
-        class="w-full bg-[#D42426] hover:bg-[#b01e20] text-white py-4 rounded-full font-bold shadow-md active:scale-95 transition-transform flex items-center justify-center font-heading text-sm"
+        class="w-full bg-[#D42426] hover:bg-[#b01e20] text-white py-4 rounded-full font-bold shadow-md active:scale-95 transition-transform flex items-center justify-center text-sm"
       >
         Voltar para Meus Grupos
       </a>
@@ -85,7 +93,7 @@
 </main>
 
 <!-- BottomNavBar -->
-<nav class="absolute bottom-0 left-0 w-full z-40 bg-white shadow-[0px_-2px_8px_rgba(0,0,0,0.05)] flex justify-around items-center px-4 py-2 border-t border-gray-100 font-body">
+<nav class="absolute bottom-0 left-0 w-full z-40 bg-white shadow-[0px_-2px_8px_rgba(0,0,0,0.05)] flex justify-around items-center px-4 py-2 border-t border-gray-100 font-body md:hidden">
   <!-- Início -->
   <a class="flex flex-col items-center justify-center text-gray-500 px-5 py-1 hover:bg-gray-50 transition-all active:scale-90 duration-150" routerLink="/sorteios">
     <span class="material-symbols-outlined">home</span>

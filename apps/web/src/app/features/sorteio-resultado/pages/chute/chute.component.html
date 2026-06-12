@@ -1,5 +1,5 @@
 <!-- TopAppBar -->
-<header class="sticky top-0 z-50 bg-[#f8f9f9] shadow-sm flex items-center w-full px-5 h-16 justify-between border-b border-gray-100">
+<header class="sticky top-0 z-50 bg-[#f8f9f9] shadow-sm flex items-center w-full px-5 h-16 justify-between border-b border-gray-100 md:hidden">
   <div class="flex items-center gap-2">
     <button [routerLink]="['/sorteio', groupId(), 'jogo']" class="p-1 text-gray-500 hover:text-gray-900 transition-colors">
       <span class="material-symbols-outlined">arrow_back</span>
@@ -8,7 +8,15 @@
   </div>
 </header>
 
-<main class="max-w-md mx-auto px-5 py-8 space-y-8 font-body w-full pb-24">
+<main class="max-w-md md:max-w-xl mx-auto px-5 py-8 space-y-8 font-body w-full pb-24 md:pt-10">
+  <!-- Desktop Back Button -->
+  <div class="hidden md:flex w-full items-center gap-2 mb-6">
+    <button [routerLink]="['/sorteio', groupId(), 'jogo']" class="flex items-center gap-2 text-gray-500 hover:text-gray-900 transition-colors font-semibold text-sm">
+      <span class="material-symbols-outlined text-[18px]">arrow_back</span>
+      <span>Voltar para o Jogo</span>
+    </button>
+  </div>
+
   <!-- Alerts -->
   @if (successMessage()) {
     <div class="p-4 mb-6 text-sm text-white bg-green-600 rounded-full flex items-center justify-between shadow-md">
@@ -31,7 +39,7 @@
   } @else {
     <!-- Main Content Area -->
     <div class="space-y-6">
-      <h1 class="text-3xl font-extrabold text-gray-900 leading-tight text-center tracking-tight font-heading">
+      <h1 class="text-3xl font-extrabold text-gray-900 leading-tight text-center tracking-tight font-heading md:text-4xl">
         Quem é o seu Amigo Secreto?
       </h1>
 
@@ -102,7 +110,7 @@
 </main>
 
 <!-- BottomNavBar -->
-<nav class="absolute bottom-0 left-0 w-full z-40 bg-white shadow-[0px_-2px_8px_rgba(0,0,0,0.05)] flex justify-around items-center px-4 py-2 border-t border-gray-100 font-body">
+<nav class="absolute bottom-0 left-0 w-full z-40 bg-white shadow-[0px_-2px_8px_rgba(0,0,0,0.05)] flex justify-around items-center px-4 py-2 border-t border-gray-100 font-body md:hidden">
   <!-- Início -->
   <a class="flex flex-col items-center justify-center text-gray-500 px-5 py-1 hover:bg-gray-50 transition-all active:scale-90 duration-150" routerLink="/sorteios">
     <span class="material-symbols-outlined">home</span>

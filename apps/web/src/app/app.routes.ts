@@ -6,8 +6,7 @@ export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    loadComponent: () =>
-      import('./features/home/home.component').then((m) => m.HomeComponent),
+    loadComponent: () => import('./features/home/home.component').then((m) => m.HomeComponent),
   },
   // Guest Routes
   {
@@ -79,13 +78,17 @@ export const routes: Routes = [
     path: 'sorteio/:id/chute',
     canActivate: [authGuard],
     loadComponent: () =>
-      import('./features/sorteio-resultado/pages/chute/chute.component').then((m) => m.ChuteComponent),
+      import('./features/sorteio-resultado/pages/chute/chute.component').then(
+        (m) => m.ChuteComponent,
+      ),
   },
   {
     path: 'sorteio/:id/resultado',
     canActivate: [authGuard],
     loadComponent: () =>
-      import('./features/sorteio-resultado/pages/reveal/reveal.component').then((m) => m.RevealComponent),
+      import('./features/sorteio-resultado/pages/reveal/reveal.component').then(
+        (m) => m.RevealComponent,
+      ),
   },
   {
     path: 'perfil',

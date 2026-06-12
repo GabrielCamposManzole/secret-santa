@@ -77,37 +77,45 @@ export class ProfileComponent implements OnInit {
       this.altura() !== null
     );
 
-    this.authService.updateProfile(updatedUser).pipe(
-      switchMap(() => {
-        const userId = this.authService.getCurrentUserId();
-        if (!userId) return of(null);
+    this.authService
+      .updateProfile(updatedUser)
+      .pipe(
+        switchMap(() => {
+          const userId = this.authService.getCurrentUserId();
+          if (!userId) return of(null);
 
-        // Fetch user memberships and update preenchido_caracteristicas
-        return this.http.get<UsuarioGrupo[]>(`${this.apiUrl}/usuario_grupo?usuario_id=${userId}`).pipe(
-          switchMap((memberships) => {
-            if (memberships.length === 0) return of(null);
-            
-            const updates = memberships.map((m) => {
-              if (m.preenchido_caracteristicas === hasCharacteristics) return of(m);
-              return this.http.patch<UsuarioGrupo>(`${this.apiUrl}/usuario_grupo/${m.id}`, {
-                preenchido_caracteristicas: hasCharacteristics,
-              });
-            });
-            return forkJoin(updates);
-          })
-        );
-      })
-    ).subscribe({
-      next: () => {
-        this.isLoading.set(false);
-        this.successMessage.set('Perfil atualizado com sucesso!');
-        setTimeout(() => this.successMessage.set(null), 3000);
-      },
-      error: (err) => {
-        this.isLoading.set(false);
-        this.errorMessage.set(err.message || 'Erro ao atualizar perfil.');
-      },
-    });
+          // Fetch user memberships and update preenchido_caracteristicas
+          return this.http
+            .get<UsuarioGrupo[]>(`${this.apiUrl}/usuario_grupo`)
+            .pipe(
+              switchMap((allMemberships) => {
+                const memberships = allMemberships.filter(
+                  (m) => String(m.usuario_id) === String(userId)
+                );
+                if (memberships.length === 0) return of(null);
+
+                const updates = memberships.map((m) => {
+                  if (m.preenchido_caracteristicas === hasCharacteristics) return of(m);
+                  return this.http.patch<UsuarioGrupo>(`${this.apiUrl}/usuario_grupo/${m.id}`, {
+                    preenchido_caracteristicas: hasCharacteristics,
+                  });
+                });
+                return forkJoin(updates);
+              }),
+            );
+        }),
+      )
+      .subscribe({
+        next: () => {
+          this.isLoading.set(false);
+          this.successMessage.set('Perfil atualizado com sucesso!');
+          setTimeout(() => this.successMessage.set(null), 3000);
+        },
+        error: (err) => {
+          this.isLoading.set(false);
+          this.errorMessage.set(err.message || 'Erro ao atualizar perfil.');
+        },
+      });
   }
 
   onLogout(): void {

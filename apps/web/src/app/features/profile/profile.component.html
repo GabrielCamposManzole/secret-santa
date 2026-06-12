@@ -1,14 +1,14 @@
 <!-- TopAppBar -->
-<header class="py-6 px-4 flex border-b border-gray-100 bg-[#f8f9f9] justify-between items-center w-full">
+<header class="py-6 px-4 flex border-b border-gray-100 bg-[#f8f9f9] justify-between items-center w-full md:hidden">
   <div class="flex items-center" data-purpose="logo">
     <span class="text-[#D42426] font-extrabold text-2xl tracking-tighter font-heading">SecretSanta</span>
   </div>
 </header>
 
-<main class="flex-grow pt-8 px-5 pb-24 w-full">
+<main class="flex-grow pt-8 px-5 pb-24 w-full md:max-w-6xl md:mx-auto md:px-8 md:pt-10">
   <!-- Title Section -->
-  <section class="mb-6">
-    <h2 class="text-2xl font-bold text-gray-900 font-heading">Meu Perfil</h2>
+  <section class="mb-6 md:mb-10 text-center md:text-left">
+    <h2 class="text-2xl font-bold text-gray-900 font-heading md:text-3xl">Meu Perfil</h2>
     <p class="text-gray-500 text-sm mt-1">Configure seus detalhes para o Amigo Secreto</p>
   </section>
 
@@ -26,135 +26,146 @@
     </div>
   }
 
-  <!-- Informações Pessoais -->
-  <section class="mb-8 space-y-4">
-    <h3 class="text-lg font-bold text-gray-900 flex items-center gap-2 font-heading">
-      <span class="material-symbols-outlined text-[#D42426]">person</span>
-      Informações Pessoais
-    </h3>
-    <div class="space-y-4">
-      <div class="group">
-        <label class="block text-sm font-semibold text-gray-600 mb-2 ml-4">Nome</label>
-        <input
-          class="w-full h-12 px-6 rounded-full border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#D42426]/20 focus:border-[#D42426] transition-all text-gray-800"
-          type="text"
-          name="nomeCompleto"
-          [(ngModel)]="nomeCompleto"
-        />
+  <!-- Two Column Grid for Desktop -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+    
+    <!-- Left Column: Personal info & Actions -->
+    <div class="space-y-6">
+      <!-- Personal Info Card -->
+      <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm space-y-6">
+        <h3 class="text-lg font-bold text-gray-900 flex items-center gap-2 font-heading">
+          <span class="material-symbols-outlined text-[#D42426]">person</span>
+          Informações Pessoais
+        </h3>
+        <div class="space-y-4">
+          <div class="group">
+            <label class="block text-sm font-semibold text-gray-600 mb-2 ml-4">Nome</label>
+            <input
+              class="w-full h-12 px-6 rounded-full border border-gray-200 bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#D42426]/20 focus:border-[#D42426] transition-all text-gray-800"
+              type="text"
+              name="nomeCompleto"
+              [(ngModel)]="nomeCompleto"
+            />
+          </div>
+          <div class="group">
+            <label class="block text-sm font-semibold text-gray-600 mb-2 ml-4">E-mail</label>
+            <input
+              class="w-full h-12 px-6 rounded-full border border-gray-200 bg-gray-100 text-gray-400 cursor-not-allowed"
+              type="email"
+              name="email"
+              [(ngModel)]="email"
+              disabled
+            />
+          </div>
+          <div class="group">
+            <label class="block text-sm font-semibold text-gray-600 mb-2 ml-4">Idade</label>
+            <input
+              class="w-full h-12 px-6 rounded-full border border-gray-200 bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#D42426]/20 focus:border-[#D42426] transition-all text-gray-800"
+              type="number"
+              name="idade"
+              [(ngModel)]="idade"
+            />
+          </div>
+        </div>
       </div>
-      <div class="group">
-        <label class="block text-sm font-semibold text-gray-600 mb-2 ml-4">E-mail</label>
-        <input
-          class="w-full h-12 px-6 rounded-full border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#D42426]/20 focus:border-[#D42426] transition-all text-gray-800"
-          type="email"
-          name="email"
-          [(ngModel)]="email"
-          disabled
-        />
-      </div>
-      <div class="group">
-        <label class="block text-sm font-semibold text-gray-600 mb-2 ml-4">Idade</label>
-        <input
-          class="w-full h-12 px-6 rounded-full border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#D42426]/20 focus:border-[#D42426] transition-all text-gray-800"
-          type="number"
-          name="idade"
-          [(ngModel)]="idade"
-        />
-      </div>
-    </div>
-  </section>
 
-  <!-- Minhas Características -->
-  <section class="mb-10 space-y-4">
-    <h3 class="text-lg font-bold text-gray-900 flex items-center gap-2 font-heading">
-      <span class="material-symbols-outlined text-[#D42426]">psychology</span>
-      Minhas Características
-    </h3>
-    <!-- Tip Box -->
-    <div class="bg-gray-100 rounded-xl p-4 flex gap-3 items-start border border-gray-200">
-      <span class="material-symbols-outlined text-[#D42426]">lightbulb</span>
-      <p class="text-xs text-gray-600 leading-relaxed font-body">
-        Dica: Essas informações ajudam nas pistas para "A Missão" do Amigo Secreto!
-      </p>
-    </div>
-    <div class="space-y-4 font-body">
-      <div class="group">
-        <label class="block text-sm font-semibold text-gray-600 mb-2 ml-4">Cor do Cabelo</label>
-        <input
-          class="w-full h-12 px-6 rounded-full border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#D42426]/20 focus:border-[#D42426] transition-all text-gray-800 placeholder:text-gray-400"
-          placeholder="Ex: Castanho, Loiro..."
-          type="text"
-          name="cabeloCor"
-          [(ngModel)]="cabeloCor"
-        />
-      </div>
-      <div class="group">
-        <label class="block text-sm font-semibold text-gray-600 mb-2 ml-4">Tipo de Cabelo</label>
-        <input
-          class="w-full h-12 px-6 rounded-full border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#D42426]/20 focus:border-[#D42426] transition-all text-gray-800 placeholder:text-gray-400"
-          placeholder="Ex: Liso, Cacheado..."
-          type="text"
-          name="cabeloTipo"
-          [(ngModel)]="cabeloTipo"
-        />
-      </div>
-      <div class="group">
-        <label class="block text-sm font-semibold text-gray-600 mb-2 ml-4">Comprimento do Cabelo</label>
-        <input
-          class="w-full h-12 px-6 rounded-full border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#D42426]/20 focus:border-[#D42426] transition-all text-gray-800 placeholder:text-gray-400"
-          placeholder="Ex: Curto, Médio, Longo..."
-          type="text"
-          name="cabeloComprimento"
-          [(ngModel)]="cabeloComprimento"
-        />
-      </div>
-      <div class="group">
-        <label class="block text-sm font-semibold text-gray-600 mb-2 ml-4">Cor dos Olhos</label>
-        <input
-          class="w-full h-12 px-6 rounded-full border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#D42426]/20 focus:border-[#D42426] transition-all text-gray-800 placeholder:text-gray-400"
-          placeholder="Ex: Castanhos, Verdes..."
-          type="text"
-          name="olhosCor"
-          [(ngModel)]="olhosCor"
-        />
-      </div>
-      <div class="group">
-        <label class="block text-sm font-semibold text-gray-600 mb-2 ml-4">Altura (cm)</label>
-        <input
-          class="w-full h-12 px-6 rounded-full border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#D42426]/20 focus:border-[#D42426] transition-all text-gray-800 placeholder:text-gray-400"
-          placeholder="Ex: 175"
-          type="number"
-          name="altura"
-          [(ngModel)]="altura"
-        />
+      <!-- Action Buttons -->
+      <div class="space-y-3">
+        <button
+          (click)="onSave()"
+          [disabled]="isLoading()"
+          class="w-full bg-[#D42426] hover:bg-[#b01e20] text-white h-14 rounded-full font-bold shadow-[0px_4px_12px_rgba(212,36,38,0.15)] active:scale-95 transition-all duration-200 flex items-center justify-center font-heading"
+        >
+          @if (isLoading()) {
+            <span class="loading loading-spinner loading-md"></span>
+          } @else {
+            Salvar Perfil
+          }
+        </button>
+        <button
+          (click)="onLogout()"
+          class="w-full bg-gray-200 text-gray-700 h-14 rounded-full font-bold hover:bg-gray-300 active:scale-95 transition-all duration-200 font-heading"
+        >
+          Sair da Conta
+        </button>
       </div>
     </div>
-  </section>
 
-  <!-- Action Buttons -->
-  <div class="space-y-3 mb-6">
-    <button
-      (click)="onSave()"
-      [disabled]="isLoading()"
-      class="w-full bg-[#D42426] hover:bg-[#b01e20] text-white h-14 rounded-full font-bold shadow-[0px_4px_12px_rgba(212,36,38,0.15)] active:scale-95 transition-all duration-200 flex items-center justify-center font-heading"
-    >
-      @if (isLoading()) {
-        <span class="loading loading-spinner loading-md"></span>
-      } @else {
-        Salvar Perfil
-      }
-    </button>
-    <button
-      (click)="onLogout()"
-      class="w-full bg-gray-200 text-gray-700 h-14 rounded-full font-bold hover:bg-gray-300 active:scale-95 transition-all duration-200 font-heading"
-    >
-      Sair da Conta
-    </button>
+    <!-- Right Column: Character Details -->
+    <div class="space-y-6">
+      <!-- Minhas Características Section Card -->
+      <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm space-y-6">
+        <h3 class="text-lg font-bold text-gray-900 flex items-center gap-2 font-heading">
+          <span class="material-symbols-outlined text-[#D42426]">psychology</span>
+          Minhas Características
+        </h3>
+        <!-- Tip Box -->
+        <div class="bg-gray-50 rounded-xl p-4 flex gap-3 items-start border border-gray-200">
+          <span class="material-symbols-outlined text-[#D42426] shrink-0">lightbulb</span>
+          <p class="text-xs text-gray-600 leading-relaxed font-body">
+            Dica: Essas informações ajudam nas pistas para "A Missão" do Amigo Secreto!
+          </p>
+        </div>
+        <div class="space-y-4 font-body">
+          <div class="group">
+            <label class="block text-sm font-semibold text-gray-600 mb-2 ml-4">Cor do Cabelo</label>
+            <input
+              class="w-full h-12 px-6 rounded-full border border-gray-200 bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#D42426]/20 focus:border-[#D42426] transition-all text-gray-800 placeholder:text-gray-400"
+              placeholder="Ex: Castanho, Loiro..."
+              type="text"
+              name="cabeloCor"
+              [(ngModel)]="cabeloCor"
+            />
+          </div>
+          <div class="group">
+            <label class="block text-sm font-semibold text-gray-600 mb-2 ml-4">Tipo de Cabelo</label>
+            <input
+              class="w-full h-12 px-6 rounded-full border border-gray-200 bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#D42426]/20 focus:border-[#D42426] transition-all text-gray-800 placeholder:text-gray-400"
+              placeholder="Ex: Liso, Cacheado..."
+              type="text"
+              name="cabeloTipo"
+              [(ngModel)]="cabeloTipo"
+            />
+          </div>
+          <div class="group">
+            <label class="block text-sm font-semibold text-gray-600 mb-2 ml-4">Comprimento do Cabelo</label>
+            <input
+              class="w-full h-12 px-6 rounded-full border border-gray-200 bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#D42426]/20 focus:border-[#D42426] transition-all text-gray-800 placeholder:text-gray-400"
+              placeholder="Ex: Curto, Médio, Longo..."
+              type="text"
+              name="cabeloComprimento"
+              [(ngModel)]="cabeloComprimento"
+            />
+          </div>
+          <div class="group">
+            <label class="block text-sm font-semibold text-gray-600 mb-2 ml-4">Cor dos Olhos</label>
+            <input
+              class="w-full h-12 px-6 rounded-full border border-gray-200 bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#D42426]/20 focus:border-[#D42426] transition-all text-gray-800 placeholder:text-gray-400"
+              placeholder="Ex: Castanhos, Verdes..."
+              type="text"
+              name="olhosCor"
+              [(ngModel)]="olhosCor"
+            />
+          </div>
+          <div class="group">
+            <label class="block text-sm font-semibold text-gray-600 mb-2 ml-4">Altura (cm)</label>
+            <input
+              class="w-full h-12 px-6 rounded-full border border-gray-200 bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#D42426]/20 focus:border-[#D42426] transition-all text-gray-800 placeholder:text-gray-400"
+              placeholder="Ex: 175"
+              type="number"
+              name="altura"
+              [(ngModel)]="altura"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </main>
 
 <!-- BottomNavBar -->
-<nav class="absolute bottom-0 left-0 w-full z-40 bg-white shadow-[0px_-2px_8px_rgba(0,0,0,0.05)] flex justify-around items-center px-4 py-2 border-t border-gray-100">
+<nav class="absolute bottom-0 left-0 w-full z-40 bg-white shadow-[0px_-2px_8px_rgba(0,0,0,0.05)] flex justify-around items-center px-4 py-2 border-t border-gray-100 md:hidden">
   <!-- Início -->
   <a class="flex flex-col items-center justify-center text-gray-500 px-5 py-1 hover:bg-gray-50 transition-all active:scale-90 duration-150" routerLink="/sorteios">
     <span class="material-symbols-outlined">home</span>
