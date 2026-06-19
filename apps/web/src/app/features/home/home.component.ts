@@ -1,14 +1,14 @@
 import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 import { GroupService } from '../../core/services/group.service';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule],
   templateUrl: './home.component.html',
 })
 export class HomeComponent {
@@ -20,12 +20,7 @@ export class HomeComponent {
   errorMessage = signal<string | null>(null);
   isLoading = signal(false);
 
-  constructor() {
-    // If user is already logged in, redirect to their groups
-    if (this.authService.isAuthenticated()) {
-      this.router.navigate(['/sorteios']);
-    }
-  }
+
 
   onPlay(): void {
     if (!this.groupCode.trim()) {

@@ -193,6 +193,14 @@
       "finalizado": false,
       "dono_id": "1",
       "id": "V_X9ovy1u_8"
+    },
+    {
+      "nome": "grupo dos cria",
+      "token": "VRKSKN04",
+      "sorteado": false,
+      "finalizado": false,
+      "dono_id": "1",
+      "id": "GtaV00fvKwc"
     }
   ],
   "usuario_grupo": [
@@ -235,6 +243,16 @@
       "resultado": false,
       "chute_id": null,
       "id": "YDEcizdFzVs"
+    },
+    {
+      "usuario_id": "1",
+      "grupo_id": "GtaV00fvKwc",
+      "id_pessoa_sorteada": null,
+      "preenchido_caracteristicas": false,
+      "jogado": false,
+      "resultado": false,
+      "chute_id": null,
+      "id": "r0trbZuxFu0"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

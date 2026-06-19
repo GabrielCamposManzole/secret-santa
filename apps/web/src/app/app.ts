@@ -1,13 +1,16 @@
 import { Component, inject, computed } from '@angular/core';
-import { RouterOutlet, Router, NavigationEnd, RouterLink, RouterLinkActive } from '@angular/router';
+import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map, filter } from 'rxjs/operators';
 import { AuthService } from './core/services/auth.service';
+import { HeaderComponent } from './shared/components/header/header.component';
+import { FooterComponent } from './shared/components/footer/footer.component';
+import { BottomNavComponent } from './shared/components/bottom-nav/bottom-nav.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, RouterLinkActive],
+  imports: [RouterOutlet, HeaderComponent, FooterComponent, BottomNavComponent],
   templateUrl: './app.component.html',
 })
 export class App {
@@ -39,6 +42,10 @@ export class App {
 
   readonly isAppPage = computed(() => {
     return !this.isLandingPage() && !this.isAuthPage();
+  });
+
+  readonly isLoggedPage = computed(() => {
+    return this.authService.isAuthenticated() && !this.isAuthPage();
   });
 
   getInitials(name: string | undefined): string {

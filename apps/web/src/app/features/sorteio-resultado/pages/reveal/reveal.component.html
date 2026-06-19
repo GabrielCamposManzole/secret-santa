@@ -1,12 +1,3 @@
-<!-- TopAppBar -->
-<header class="sticky top-0 z-50 bg-[#f8f9f9] shadow-sm flex items-center w-full px-5 h-16 justify-between border-b border-gray-100 md:hidden">
-  <div class="flex items-center gap-2">
-    <button routerLink="/sorteios" class="p-1 text-gray-500 hover:text-gray-900 transition-colors">
-      <span class="material-symbols-outlined">arrow_back</span>
-    </button>
-    <h1 class="text-xl font-bold text-[#D42426] font-heading">Secret Santa</h1>
-  </div>
-</header>
 
 <main class="flex-grow px-5 pt-8 pb-24 w-full max-w-md md:max-w-lg mx-auto font-body md:pt-10">
   <!-- Desktop Back Button -->
@@ -91,22 +82,4 @@
     </div>
   }
 </main>
-
-<!-- BottomNavBar -->
-<nav class="absolute bottom-0 left-0 w-full z-40 bg-white shadow-[0px_-2px_8px_rgba(0,0,0,0.05)] flex justify-around items-center px-4 py-2 border-t border-gray-100 font-body md:hidden">
-  <!-- Início -->
-  <a class="flex flex-col items-center justify-center text-gray-500 px-5 py-1 hover:bg-gray-50 transition-all active:scale-90 duration-150" routerLink="/sorteios">
-    <span class="material-symbols-outlined">home</span>
-    <span class="text-[10px] font-medium mt-1">Início</span>
-  </a>
-  <!-- Grupos (Active State) -->
-  <a class="flex flex-col items-center justify-center bg-[#D42426]/10 text-[#D42426] rounded-full px-5 py-1 transition-all active:scale-90 duration-150" routerLink="/sorteios">
-    <span class="material-symbols-outlined font-bold">group</span>
-    <span class="text-[10px] font-bold mt-1">Grupos</span>
-  </a>
-  <!-- Perfil -->
-  <a class="flex flex-col items-center justify-center text-gray-500 px-5 py-1 hover:bg-gray-50 transition-all active:scale-90 duration-150" routerLink="/perfil">
-    <span class="material-symbols-outlined">person</span>
-    <span class="text-[10px] font-medium mt-1 font-body">Perfil</span>
-  </a>
-</nav>
+

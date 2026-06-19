@@ -1,0 +1,52 @@
+<!-- BottomNavBar - Visible only on mobile, matches Stitch design -->
+<nav class="fixed bottom-0 left-0 w-full z-50 md:hidden bg-[#fff8f7] shadow-[0px_-2px_8px_rgba(26,28,28,0.04)] px-4 py-2 flex justify-around items-center">
+
+  <!-- Início -->
+  <a
+    routerLink="/"
+    class="flex flex-col items-center justify-center transition-all active:scale-90 duration-150"
+    [class]="isHome()
+      ? 'bg-[#d42426] text-white rounded-full px-6 py-1.5'
+      : 'text-[#5c403d] px-5 py-1 hover:bg-[#ffe9e6]'"
+  >
+    <span
+      class="material-symbols-outlined"
+      [style.font-variation-settings]="isHome() ? \"'FILL' 1\" : \"'FILL' 0\""
+    >home</span>
+    <span class="text-xs mt-0.5" [class]="isHome() ? 'font-bold' : 'font-medium'">Início</span>
+  </a>
+
+  <!-- Grupos -->
+  <a
+    routerLink="/sorteios"
+    class="flex flex-col items-center justify-center transition-all active:scale-90 duration-150"
+    [class]="isGrupos()
+      ? 'bg-[#d42426] text-white rounded-full px-6 py-1.5'
+      : 'text-[#5c403d] px-5 py-1 hover:bg-[#ffe9e6]'"
+  >
+    <span
+      class="material-symbols-outlined"
+      [style.font-variation-settings]="isGrupos() ? \"'FILL' 1\" : \"'FILL' 0\""
+    >group</span>
+    <span class="text-xs mt-0.5" [class]="isGrupos() ? 'font-bold' : 'font-medium'">Grupos</span>
+  </a>
+
+  <!-- Perfil -->
+  <a
+    routerLink="/perfil"
+    class="flex flex-col items-center justify-center transition-all active:scale-90 duration-150"
+    [class]="isPerfil()
+      ? 'bg-[#d42426] text-white rounded-full px-6 py-1.5'
+      : 'text-[#5c403d] px-5 py-1 hover:bg-[#ffe9e6]'"
+  >
+    <span
+      class="material-symbols-outlined"
+      [style.font-variation-settings]="isPerfil() ? \"'FILL' 1\" : \"'FILL' 0\""
+    >person</span>
+    <span class="text-xs mt-0.5" [class]="isPerfil() ? 'font-bold' : 'font-medium'">Perfil</span>
+  </a>
+
+</nav>
+
+<!-- Spacer to prevent content from being hidden behind fixed bottom nav on mobile -->
+<div class="h-16 md:hidden"></div>
