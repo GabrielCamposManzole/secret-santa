@@ -164,30 +164,27 @@ export class EditarComponent implements OnInit {
 
   private addMembership(userId: string, groupId: string) {
     // Check if membership already exists
-    return this.http
-      .get<UsuarioGrupo[]>(`${this.apiUrl}/usuario_grupo`)
-      .pipe(
-        switchMap((allMemberships) => {
-          const memberships = allMemberships.filter(
-            (m) => String(m.usuario_id) === String(userId) && String(m.grupo_id) === String(groupId)
-          );
-          if (memberships.length > 0) {
-            throw new Error('Este participante já está no grupo.');
-          }
-          const newMembership: Omit<UsuarioGrupo, 'id'> = {
-            usuario_id: userId,
-            grupo_id: groupId,
-            id_pessoa_sorteada: null,
-            preenchido_caracteristicas: false,
-            jogado: false,
-            resultado: false,
-            chute_id: null,
-          };
-          return this.http.post<UsuarioGrupo>(`${this.apiUrl}/usuario_grupo`, newMembership);
-        }),
-      );
+    return this.http.get<UsuarioGrupo[]>(`${this.apiUrl}/usuario_grupo`).pipe(
+      switchMap((allMemberships) => {
+        const memberships = allMemberships.filter(
+          (m) => String(m.usuario_id) === String(userId) && String(m.grupo_id) === String(groupId),
+        );
+        if (memberships.length > 0) {
+          throw new Error('Este participante já está no grupo.');
+        }
+        const newMembership: Omit<UsuarioGrupo, 'id'> = {
+          usuario_id: userId,
+          grupo_id: groupId,
+          id_pessoa_sorteada: null,
+          preenchido_caracteristicas: false,
+          jogado: false,
+          resultado: false,
+          chute_id: null,
+        };
+        return this.http.post<UsuarioGrupo>(`${this.apiUrl}/usuario_grupo`, newMembership);
+      }),
+    );
   }
-
 
   onSaveGroup(): void {
     if (!this.groupName().trim()) {

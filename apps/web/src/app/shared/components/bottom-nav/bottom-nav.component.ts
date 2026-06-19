@@ -28,8 +28,17 @@ export class BottomNavComponent {
 
   readonly isGrupos = computed(() => {
     const url = this.currentUrl();
-    return url.startsWith('/sorteio') && !url.includes('/jogo') && !url.includes('/chute') && !url.includes('/resultado');
+    return (
+      url.startsWith('/sorteio') &&
+      !url.includes('/jogo') &&
+      !url.includes('/chute') &&
+      !url.includes('/resultado')
+    );
   });
 
   readonly isPerfil = computed(() => this.currentUrl().startsWith('/perfil'));
+
+  readonly homeIconSettings = computed(() => (this.isHome() ? "'FILL' 1" : "'FILL' 0"));
+  readonly gruposIconSettings = computed(() => (this.isGrupos() ? "'FILL' 1" : "'FILL' 0"));
+  readonly perfilIconSettings = computed(() => (this.isPerfil() ? "'FILL' 1" : "'FILL' 0"));
 }

@@ -85,24 +85,22 @@ export class ProfileComponent implements OnInit {
           if (!userId) return of(null);
 
           // Fetch user memberships and update preenchido_caracteristicas
-          return this.http
-            .get<UsuarioGrupo[]>(`${this.apiUrl}/usuario_grupo`)
-            .pipe(
-              switchMap((allMemberships) => {
-                const memberships = allMemberships.filter(
-                  (m) => String(m.usuario_id) === String(userId)
-                );
-                if (memberships.length === 0) return of(null);
+          return this.http.get<UsuarioGrupo[]>(`${this.apiUrl}/usuario_grupo`).pipe(
+            switchMap((allMemberships) => {
+              const memberships = allMemberships.filter(
+                (m) => String(m.usuario_id) === String(userId),
+              );
+              if (memberships.length === 0) return of(null);
 
-                const updates = memberships.map((m) => {
-                  if (m.preenchido_caracteristicas === hasCharacteristics) return of(m);
-                  return this.http.patch<UsuarioGrupo>(`${this.apiUrl}/usuario_grupo/${m.id}`, {
-                    preenchido_caracteristicas: hasCharacteristics,
-                  });
+              const updates = memberships.map((m) => {
+                if (m.preenchido_caracteristicas === hasCharacteristics) return of(m);
+                return this.http.patch<UsuarioGrupo>(`${this.apiUrl}/usuario_grupo/${m.id}`, {
+                  preenchido_caracteristicas: hasCharacteristics,
                 });
-                return forkJoin(updates);
-              }),
-            );
+              });
+              return forkJoin(updates);
+            }),
+          );
         }),
       )
       .subscribe({

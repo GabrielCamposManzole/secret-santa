@@ -16,9 +16,7 @@ export class GroupService {
     // 1. Get all memberships to avoid type mismatches
     return this.http.get<UsuarioGrupo[]>(`${this.apiUrl}/usuario_grupo`).pipe(
       switchMap((allMemberships) => {
-        const memberships = allMemberships.filter(
-          (m) => String(m.usuario_id) === String(userId)
-        );
+        const memberships = allMemberships.filter((m) => String(m.usuario_id) === String(userId));
         if (memberships.length === 0) return of([]);
 
         // 2. For each membership, fetch the group details and all participants
@@ -26,10 +24,10 @@ export class GroupService {
           return forkJoin({
             membership: of(m),
             group: this.http.get<Grupo>(`${this.apiUrl}/grupos/${m.grupo_id}`).pipe(
-              catchError(() => of(null)) // Handle deleted/orphaned groups gracefully
+              catchError(() => of(null)), // Handle deleted/orphaned groups gracefully
             ),
             allParticipants: of(
-              allMemberships.filter((x) => String(x.grupo_id) === String(m.grupo_id))
+              allMemberships.filter((x) => String(x.grupo_id) === String(m.grupo_id)),
             ),
           });
         });
@@ -59,9 +57,7 @@ export class GroupService {
       allMemberships: this.http.get<UsuarioGrupo[]>(`${this.apiUrl}/usuario_grupo`),
     }).pipe(
       switchMap(({ group, allMemberships }) => {
-        const memberships = allMemberships.filter(
-          (m) => String(m.grupo_id) === String(groupId)
-        );
+        const memberships = allMemberships.filter((m) => String(m.grupo_id) === String(groupId));
         if (memberships.length === 0) {
           return of({ group, participants: [] });
         }
@@ -141,7 +137,8 @@ export class GroupService {
         return this.http.get<UsuarioGrupo[]>(`${this.apiUrl}/usuario_grupo`).pipe(
           switchMap((allMemberships) => {
             const memberships = allMemberships.filter(
-              (m) => String(m.usuario_id) === String(userId) && String(m.grupo_id) === String(group.id)
+              (m) =>
+                String(m.usuario_id) === String(userId) && String(m.grupo_id) === String(group.id),
             );
             if (memberships.length > 0) {
               return of(memberships[0]); // Already joined
@@ -167,9 +164,7 @@ export class GroupService {
   performDraw(groupId: string): Observable<any> {
     return this.http.get<UsuarioGrupo[]>(`${this.apiUrl}/usuario_grupo`).pipe(
       switchMap((allMemberships) => {
-        const memberships = allMemberships.filter(
-          (m) => String(m.grupo_id) === String(groupId)
-        );
+        const memberships = allMemberships.filter((m) => String(m.grupo_id) === String(groupId));
         if (memberships.length < 3) {
           return throwError(() => new Error('O sorteio necessita de pelo menos 3 participantes.'));
         }
@@ -220,7 +215,7 @@ export class GroupService {
     return this.http.get<UsuarioGrupo[]>(`${this.apiUrl}/usuario_grupo`).pipe(
       switchMap((allMemberships) => {
         const memberships = allMemberships.filter(
-          (m) => String(m.usuario_id) === String(userId) && String(m.grupo_id) === String(groupId)
+          (m) => String(m.usuario_id) === String(userId) && String(m.grupo_id) === String(groupId),
         );
         if (memberships.length === 0) {
           return throwError(() => new Error('Participante não cadastrado neste grupo.'));
@@ -246,9 +241,7 @@ export class GroupService {
   deleteGroup(groupId: string): Observable<any> {
     return this.http.get<UsuarioGrupo[]>(`${this.apiUrl}/usuario_grupo`).pipe(
       switchMap((allMemberships) => {
-        const memberships = allMemberships.filter(
-          (m) => String(m.grupo_id) === String(groupId)
-        );
+        const memberships = allMemberships.filter((m) => String(m.grupo_id) === String(groupId));
         const deleteRequests = memberships.map((m) =>
           this.http.delete(`${this.apiUrl}/usuario_grupo/${m.id}`),
         );
@@ -262,4 +255,3 @@ export class GroupService {
     );
   }
 }
-

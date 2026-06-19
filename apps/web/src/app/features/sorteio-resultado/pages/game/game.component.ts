@@ -60,13 +60,16 @@ export class GameComponent implements OnInit {
       .pipe(
         switchMap((grp) => {
           this.group.set(grp);
-          return this.http.get<UsuarioGrupo[]>(`${this.apiUrl}/usuario_grupo`).pipe(
-            map((allMemberships) =>
-              allMemberships.filter(
-                (m) => String(m.usuario_id) === String(userId) && String(m.grupo_id) === String(id)
-              )
-            )
-          );
+          return this.http
+            .get<UsuarioGrupo[]>(`${this.apiUrl}/usuario_grupo`)
+            .pipe(
+              map((allMemberships) =>
+                allMemberships.filter(
+                  (m) =>
+                    String(m.usuario_id) === String(userId) && String(m.grupo_id) === String(id),
+                ),
+              ),
+            );
         }),
         switchMap((memberships) => {
           if (memberships.length === 0) {

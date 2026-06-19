@@ -11,7 +11,7 @@
   >
     <span
       class="material-symbols-outlined"
-      [style.font-variation-settings]="isHome() ? \"'FILL' 1\" : \"'FILL' 0\""
+      [style.font-variation-settings]="homeIconSettings()"
     >home</span>
     <span class="text-xs mt-0.5" [class]="isHome() ? 'font-bold' : 'font-medium'">Início</span>
   </a>
@@ -26,7 +26,7 @@
   >
     <span
       class="material-symbols-outlined"
-      [style.font-variation-settings]="isGrupos() ? \"'FILL' 1\" : \"'FILL' 0\""
+      [style.font-variation-settings]="gruposIconSettings()"
     >group</span>
     <span class="text-xs mt-0.5" [class]="isGrupos() ? 'font-bold' : 'font-medium'">Grupos</span>
   </a>
@@ -41,7 +41,7 @@
   >
     <span
       class="material-symbols-outlined"
-      [style.font-variation-settings]="isPerfil() ? \"'FILL' 1\" : \"'FILL' 0\""
+      [style.font-variation-settings]="perfilIconSettings()"
     >person</span>
     <span class="text-xs mt-0.5" [class]="isPerfil() ? 'font-bold' : 'font-medium'">Perfil</span>
   </a>

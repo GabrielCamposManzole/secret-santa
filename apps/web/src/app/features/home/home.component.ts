@@ -20,8 +20,6 @@ export class HomeComponent {
   errorMessage = signal<string | null>(null);
   isLoading = signal(false);
 
-
-
   onPlay(): void {
     if (!this.groupCode.trim()) {
       this.errorMessage.set('Por favor, insira o código do grupo.');
