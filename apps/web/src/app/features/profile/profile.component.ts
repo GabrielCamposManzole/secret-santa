@@ -2,11 +2,10 @@ import { Component, inject, signal, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../core/services/auth.service';
-import { Usuario, UsuarioGrupo } from '../../core/models';
-import { environment } from '../../../environments/environment';
-import { forkJoin, of, switchMap } from 'rxjs';
+import { MembershipService } from '../../core/services/membership.service';
+import { Usuario } from '../../core/models';
+import { of, switchMap, forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-profile',
@@ -16,9 +15,8 @@ import { forkJoin, of, switchMap } from 'rxjs';
 })
 export class ProfileComponent implements OnInit {
   private readonly authService = inject(AuthService);
+  private readonly membershipService = inject(MembershipService);
   private readonly router = inject(Router);
-  private readonly http = inject(HttpClient);
-  private readonly apiUrl = environment.apiUrl;
 
   // Profile fields
   readonly nomeCompleto = signal('');
@@ -68,7 +66,6 @@ export class ProfileComponent implements OnInit {
       altura: this.altura() !== null ? Number(this.altura()) : undefined,
     };
 
-    // Determine if all characteristics are filled
     const hasCharacteristics = !!(
       this.cabeloCor().trim() &&
       this.cabeloTipo().trim() &&
@@ -84,21 +81,18 @@ export class ProfileComponent implements OnInit {
           const userId = this.authService.getCurrentUserId();
           if (!userId) return of(null);
 
-          // Fetch user memberships and update preenchido_caracteristicas
-          return this.http.get<UsuarioGrupo[]>(`${this.apiUrl}/usuario_grupo`).pipe(
-            switchMap((allMemberships) => {
-              const memberships = allMemberships.filter(
-                (m) => String(m.usuario_id) === String(userId),
-              );
+          return this.membershipService.getMemberships(userId).pipe(
+            switchMap((memberships) => {
               if (memberships.length === 0) return of(null);
 
               const updates = memberships.map((m) => {
                 if (m.preenchido_caracteristicas === hasCharacteristics) return of(m);
-                return this.http.patch<UsuarioGrupo>(`${this.apiUrl}/usuario_grupo/${m.id}`, {
+                return this.membershipService.updateMembership(m.id, {
                   preenchido_caracteristicas: hasCharacteristics,
                 });
               });
-              return forkJoin(updates);
+
+              return updates.length > 0 ? forkJoin(updates) : of(null);
             }),
           );
         }),

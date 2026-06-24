@@ -21,6 +21,6 @@
   --rounded-btn: var(--radius-btn);
 }
 
-body {
+.bg-base {
   background-color: var(--color-base);
 }

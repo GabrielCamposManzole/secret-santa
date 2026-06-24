@@ -85,14 +85,14 @@
       "id": "Ah8bYmAxyrE"
     },
     {
-      "nome_completo": "Emilly",
+      "nome_completo": "Marilda",
       "email": "Emilly@exemple.com",
       "senha": "123",
-      "idade": 18,
-      "cabelo_cor": "",
-      "cabelo_tipo": "",
-      "cabelo_comprimento": "",
-      "olhos_cor": "",
+      "idade": 36,
+      "cabelo_cor": "Castanho",
+      "cabelo_tipo": "liso",
+      "cabelo_comprimento": "curto",
+      "olhos_cor": "verdes",
       "altura": 170,
       "id": "J-FmdNQFmlE"
     },
@@ -227,6 +227,30 @@
       "olhos_cor": "",
       "altura": 170,
       "id": "MU7DRSE2bBE"
+    },
+    {
+      "nome_completo": "Marildo",
+      "email": "marildo@example.com",
+      "senha": "123",
+      "idade": 18,
+      "cabelo_cor": "loiro",
+      "cabelo_tipo": "cacheado",
+      "cabelo_comprimento": "medio",
+      "olhos_cor": "azul",
+      "altura": 170,
+      "id": "mrlVsUv7aTs"
+    },
+    {
+      "nome_completo": "Marcio",
+      "email": "marcio@example.com",
+      "senha": "123",
+      "idade": 18,
+      "cabelo_cor": "rosa",
+      "cabelo_tipo": "careca",
+      "cabelo_comprimento": "calvo",
+      "olhos_cor": "castanhos",
+      "altura": 170,
+      "id": "qzKui0wbFJo"
     }
   ],
   "grupos": [
@@ -285,6 +309,14 @@
       "finalizado": false,
       "dono_id": "1",
       "id": "D8AajvLaE6U"
+    },
+    {
+      "nome": "2k26",
+      "token": "M0M8XCD9",
+      "sorteado": true,
+      "finalizado": false,
+      "dono_id": "J-FmdNQFmlE",
+      "id": "oUJP-NOi6Rc"
     }
   ],
   "usuario_grupo": [
@@ -407,6 +439,36 @@
       "resultado": false,
       "chute_id": null,
       "id": "SXzVE0vmyZA"
+    },
+    {
+      "usuario_id": "J-FmdNQFmlE",
+      "grupo_id": "oUJP-NOi6Rc",
+      "id_pessoa_sorteada": "mrlVsUv7aTs",
+      "preenchido_caracteristicas": true,
+      "jogado": true,
+      "resultado": true,
+      "chute_id": "mrlVsUv7aTs",
+      "id": "KXtZbj-EO94"
+    },
+    {
+      "usuario_id": "mrlVsUv7aTs",
+      "grupo_id": "oUJP-NOi6Rc",
+      "id_pessoa_sorteada": "qzKui0wbFJo",
+      "preenchido_caracteristicas": true,
+      "jogado": false,
+      "resultado": false,
+      "chute_id": null,
+      "id": "PewCQjsaqt4"
+    },
+    {
+      "usuario_id": "qzKui0wbFJo",
+      "grupo_id": "oUJP-NOi6Rc",
+      "id_pessoa_sorteada": "J-FmdNQFmlE",
+      "preenchido_caracteristicas": true,
+      "jogado": false,
+      "resultado": false,
+      "chute_id": null,
+      "id": "DDob8WmP-34"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

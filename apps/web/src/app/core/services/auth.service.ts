@@ -1,6 +1,5 @@
-import { Injectable, inject, signal } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, tap, map, switchMap, throwError } from 'rxjs';
+import { Injectable, signal } from '@angular/core';
+import { from, Observable, tap, map, switchMap, throwError, of } from 'rxjs';
 import { Usuario } from '../models';
 import { environment } from '../../../environments/environment';
 
@@ -8,7 +7,6 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root',
 })
 export class AuthService {
-  private readonly http = inject(HttpClient);
   private readonly apiUrl = environment.apiUrl;
 
   readonly currentUser = signal<Usuario | null>(null);
@@ -33,8 +31,13 @@ export class AuthService {
   }
 
   login(email: string, senha: string): Observable<Usuario> {
-    return this.http.get<Usuario[]>(`${this.apiUrl}/usuarios?email=${email}`).pipe(
-      map((users) => {
+    return from(
+      fetch(`${this.apiUrl}/usuarios?email=${email}`).then((res) => {
+        if (!res.ok) throw new Error('Erro ao buscar usuário');
+        return res.json();
+      }),
+    ).pipe(
+      map((users: Usuario[]) => {
         if (users.length === 0) {
           throw new Error('Usuário não encontrado');
         }
@@ -54,17 +57,31 @@ export class AuthService {
   }
 
   register(userData: Partial<Usuario>): Observable<Usuario> {
-    return this.http.get<Usuario[]>(`${this.apiUrl}/usuarios?email=${userData.email}`).pipe(
-      map((users) => {
+    return from(
+      fetch(`${this.apiUrl}/usuarios?email=${userData.email}`).then((res) => {
+        if (!res.ok) throw new Error('Erro ao validar e-mail');
+        return res.json();
+      }),
+    ).pipe(
+      map((users: Usuario[]) => {
         if (users.length > 0) {
           throw new Error('E-mail já cadastrado');
         }
         return true;
       }),
       switchMap(() => {
-        return this.http.post<Usuario>(`${this.apiUrl}/usuarios`, userData);
+        return from(
+          fetch(`${this.apiUrl}/usuarios`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(userData),
+          }).then((res) => {
+            if (!res.ok) throw new Error('Erro ao cadastrar usuário');
+            return res.json();
+          }),
+        );
       }),
-      tap((user) => {
+      tap((user: Usuario) => {
         const userWithoutPassword = { ...user };
         delete userWithoutPassword.senha;
         this.currentUser.set(userWithoutPassword);
@@ -77,8 +94,17 @@ export class AuthService {
     const userId = this.getCurrentUserId();
     if (!userId) return throwError(() => new Error('Usuário não autenticado'));
 
-    return this.http.patch<Usuario>(`${this.apiUrl}/usuarios/${userId}`, userData).pipe(
-      tap((user) => {
+    return from(
+      fetch(`${this.apiUrl}/usuarios/${userId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(userData),
+      }).then((res) => {
+        if (!res.ok) throw new Error('Erro ao atualizar perfil');
+        return res.json();
+      }),
+    ).pipe(
+      tap((user: Usuario) => {
         const userWithoutPassword = { ...user };
         delete userWithoutPassword.senha;
         this.currentUser.set(userWithoutPassword);

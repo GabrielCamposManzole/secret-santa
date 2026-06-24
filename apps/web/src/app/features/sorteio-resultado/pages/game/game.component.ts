@@ -1,12 +1,13 @@
 import { Component, inject, signal, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../../../core/services/auth.service';
 import { GroupService } from '../../../../core/services/group.service';
-import { Usuario, UsuarioGrupo, Grupo } from '../../../../core/models';
+import { MembershipService } from '../../../../core/services/membership.service';
+import { Usuario, Grupo } from '../../../../core/models';
 import { environment } from '../../../../../environments/environment';
 import { switchMap, map } from 'rxjs/operators';
+import { of, from } from 'rxjs';
 
 interface CharacteristicStep {
   label: string;
@@ -25,7 +26,7 @@ export class GameComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly authService = inject(AuthService);
   private readonly groupService = inject(GroupService);
-  private readonly http = inject(HttpClient);
+  private readonly membershipService = inject(MembershipService);
   private readonly apiUrl = environment.apiUrl;
 
   readonly groupId = signal<string | null>(null);
@@ -54,46 +55,40 @@ export class GameComponent implements OnInit {
 
     this.isLoading.set(true);
 
-    // Get group info
-    this.http
-      .get<Grupo>(`${this.apiUrl}/grupos/${id}`)
+    this.groupService
+      .getGroupDetails(id)
       .pipe(
-        switchMap((grp) => {
-          this.group.set(grp);
-          return this.http
-            .get<UsuarioGrupo[]>(`${this.apiUrl}/usuario_grupo`)
-            .pipe(
-              map((allMemberships) =>
-                allMemberships.filter(
-                  (m) =>
-                    String(m.usuario_id) === String(userId) && String(m.grupo_id) === String(id),
-                ),
-              ),
-            );
+        switchMap((data) => {
+          this.group.set(data.group);
+          return this.membershipService.getMembership(userId, id);
         }),
-        switchMap((memberships) => {
-          if (memberships.length === 0) {
+        switchMap((membership) => {
+          if (!membership) {
             throw new Error('Você não participa deste grupo.');
           }
-          const membership = memberships[0];
           if (!membership.id_pessoa_sorteada) {
             throw new Error('O sorteio ainda não foi realizado para este grupo.');
           }
           if (membership.jogado) {
-            // Already played! Redirect to reveal or result screen
             this.router.navigate([`/sorteio/${id}/resultado`]);
           }
-          // Fetch target user (the person drawn)
-          return this.http.get<Usuario>(`${this.apiUrl}/usuarios/${membership.id_pessoa_sorteada}`);
+
+          // Using native fetch wrapped in from() for the direct user detail call
+          return from(
+            fetch(`${this.apiUrl}/usuarios/${membership.id_pessoa_sorteada}`).then((res) => {
+              if (!res.ok) throw new Error('Erro ao carregar sorteado');
+              return res.json();
+            }),
+          );
         }),
       )
       .subscribe({
-        next: (target) => {
+        next: (target: Usuario) => {
           this.targetUser.set(target);
           this.setupSteps(target);
           this.isLoading.set(false);
         },
-        error: (err) => {
+        error: (err: any) => {
           this.errorMessage.set(err.message || 'Erro ao carregar dados do jogo.');
           this.isLoading.set(false);
         },
