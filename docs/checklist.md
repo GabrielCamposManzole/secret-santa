@@ -31,7 +31,7 @@ Competência: O aluno entende como o fluxo de dados altera a interface de forma 
 
 [ ] ID11: Aplicar técnicas de two-way data binding utilizando a função moderna model() para sincronização bidirecional.
 
-[ ] ID12: Utilizar efeitos (effect()) para a manipulação segura de efeitos colaterais reativos.
+[x] ID12: Utilizar efeitos (effect()) para a manipulação segura de efeitos colaterais reativos.
 
 [ ] RA4 - Arquitetura de Software e Injeção de Dependências
 Competência: O aluno sabe separar responsabilidades, isolando a lógica de negócios da camada de visualização.
@@ -43,9 +43,9 @@ Competência: O aluno sabe separar responsabilidades, isolando a lógica de neg�
 [ ] RA5 - Roteamento e Navegação SPA (Single Page Application)
 Competência: O aluno consegue criar uma experiência de navegação fluida, segura e de alta performance.
 
-[ ] ID15: Configurar rotas dinâmicas utilizando a API funcional moderna (provideRouter e withComponentInputBinding).
+[x] ID15: Configurar rotas dinâmicas utilizando a API funcional moderna (provideRouter e withComponentInputBinding).
 
-[ ] ID16: Passar e consumir dados entre telas recebendo parâmetros de rota diretamente como @Input() nos componentes.
+[x] ID16: Passar e consumir dados entre telas recebendo parâmetros de rota diretamente como @Input() nos componentes.
 
 [ ] ID17: Criar uma estrutura de navegação aninhada (rotas filhas) para representar hierarquias de layout.
 

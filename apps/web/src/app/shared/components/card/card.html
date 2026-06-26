@@ -1,1 +1,40 @@
-<p>card works!</p>
+<div
+  class="bg-white rounded-xl p-6 shadow-sm border border-gray-200 cursor-pointer hover:bg-gray-50 transition-colors flex flex-col justify-between min-h-[200px]">
+  <div class="mb-4">
+    <!-- Status Badges -->
+    @if (!group().sorteado) {
+    <span class="text-[10px] font-bold uppercase tracking-widest text-[#D42426] mb-1 block">
+      Aguardando Sorteio
+    </span>
+    } @else if (group().sorteado && !group().jogado) {
+    <span class="text-[10px] font-bold uppercase tracking-widest text-[#D42426] mb-1 block">
+      Aguardando Jogo
+    </span>
+    } @else {
+    <span class="text-[10px] font-bold uppercase tracking-widest text-emerald-700 mb-1 block font-semibold">
+      Sorteio Realizado
+    </span>
+    }
+
+    <h2 class="text-xl font-bold text-gray-900 font-heading mt-1">{{ group().nome }}</h2>
+    <div class="flex items-center gap-1.5 text-gray-500 mt-2">
+      <span class="material-symbols-outlined text-[18px]">group</span>
+      <span class="text-sm">{{ group().participantsCount }} participantes</span>
+    </div>
+  </div>
+
+  <!-- Action Buttons -->
+  @if (!group().sorteado && isOwner()) {
+  <button (click)="onStartDrawClick($event)"
+    class="w-full bg-[#D42426] hover:bg-[#b01e20] text-white py-3.5 rounded-full font-bold flex items-center justify-center gap-2 shadow-sm active:scale-[0.98] transition-transform font-heading text-sm mt-auto">
+    <span class="material-symbols-outlined text-[20px]">celebration</span>
+    Iniciar Sorteio
+  </button>
+  } @else if (group().sorteado && !group().jogado) {
+  <button (click)="onPlayClick($event)"
+    class="w-full bg-[#D42426] hover:bg-[#b01e20] text-white py-3.5 rounded-full font-bold flex items-center justify-center gap-2 shadow-sm active:scale-[0.98] transition-transform font-heading text-sm mt-auto">
+    <span class="material-symbols-outlined text-[20px]">redeem</span>
+    Entrar na Quest
+  </button>
+  }
+</div>

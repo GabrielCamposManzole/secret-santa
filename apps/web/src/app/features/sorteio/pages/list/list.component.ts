@@ -1,13 +1,15 @@
 import { Component, inject, signal, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { CommonModule } from '@angular/common';
 import { GroupService } from '../../../../core/services/group.service';
 import { AuthService } from '../../../../core/services/auth.service';
+
+import { Card } from '../../../../shared/components/card/card';
 
 @Component({
   selector: 'app-list',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+
+  imports: [RouterLink, Card],
   templateUrl: './list.component.html',
 })
 export class ListComponent implements OnInit {
@@ -51,8 +53,7 @@ export class ListComponent implements OnInit {
     return group.dono_id === this.currentUserId();
   }
 
-  onStartDraw(event: Event, group: any): void {
-    event.stopPropagation();
+  onStartDraw(group: any): void {
     this.isLoading.set(true);
     this.errorMessage.set(null);
 
@@ -67,8 +68,7 @@ export class ListComponent implements OnInit {
     });
   }
 
-  onPlay(event: Event, group: any): void {
-    event.stopPropagation();
+  onPlay(group: any): void {
     this.router.navigate([`/sorteio/${group.id}/jogo`]);
   }
 

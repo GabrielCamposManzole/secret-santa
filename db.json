@@ -1,475 +1,122 @@
 {
   "usuarios": [
     {
-      "id": "1",
-      "nome_completo": "Marcos Olenka",
-      "email": "marcos@example.com",
-      "senha": "password",
+      "nome_completo": "Gabriel Campos Manzoli",
       "idade": 29,
-      "cabelo_cor": "Preto",
-      "cabelo_tipo": "Careca",
-      "cabelo_comprimento": "LOngo",
-      "olhos_cor": "Cego",
-      "altura": 244
-    },
-    {
-      "id": "2",
-      "nome_completo": "Beatriz Oliveira",
-      "email": "beatriz@example.com",
-      "senha": "password",
-      "idade": 25,
-      "cabelo_cor": "Loiro",
-      "cabelo_tipo": "Ondulado",
-      "cabelo_comprimento": "Longo",
-      "olhos_cor": "Verdes",
-      "altura": 165
-    },
-    {
-      "id": "3",
-      "nome_completo": "Henrique Silva",
-      "email": "henrique@example.com",
-      "senha": "password",
-      "idade": 31,
-      "cabelo_cor": "Preto",
-      "cabelo_tipo": "Crespo",
-      "cabelo_comprimento": "Curto",
-      "olhos_cor": "Pretos",
-      "altura": 175
-    },
-    {
-      "nome_completo": "Gabriel",
-      "email": "gh@exemple.com",
+      "email": "gh987181127@gmail.com",
       "senha": "123",
-      "idade": 18,
-      "cabelo_cor": "Rosa",
-      "cabelo_tipo": "Careca",
-      "cabelo_comprimento": "LOngo",
-      "olhos_cor": "Cego",
-      "altura": 170,
-      "id": "1mwMwh9DRZA"
-    },
-    {
-      "nome_completo": "Alex",
-      "email": "alex@exemple.com",
-      "senha": "123",
-      "idade": 18,
-      "cabelo_cor": "cinza",
-      "cabelo_tipo": "careca",
-      "cabelo_comprimento": "curto",
-      "olhos_cor": "preto",
-      "altura": 170,
-      "id": "6wiYUee3T_Y"
-    },
-    {
-      "nome_completo": "gabriell",
-      "email": "gabriell@exemple.com",
-      "senha": "123",
-      "idade": 18,
-      "cabelo_cor": "rosa",
-      "cabelo_tipo": "ondulado",
-      "cabelo_comprimento": "longo",
-      "olhos_cor": "preto",
-      "altura": 170,
-      "id": "5ShVz1v0CTs"
-    },
-    {
-      "nome_completo": "Gabriel",
-      "email": "gabriel@exemple.com",
-      "senha": "123",
-      "idade": 18,
-      "cabelo_cor": "",
-      "cabelo_tipo": "",
-      "cabelo_comprimento": "",
-      "olhos_cor": "",
-      "altura": 170,
-      "id": "Ah8bYmAxyrE"
-    },
-    {
-      "nome_completo": "Marilda",
-      "email": "Emilly@exemple.com",
-      "senha": "123",
-      "idade": 36,
       "cabelo_cor": "Castanho",
-      "cabelo_tipo": "liso",
-      "cabelo_comprimento": "curto",
-      "olhos_cor": "verdes",
-      "altura": 170,
-      "id": "J-FmdNQFmlE"
-    },
-    {
-      "nome_completo": "Gabriel",
-      "email": "Gabriel@exemple.com",
-      "senha": "123",
-      "idade": 18,
-      "cabelo_cor": "",
-      "cabelo_tipo": "",
-      "cabelo_comprimento": "",
-      "olhos_cor": "",
-      "altura": 170,
-      "id": "9OveLijGqQ0"
-    },
-    {
-      "nome_completo": "Emilly",
-      "idade": 96,
-      "email": "emilly@exemple.com",
-      "senha": "123",
-      "cabelo_cor": "Rosa",
-      "cabelo_tipo": "Careca",
-      "cabelo_comprimento": "LOngo",
-      "olhos_cor": "Cego",
-      "altura": 170,
-      "id": "PB9tdwgkmd0"
-    },
-    {
-      "nome_completo": "Jorge",
-      "email": "jorge@exemple.com",
-      "senha": "password123",
-      "idade": 20,
-      "cabelo_cor": "Castanho",
-      "cabelo_tipo": "Ondulado",
-      "cabelo_comprimento": "Curto",
+      "cabelo_tipo": "Liso",
+      "cabelo_comprimento": "Curto ",
       "olhos_cor": "Verdes",
-      "altura": 175,
-      "id": "zPXptf3P2ec"
+      "altura": 190,
+      "id": "yTL59CyQFI8"
     },
     {
-      "nome_completo": "Tadeu",
-      "email": "tadeu@exemple.com",
-      "senha": "123",
+      "nome_completo": "Roni",
       "idade": 18,
-      "cabelo_cor": "Rosa",
-      "cabelo_tipo": "Careca",
-      "cabelo_comprimento": "LOngo",
-      "olhos_cor": "Cego",
-      "altura": 170,
-      "id": "9C9azJyK7NM"
-    },
-    {
-      "nome_completo": "Participant Gem",
-      "email": "gem@example.com",
+      "email": "Roni@exemple.com",
       "senha": "123",
-      "idade": 18,
-      "cabelo_cor": "",
-      "cabelo_tipo": "",
-      "cabelo_comprimento": "",
-      "olhos_cor": "",
-      "altura": 170,
-      "id": "93IOwHmQYFs"
+      "cabelo_cor": "Preto",
+      "cabelo_tipo": "Cacheado",
+      "cabelo_comprimento": "Médio ",
+      "olhos_cor": "Preto",
+      "altura": 100,
+      "id": "huECPuZ9GNk"
     },
     {
-      "nome_completo": "Participante Dois",
-      "email": "dois@example.com",
+      "nome_completo": "Neymar",
+      "idade": 32,
+      "email": "Ney@exemple.com",
       "senha": "123",
-      "idade": 18,
-      "cabelo_cor": "",
-      "cabelo_tipo": "",
-      "cabelo_comprimento": "",
-      "olhos_cor": "",
-      "altura": 170,
-      "id": "XmOUF90_5U8"
-    },
-    {
-      "nome_completo": "Jorge Salamanca",
-      "email": "Salamanca@exemple.com",
-      "senha": "123",
-      "idade": 18,
-      "cabelo_cor": "Azul ",
-      "cabelo_tipo": "liso",
-      "cabelo_comprimento": "curto",
-      "olhos_cor": "Castanhos",
-      "altura": 170,
-      "id": "iS2x3ZfELZ4"
-    },
-    {
-      "nome_completo": "Jorge Salamanca",
-      "email": "Sallamanca@exemple.com",
-      "senha": "123",
-      "idade": 18,
-      "cabelo_cor": "CAstanhos",
-      "cabelo_tipo": "liso",
-      "cabelo_comprimento": "curto",
-      "olhos_cor": "verdes",
-      "altura": 170,
-      "id": "hxhD8r5h4Vk"
-    },
-    {
-      "nome_completo": "Test User",
-      "idade": 25,
-      "email": "testuser@example.com",
-      "senha": "password123",
-      "cabelo_cor": "",
-      "cabelo_tipo": "",
-      "cabelo_comprimento": "",
-      "olhos_cor": "",
-      "altura": 170,
-      "id": "YTjlZ0maHVE"
-    },
-    {
-      "nome_completo": "Zatt",
-      "idade": 89,
-      "email": "Zatt@exemple.com",
-      "senha": "123",
-      "cabelo_cor": "Rosa",
-      "cabelo_tipo": "Carecapsychology",
-      "cabelo_comprimento": "Curto",
-      "olhos_cor": "Verdes",
-      "altura": 170,
-      "id": "PnhzLCRpdUg"
-    },
-    {
-      "nome_completo": "E2E User",
-      "idade": 25,
-      "email": "e2e_user@example.com",
-      "senha": "password",
-      "cabelo_cor": "",
-      "cabelo_tipo": "",
-      "cabelo_comprimento": "",
-      "olhos_cor": "",
-      "altura": 170,
-      "id": "MU7DRSE2bBE"
-    },
-    {
-      "nome_completo": "Marildo",
-      "email": "marildo@example.com",
-      "senha": "123",
-      "idade": 18,
-      "cabelo_cor": "loiro",
-      "cabelo_tipo": "cacheado",
-      "cabelo_comprimento": "medio",
-      "olhos_cor": "azul",
-      "altura": 170,
-      "id": "mrlVsUv7aTs"
-    },
-    {
-      "nome_completo": "Marcio",
-      "email": "marcio@example.com",
-      "senha": "123",
-      "idade": 18,
-      "cabelo_cor": "rosa",
-      "cabelo_tipo": "careca",
-      "cabelo_comprimento": "calvo",
-      "olhos_cor": "castanhos",
-      "altura": 170,
-      "id": "qzKui0wbFJo"
+      "cabelo_cor": "Rosas",
+      "cabelo_tipo": "Cacheado",
+      "cabelo_comprimento": "Moicano",
+      "olhos_cor": "Azuis",
+      "altura": 189,
+      "id": "VXOyWjaHZWc"
     }
   ],
   "grupos": [
     {
-      "nome": "Campos",
-      "token": "OXNWAHIY",
+      "nome": "Web3 o retorno",
+      "token": "ISBVS6FI",
       "sorteado": true,
       "finalizado": false,
-      "dono_id": "PB9tdwgkmd0",
-      "id": "yqwhyriD4aI"
+      "dono_id": "yTL59CyQFI8",
+      "id": "MNsJvPwk8WQ"
     },
     {
-      "id": "B5l1e91FWBA",
-      "nome": "Grupo de Teste 98",
-      "token": "TEST98",
+      "nome": "Teste",
+      "token": "JPHCJ7WL",
       "sorteado": false,
       "finalizado": false,
-      "dono_id": "1"
-    },
-    {
-      "nome": "Grupo Sorteado",
-      "token": "CXLMTYXE",
-      "sorteado": false,
-      "finalizado": false,
-      "dono_id": "1",
-      "id": "V_X9ovy1u_8"
-    },
-    {
-      "nome": "grupo dos cria",
-      "token": "VRKSKN04",
-      "sorteado": true,
-      "finalizado": false,
-      "dono_id": "1",
-      "id": "GtaV00fvKwc"
-    },
-    {
-      "nome": "Web 3",
-      "token": "V7QM6515",
-      "sorteado": false,
-      "finalizado": false,
-      "dono_id": "1mwMwh9DRZA",
-      "id": "XfKFHha_ak8"
-    },
-    {
-      "nome": "Grupo de Testes E2E Temp",
-      "dono_id": "1",
-      "token": "TESTTOK1",
-      "sorteado": false,
-      "finalizado": false,
-      "id": "S5Qy213Emfk"
-    },
-    {
-      "nome": "Grupo de Testes E2E - Alterado",
-      "token": "TESTE2E1",
-      "sorteado": false,
-      "finalizado": false,
-      "dono_id": "1",
-      "id": "D8AajvLaE6U"
-    },
-    {
-      "nome": "2k26",
-      "token": "M0M8XCD9",
-      "sorteado": true,
-      "finalizado": false,
-      "dono_id": "J-FmdNQFmlE",
-      "id": "oUJP-NOi6Rc"
+      "dono_id": "yTL59CyQFI8",
+      "id": "MIQTG5jQAck"
     }
   ],
   "usuario_grupo": [
     {
-      "usuario_id": "PB9tdwgkmd0",
-      "grupo_id": "yqwhyriD4aI",
-      "id_pessoa_sorteada": "9C9azJyK7NM",
+      "usuario_id": "yTL59CyQFI8",
+      "grupo_id": "MNsJvPwk8WQ",
+      "id_pessoa_sorteada": "VXOyWjaHZWc",
+      "preenchido_caracteristicas": true,
+      "jogado": true,
+      "resultado": false,
+      "chute_id": "huECPuZ9GNk",
+      "id": "dWmqDCcdER4"
+    },
+    {
+      "usuario_id": "huECPuZ9GNk",
+      "grupo_id": "MNsJvPwk8WQ",
+      "id_pessoa_sorteada": "yTL59CyQFI8",
       "preenchido_caracteristicas": true,
       "jogado": true,
       "resultado": true,
-      "chute_id": "9C9azJyK7NM",
-      "id": "a0VlRAdfvjs"
+      "chute_id": "yTL59CyQFI8",
+      "id": "DgE48sQrrFs"
     },
     {
-      "usuario_id": "zPXptf3P2ec",
-      "grupo_id": "yqwhyriD4aI",
-      "id_pessoa_sorteada": "2",
+      "usuario_id": "VXOyWjaHZWc",
+      "grupo_id": "MNsJvPwk8WQ",
+      "id_pessoa_sorteada": "huECPuZ9GNk",
       "preenchido_caracteristicas": true,
       "jogado": false,
       "resultado": false,
       "chute_id": null,
-      "id": "DJdRd_UvFWQ"
+      "id": "a-Q0jfr5xB8"
     },
     {
-      "usuario_id": "9C9azJyK7NM",
-      "grupo_id": "yqwhyriD4aI",
-      "id_pessoa_sorteada": "PnhzLCRpdUg",
-      "preenchido_caracteristicas": true,
-      "jogado": true,
-      "resultado": false,
-      "chute_id": "PB9tdwgkmd0",
-      "id": "5qZJt5HvthY"
-    },
-    {
-      "usuario_id": "1",
-      "grupo_id": "V_X9ovy1u_8",
+      "usuario_id": "yTL59CyQFI8",
+      "grupo_id": "MIQTG5jQAck",
       "id_pessoa_sorteada": null,
       "preenchido_caracteristicas": true,
       "jogado": false,
       "resultado": false,
       "chute_id": null,
-      "id": "YDEcizdFzVs"
+      "id": "u5VL0Ba6Sbw"
     },
     {
-      "usuario_id": "1",
-      "grupo_id": "GtaV00fvKwc",
-      "id_pessoa_sorteada": "hxhD8r5h4Vk",
-      "preenchido_caracteristicas": true,
-      "jogado": true,
-      "resultado": true,
-      "chute_id": "hxhD8r5h4Vk",
-      "id": "r0trbZuxFu0"
+      "usuario_id": "huECPuZ9GNk",
+      "grupo_id": "MIQTG5jQAck",
+      "id_pessoa_sorteada": null,
+      "preenchido_caracteristicas": false,
+      "jogado": false,
+      "resultado": false,
+      "chute_id": null,
+      "id": "2aTRvZodtxg"
     },
     {
-      "usuario_id": "1mwMwh9DRZA",
-      "grupo_id": "XfKFHha_ak8",
+      "usuario_id": "VXOyWjaHZWc",
+      "grupo_id": "MIQTG5jQAck",
       "id_pessoa_sorteada": null,
       "preenchido_caracteristicas": true,
       "jogado": false,
       "resultado": false,
       "chute_id": null,
-      "id": "a4-OUKG91IM"
-    },
-    {
-      "usuario_id": "iS2x3ZfELZ4",
-      "grupo_id": "GtaV00fvKwc",
-      "id_pessoa_sorteada": "1",
-      "preenchido_caracteristicas": true,
-      "jogado": false,
-      "resultado": false,
-      "chute_id": null,
-      "id": "aPhlb-T00NA"
-    },
-    {
-      "usuario_id": "hxhD8r5h4Vk",
-      "grupo_id": "GtaV00fvKwc",
-      "id_pessoa_sorteada": "iS2x3ZfELZ4",
-      "preenchido_caracteristicas": true,
-      "jogado": false,
-      "resultado": false,
-      "chute_id": null,
-      "id": "Eb8qwrEvcV4"
-    },
-    {
-      "usuario_id": "2",
-      "grupo_id": "yqwhyriD4aI",
-      "id_pessoa_sorteada": "PB9tdwgkmd0",
-      "preenchido_caracteristicas": true,
-      "jogado": true,
-      "resultado": true,
-      "chute_id": "PB9tdwgkmd0",
-      "id": "2mbZZTe6JSI"
-    },
-    {
-      "usuario_id": "1mwMwh9DRZA",
-      "grupo_id": "yqwhyriD4aI",
-      "id_pessoa_sorteada": "zPXptf3P2ec",
-      "preenchido_caracteristicas": true,
-      "jogado": true,
-      "resultado": true,
-      "chute_id": "zPXptf3P2ec",
-      "id": "UjkLbW0G0n0"
-    },
-    {
-      "usuario_id": "PnhzLCRpdUg",
-      "grupo_id": "yqwhyriD4aI",
-      "id_pessoa_sorteada": "1mwMwh9DRZA",
-      "preenchido_caracteristicas": true,
-      "jogado": true,
-      "resultado": true,
-      "chute_id": "1mwMwh9DRZA",
-      "id": "Zad0B5a8OG4"
-    },
-    {
-      "usuario_id": "1",
-      "grupo_id": "D8AajvLaE6U",
-      "id_pessoa_sorteada": null,
-      "preenchido_caracteristicas": true,
-      "jogado": false,
-      "resultado": false,
-      "chute_id": null,
-      "id": "SXzVE0vmyZA"
-    },
-    {
-      "usuario_id": "J-FmdNQFmlE",
-      "grupo_id": "oUJP-NOi6Rc",
-      "id_pessoa_sorteada": "mrlVsUv7aTs",
-      "preenchido_caracteristicas": true,
-      "jogado": true,
-      "resultado": true,
-      "chute_id": "mrlVsUv7aTs",
-      "id": "KXtZbj-EO94"
-    },
-    {
-      "usuario_id": "mrlVsUv7aTs",
-      "grupo_id": "oUJP-NOi6Rc",
-      "id_pessoa_sorteada": "qzKui0wbFJo",
-      "preenchido_caracteristicas": true,
-      "jogado": false,
-      "resultado": false,
-      "chute_id": null,
-      "id": "PewCQjsaqt4"
-    },
-    {
-      "usuario_id": "qzKui0wbFJo",
-      "grupo_id": "oUJP-NOi6Rc",
-      "id_pessoa_sorteada": "J-FmdNQFmlE",
-      "preenchido_caracteristicas": true,
-      "jogado": false,
-      "resultado": false,
-      "chute_id": null,
-      "id": "DDob8WmP-34"
+      "id": "fF7ldCAX0DI"
     }
   ],
+  "sorteios": [],
   "$schema": "./node_modules/json-server/schema.json"
 }

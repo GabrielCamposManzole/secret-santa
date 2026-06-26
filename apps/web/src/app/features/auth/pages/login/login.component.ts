@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, effect } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -18,6 +18,29 @@ export class LoginComponent {
   readonly password = signal('');
   readonly errorMessage = signal<string | null>(null);
   readonly isLoading = signal(false);
+
+  constructor() {
+    effect(() => {
+      const message = this.errorMessage();
+      if (message) {
+        console.warn(
+          `%c[Auth Audit] Falha na tentativa de login: ${message}`,
+          'color: #ffffff; background-color: #ef4444; font-weight: bold; padding: 4px 8px; border-radius: 4px;',
+        );
+
+        try {
+          const currentLogs = JSON.parse(localStorage.getItem('auth_logs') || '[]');
+          currentLogs.push({
+            timestamp: new Date().toLocaleString('pt-BR'),
+            error: message,
+          });
+          localStorage.setItem('auth_logs', JSON.stringify(currentLogs));
+        } catch (e) {
+          console.error('Erro ao salvar auditoria no localStorage:', e);
+        }
+      }
+    });
+  }
 
   onSubmit(): void {
     if (!this.email() || !this.password()) {

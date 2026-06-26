@@ -1,22 +1,23 @@
-import { Component, inject, signal, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { Component, inject, signal, OnInit, input } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { GroupService } from '../../../../core/services/group.service';
 import { AuthService } from '../../../../core/services/auth.service';
 import { Grupo } from '../../../../core/models';
+import { MaskEmailPipe } from '../../../../shared/pipes/mask-email.pipe';
 
 @Component({
   selector: 'app-detail',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, MaskEmailPipe],
   templateUrl: './detail.component.html',
 })
 export class DetailComponent implements OnInit {
-  private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly groupService = inject(GroupService);
   private readonly authService = inject(AuthService);
 
+  readonly id = input<string>(); // Vinculação automática do parâmetro :id da URL
   readonly groupId = signal<string | null>(null);
   readonly currentUserId = signal<string | null>(null);
   readonly group = signal<Grupo | null>(null);
@@ -28,7 +29,7 @@ export class DetailComponent implements OnInit {
   readonly successMessage = signal<string | null>(null);
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
+    const id = this.id();
     if (!id) {
       this.router.navigate(['/sorteios']);
       return;

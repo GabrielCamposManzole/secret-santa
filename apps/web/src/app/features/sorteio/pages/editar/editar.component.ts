@@ -1,5 +1,5 @@
-import { Component, inject, signal, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { Component, inject, signal, OnInit, input } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { GroupService } from '../../../../core/services/group.service';
@@ -17,13 +17,13 @@ import { switchMap, map } from 'rxjs/operators';
   templateUrl: './editar.component.html',
 })
 export class EditarComponent implements OnInit {
-  private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly groupService = inject(GroupService);
   private readonly authService = inject(AuthService);
   private readonly membershipService = inject(MembershipService);
   private readonly apiUrl = environment.apiUrl;
 
+  readonly id = input<string>(); // Vinculação automática do parâmetro :id da URL
   readonly groupId = signal<string | null>(null);
   readonly group = signal<Grupo | null>(null);
   readonly participants = signal<any[]>([]);
@@ -38,7 +38,7 @@ export class EditarComponent implements OnInit {
   readonly successMessage = signal<string | null>(null);
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
+    const id = this.id();
     if (!id) {
       this.router.navigate(['/sorteios']);
       return;
@@ -101,7 +101,7 @@ export class EditarComponent implements OnInit {
         method: 'DELETE',
       }).then((res) => {
         if (!res.ok) throw new Error('Erro ao remover participante');
-      })
+      }),
     ).subscribe({
       next: () => {
         this.loadGroupDetails();
@@ -134,49 +134,51 @@ export class EditarComponent implements OnInit {
       fetch(`${this.apiUrl}/usuarios?email=${email}`).then((res) => {
         if (!res.ok) throw new Error('Erro ao buscar usuário');
         return res.json();
-      })
-    ).pipe(
-      switchMap((users: Usuario[]) => {
-        if (users.length > 0) {
-          return this.addMembership(users[0].id, id);
-        } else {
-          // Create new user
-          const newUser: Omit<Usuario, 'id'> = {
-            nome_completo: nome,
-            email: email,
-            senha: '123',
-            idade: 18,
-            cabelo_cor: '',
-            cabelo_tipo: '',
-            cabelo_comprimento: '',
-            olhos_cor: '',
-            altura: 170,
-          };
-          return from(
-            fetch(`${this.apiUrl}/usuarios`, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(newUser),
-            }).then((res) => {
-              if (!res.ok) throw new Error('Erro ao criar usuário');
-              return res.json();
-            })
-          ).pipe(switchMap((createdUser: Usuario) => this.addMembership(createdUser.id, id)));
-        }
-      })
-    ).subscribe({
-      next: () => {
-        this.newParticipantName.set('');
-        this.newParticipantEmail.set('');
-        this.loadGroupDetails();
-        this.successMessage.set('Participante adicionado com sucesso!');
-        setTimeout(() => this.successMessage.set(null), 3000);
-      },
-      error: (err: any) => {
-        this.isLoading.set(false);
-        this.errorMessage.set(err.message || 'Erro ao adicionar participante.');
-      },
-    });
+      }),
+    )
+      .pipe(
+        switchMap((users: Usuario[]) => {
+          if (users.length > 0) {
+            return this.addMembership(users[0].id, id);
+          } else {
+            // Create new user
+            const newUser: Omit<Usuario, 'id'> = {
+              nome_completo: nome,
+              email: email,
+              senha: '123',
+              idade: 18,
+              cabelo_cor: '',
+              cabelo_tipo: '',
+              cabelo_comprimento: '',
+              olhos_cor: '',
+              altura: 170,
+            };
+            return from(
+              fetch(`${this.apiUrl}/usuarios`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(newUser),
+              }).then((res) => {
+                if (!res.ok) throw new Error('Erro ao criar usuário');
+                return res.json();
+              }),
+            ).pipe(switchMap((createdUser: Usuario) => this.addMembership(createdUser.id, id)));
+          }
+        }),
+      )
+      .subscribe({
+        next: () => {
+          this.newParticipantName.set('');
+          this.newParticipantEmail.set('');
+          this.loadGroupDetails();
+          this.successMessage.set('Participante adicionado com sucesso!');
+          setTimeout(() => this.successMessage.set(null), 3000);
+        },
+        error: (err: any) => {
+          this.isLoading.set(false);
+          this.errorMessage.set(err.message || 'Erro ao adicionar participante.');
+        },
+      });
   }
 
   private addMembership(userId: string, groupId: string) {
@@ -202,9 +204,9 @@ export class EditarComponent implements OnInit {
           }).then((res) => {
             if (!res.ok) throw new Error('Erro ao adicionar participante ao grupo');
             return res.json();
-          })
+          }),
         );
-      })
+      }),
     );
   }
 
@@ -229,7 +231,7 @@ export class EditarComponent implements OnInit {
       }).then((res) => {
         if (!res.ok) throw new Error('Erro ao salvar grupo');
         return res.json();
-      })
+      }),
     ).subscribe({
       next: () => {
         this.isLoading.set(false);

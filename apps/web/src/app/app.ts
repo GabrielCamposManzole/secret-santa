@@ -33,7 +33,6 @@ export class App {
   readonly isAuthPage = computed(() => {
     const url = this.currentUrl();
     return (
-      url.startsWith('/login') ||
       url.startsWith('/cadastro') ||
       url.startsWith('/recuperar-senha') ||
       url.startsWith('/email-enviado')

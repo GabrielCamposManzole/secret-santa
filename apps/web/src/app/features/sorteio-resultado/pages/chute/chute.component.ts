@@ -1,5 +1,5 @@
-import { Component, inject, signal, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { Component, inject, signal, OnInit, input } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { GroupService } from '../../../../core/services/group.service';
@@ -13,11 +13,11 @@ import { Usuario } from '../../../../core/models';
   templateUrl: './chute.component.html',
 })
 export class ChuteComponent implements OnInit {
-  private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly groupService = inject(GroupService);
   private readonly authService = inject(AuthService);
 
+  readonly id = input<string>(); // Vinculação automática do parâmetro :id da URL
   readonly groupId = signal<string | null>(null);
   readonly participants = signal<Usuario[]>([]);
   readonly filteredParticipants = signal<Usuario[]>([]);
@@ -29,7 +29,7 @@ export class ChuteComponent implements OnInit {
   readonly successMessage = signal<string | null>(null);
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
+    const id = this.id();
     if (!id) {
       this.router.navigate(['/sorteios']);
       return;

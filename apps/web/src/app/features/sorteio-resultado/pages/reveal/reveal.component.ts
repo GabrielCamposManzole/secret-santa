@@ -1,5 +1,5 @@
-import { Component, inject, signal, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { Component, inject, signal, OnInit, input } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../../core/services/auth.service';
 import { GroupService } from '../../../../core/services/group.service';
@@ -16,13 +16,13 @@ import { of, from } from 'rxjs';
   templateUrl: './reveal.component.html',
 })
 export class RevealComponent implements OnInit {
-  private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly authService = inject(AuthService);
   private readonly groupService = inject(GroupService);
   private readonly membershipService = inject(MembershipService);
   private readonly apiUrl = environment.apiUrl;
 
+  readonly id = input<string>(); // Vinculação automática do parâmetro :id da URL
   readonly groupId = signal<string | null>(null);
   readonly group = signal<Grupo | null>(null);
   readonly targetUser = signal<Usuario | null>(null);
@@ -33,7 +33,7 @@ export class RevealComponent implements OnInit {
   readonly errorMessage = signal<string | null>(null);
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
+    const id = this.id();
     if (!id) {
       this.router.navigate(['/sorteios']);
       return;

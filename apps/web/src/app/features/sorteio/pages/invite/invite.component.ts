@@ -1,5 +1,5 @@
-import { Component, inject, signal, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { Component, inject, signal, OnInit, input } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { GroupService } from '../../../../core/services/group.service';
 import { AuthService } from '../../../../core/services/auth.service';
@@ -11,23 +11,21 @@ import { AuthService } from '../../../../core/services/auth.service';
   templateUrl: './invite.component.html',
 })
 export class InviteComponent implements OnInit {
-  private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly groupService = inject(GroupService);
   private readonly authService = inject(AuthService);
 
-  readonly token = signal<string | null>(null);
+  readonly token = input<string>(); // Vinculação automática do parâmetro :token da URL
   readonly isLoading = signal(false);
   readonly errorMessage = signal<string | null>(null);
   readonly successMessage = signal<string | null>(null);
 
   ngOnInit(): void {
-    const tokenVal = this.route.snapshot.paramMap.get('token');
+    const tokenVal = this.token();
     if (!tokenVal) {
       this.errorMessage.set('Token de convite inválido.');
       return;
     }
-    this.token.set(tokenVal);
     this.join();
   }
 
