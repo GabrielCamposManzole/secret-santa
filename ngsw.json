@@ -1,0 +1,115 @@
+{
+  "configVersion": 1,
+  "timestamp": 1782695706368,
+  "index": "/secret-santa/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/secret-santa/chunk-2M73IISE.js",
+        "/secret-santa/chunk-33YT2HJI.js",
+        "/secret-santa/chunk-3QRFAEXX.js",
+        "/secret-santa/chunk-4BHGGUHV.js",
+        "/secret-santa/chunk-5LWPDFXH.js",
+        "/secret-santa/chunk-7WBBIJGM.js",
+        "/secret-santa/chunk-A3JECQDQ.js",
+        "/secret-santa/chunk-BRQEAP7M.js",
+        "/secret-santa/chunk-DP6PLR4H.js",
+        "/secret-santa/chunk-HSWA2QNU.js",
+        "/secret-santa/chunk-L4CDAGHB.js",
+        "/secret-santa/chunk-M57CEF6R.js",
+        "/secret-santa/chunk-OBVENVHQ.js",
+        "/secret-santa/chunk-QPUQRGCV.js",
+        "/secret-santa/chunk-QSCOBXDL.js",
+        "/secret-santa/chunk-V7RD2FKE.js",
+        "/secret-santa/chunk-WUTIDOOS.js",
+        "/secret-santa/chunk-YGZDNUJP.js",
+        "/secret-santa/chunk-Z5S6YCC3.js",
+        "/secret-santa/favicon.ico",
+        "/secret-santa/index.html",
+        "/secret-santa/main-P5M22VWS.js",
+        "/secret-santa/manifest.webmanifest",
+        "/secret-santa/styles-RHPOIVLW.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/secret-santa/icons/icon-128x128.png",
+        "/secret-santa/icons/icon-144x144.png",
+        "/secret-santa/icons/icon-152x152.png",
+        "/secret-santa/icons/icon-192x192.png",
+        "/secret-santa/icons/icon-384x384.png",
+        "/secret-santa/icons/icon-512x512.png",
+        "/secret-santa/icons/icon-72x72.png",
+        "/secret-santa/icons/icon-96x96.png"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/secret-santa/chunk-2M73IISE.js": "494b69a155bf5ffe72e544da20ccccb1e0b913f8",
+    "/secret-santa/chunk-33YT2HJI.js": "55ac6bebf30970abbf6e7651fcf3d57f66445faa",
+    "/secret-santa/chunk-3QRFAEXX.js": "ad493d6109716fe7a270ea3d044356df8ef5d4c3",
+    "/secret-santa/chunk-4BHGGUHV.js": "b2f074c73a877efa15130d6df9eae531299f13a9",
+    "/secret-santa/chunk-5LWPDFXH.js": "7c6c225969b107c80ea3849186147553eff5b09d",
+    "/secret-santa/chunk-7WBBIJGM.js": "ad161e205c36fc3cc40102b95314d28403d8aad9",
+    "/secret-santa/chunk-A3JECQDQ.js": "0d1cae7119a3cc3b3b5f4c248dafe8e28af2188c",
+    "/secret-santa/chunk-BRQEAP7M.js": "14a4df58caac7835601ee7b56dc8ebfa5bb72ac1",
+    "/secret-santa/chunk-DP6PLR4H.js": "7c25c25084ca9ccbd9f043cba9c80d1bd453255d",
+    "/secret-santa/chunk-HSWA2QNU.js": "7ef0f06c20c19c3811a98429cd4ac4bba298202c",
+    "/secret-santa/chunk-L4CDAGHB.js": "e6edf320394950688cd5f3585dd37be4bcc7711f",
+    "/secret-santa/chunk-M57CEF6R.js": "1152b3a1a373a1bf1f8ba078aa85e228636e2734",
+    "/secret-santa/chunk-OBVENVHQ.js": "f08db0ed5a9b5a7d9a4ff924440c2f6f7b92186f",
+    "/secret-santa/chunk-QPUQRGCV.js": "890148715a67906aa644d88a8770129100bb8c53",
+    "/secret-santa/chunk-QSCOBXDL.js": "b5e1fb9f694181d924bc1a5c2e30262c15fa4e4c",
+    "/secret-santa/chunk-V7RD2FKE.js": "c137d60407c47d37db49738e76fc09b404527890",
+    "/secret-santa/chunk-WUTIDOOS.js": "15774a0624c436f6d86fba582f92bc113d6e2810",
+    "/secret-santa/chunk-YGZDNUJP.js": "675cf71d88c4b1ef7ef71982addbdecea8710e8b",
+    "/secret-santa/chunk-Z5S6YCC3.js": "7ecea5b969b58f3a57aa9cb4567ec7bda5c46015",
+    "/secret-santa/favicon.ico": "9c39f434fe1261f68c5e3eefdf734630d99c5670",
+    "/secret-santa/icons/icon-128x128.png": "f912963bdc6d5a38d8f1dd0afbaab2ce8d657acb",
+    "/secret-santa/icons/icon-144x144.png": "b155fd5f2fd5d2ea7760721063003c4cd95fd783",
+    "/secret-santa/icons/icon-152x152.png": "eae6e0f0c8afb8aaae339e2a569b43e9238e5e6c",
+    "/secret-santa/icons/icon-192x192.png": "15c4180454633880d98674aa7394656196c91584",
+    "/secret-santa/icons/icon-384x384.png": "94a915751ef6c9282df9aea405ad679230631814",
+    "/secret-santa/icons/icon-512x512.png": "1de182f76f7329dfa8f9fcdd1fdcdd695bea6a99",
+    "/secret-santa/icons/icon-72x72.png": "aa88a6096bd973be7f6d7a5489bfa6bc2463f8c4",
+    "/secret-santa/icons/icon-96x96.png": "7fb8f59c30ce2ff12c700321a0b39e14b3dc8f95",
+    "/secret-santa/index.html": "5a3a2a1a731c379289f34c48690ea198eedfa040",
+    "/secret-santa/main-P5M22VWS.js": "1c8fe9700673366eaf30d6d7481ed2bec921a575",
+    "/secret-santa/manifest.webmanifest": "08e6cfc40e8b519884f9f9e9ca4c3edb98862617",
+    "/secret-santa/styles-RHPOIVLW.css": "61e7d14ca8d62546048a4cfceb6d4f9770abaade"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}
