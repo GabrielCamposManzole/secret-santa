@@ -11,6 +11,7 @@
     "dev:api": "echo 'Backend não configurado. Rode o Workflow 2.'",
     "dev:web": "npm run start -w apps/web",
     "build:web": "npm run build -w apps/web",
+    "deploy:web": "cd apps/web && npx ng build --configuration production --base-href /secret-santa/ && npx angular-cli-ghpages --dir=dist/web/browser",
     "test:web": "npm run test -w apps/web",
     "format": "prettier --write \"**/*.{ts,js,json,css,scss,md}\"",
     "server": "json-server --watch db.json --port 3000"
