@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { GroupService } from '../../../../core/services/group.service';
 import { AuthService } from '../../../../core/services/auth.service';
-import { Usuario } from '../../../../core/models';
+import { Usuario, ParticipanteGrupo } from '../../../../core/models';
 
 @Component({
   selector: 'app-chute',
@@ -47,7 +47,7 @@ export class ChuteComponent implements OnInit {
     this.groupService.getGroupDetails(id).subscribe({
       next: (data) => {
         // Exclude current user from candidate list
-        const others = data.participants.filter((p: any) => p.id !== currentUserId);
+        const others = data.participants.filter((p: ParticipanteGrupo) => p.id !== currentUserId);
         this.participants.set(others);
         this.filteredParticipants.set(others);
         this.isLoading.set(false);

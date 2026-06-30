@@ -6,7 +6,7 @@ import { GroupService } from '../../../../core/services/group.service';
 import { MembershipService } from '../../../../core/services/membership.service';
 import { Usuario, UsuarioGrupo, Grupo } from '../../../../core/models';
 import { environment } from '../../../../../environments/environment';
-import { switchMap, map } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import { of, from } from 'rxjs';
 
 @Component({
@@ -95,7 +95,7 @@ export class RevealComponent implements OnInit {
           }
           this.isLoading.set(false);
         },
-        error: (err: any) => {
+        error: (err: Error) => {
           this.errorMessage.set(err.message || 'Erro ao carregar revelação.');
           this.isLoading.set(false);
         },

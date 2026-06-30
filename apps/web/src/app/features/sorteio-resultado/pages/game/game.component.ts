@@ -6,8 +6,8 @@ import { GroupService } from '../../../../core/services/group.service';
 import { MembershipService } from '../../../../core/services/membership.service';
 import { Usuario, Grupo } from '../../../../core/models';
 import { environment } from '../../../../../environments/environment';
-import { switchMap, map } from 'rxjs/operators';
-import { of, from } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+import { from } from 'rxjs';
 
 interface CharacteristicStep {
   label: string;
@@ -88,7 +88,7 @@ export class GameComponent implements OnInit {
           this.setupSteps(target);
           this.isLoading.set(false);
         },
-        error: (err: any) => {
+        error: (err: Error) => {
           this.errorMessage.set(err.message || 'Erro ao carregar dados do jogo.');
           this.isLoading.set(false);
         },

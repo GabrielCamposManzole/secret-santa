@@ -1,4 +1,5 @@
 import { Component, input, output } from '@angular/core';
+import { GrupoComParticipacao } from '../../../core/models';
 
 @Component({
   selector: 'app-card',
@@ -8,11 +9,11 @@ import { Component, input, output } from '@angular/core';
   styleUrl: './card.css',
 })
 export class Card {
-  group = input.required<any>();
+  group = input.required<GrupoComParticipacao>();
   isOwner = input<boolean>(false);
 
   startDraw = output<void>();
-  play = output<void>();
+  playQuest = output<void>();
 
   onStartDrawClick(event: Event): void {
     event.stopPropagation();
@@ -21,6 +22,6 @@ export class Card {
 
   onPlayClick(event: Event): void {
     event.stopPropagation();
-    this.play.emit();
+    this.playQuest.emit();
   }
 }

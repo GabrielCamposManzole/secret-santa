@@ -31,7 +31,7 @@
   <form (ngSubmit)="onSubmit()" class="w-full space-y-4">
     <!-- Name Field -->
     <div class="space-y-1.5">
-      <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-wider ml-4">Nome Completo</label>
+      <label for="nomeCompleto" class="block text-[10px] font-bold text-gray-500 uppercase tracking-wider ml-4">Nome Completo</label>
       <div class="relative">
         <div class="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
           <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -39,6 +39,7 @@
           </svg>
         </div>
         <input
+          id="nomeCompleto"
           class="block w-full bg-gray-100 border border-transparent rounded-full py-4 pl-12 pr-4 text-sm focus:bg-white focus:border-[#D42426] focus:ring-2 focus:ring-[#D42426]/20 focus:outline-none placeholder-gray-400"
           placeholder="Como quer ser chamado?"
           type="text"
@@ -51,7 +52,7 @@
 
     <!-- Age Field -->
     <div class="space-y-1.5">
-      <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-wider ml-4">Idade</label>
+      <label for="idade" class="block text-[10px] font-bold text-gray-500 uppercase tracking-wider ml-4">Idade</label>
       <div class="relative">
         <div class="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
           <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -59,6 +60,7 @@
           </svg>
         </div>
         <input
+          id="idade"
           class="block w-full bg-gray-100 border border-transparent rounded-full py-4 pl-12 pr-4 text-sm focus:bg-white focus:border-[#D42426] focus:ring-2 focus:ring-[#D42426]/20 focus:outline-none placeholder-gray-400"
           placeholder="Sua idade"
           type="number"
@@ -71,7 +73,7 @@
 
     <!-- E-mail Field -->
     <div class="space-y-1.5">
-      <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-wider ml-4">E-mail</label>
+      <label for="email" class="block text-[10px] font-bold text-gray-500 uppercase tracking-wider ml-4">E-mail</label>
       <div class="relative">
         <div class="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
           <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -79,6 +81,7 @@
           </svg>
         </div>
         <input
+          id="email"
           class="block w-full bg-gray-100 border border-transparent rounded-full py-4 pl-12 pr-4 text-sm focus:bg-white focus:border-[#D42426] focus:ring-2 focus:ring-[#D42426]/20 focus:outline-none placeholder-gray-400"
           placeholder="seu@email.com"
           type="email"
@@ -91,7 +94,7 @@
 
     <!-- Password Field -->
     <div class="space-y-1.5">
-      <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-wider ml-4">Senha</label>
+      <label for="senha" class="block text-[10px] font-bold text-gray-500 uppercase tracking-wider ml-4">Senha</label>
       <div class="relative">
         <div class="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
           <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -99,6 +102,7 @@
           </svg>
         </div>
         <input
+          id="senha"
           class="block w-full bg-gray-100 border border-transparent rounded-full py-4 pl-12 pr-4 text-sm focus:bg-white focus:border-[#D42426] focus:ring-2 focus:ring-[#D42426]/20 focus:outline-none placeholder-gray-400"
           placeholder="........."
           type="password"

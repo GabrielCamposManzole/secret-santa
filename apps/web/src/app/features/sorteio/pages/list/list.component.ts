@@ -4,6 +4,7 @@ import { GroupService } from '../../../../core/services/group.service';
 import { AuthService } from '../../../../core/services/auth.service';
 
 import { Card } from '../../../../shared/components/card/card';
+import { GrupoComParticipacao } from '../../../../core/models';
 
 @Component({
   selector: 'app-list',
@@ -17,7 +18,7 @@ export class ListComponent implements OnInit {
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
 
-  readonly groups = signal<any[]>([]);
+  readonly groups = signal<GrupoComParticipacao[]>([]);
   readonly isLoading = signal(false);
   readonly errorMessage = signal<string | null>(null);
   readonly currentUserId = signal<string | null>(null);
@@ -49,11 +50,11 @@ export class ListComponent implements OnInit {
     });
   }
 
-  isGroupOwner(group: any): boolean {
+  isGroupOwner(group: GrupoComParticipacao): boolean {
     return group.dono_id === this.currentUserId();
   }
 
-  onStartDraw(group: any): void {
+  onStartDraw(group: GrupoComParticipacao): void {
     this.isLoading.set(true);
     this.errorMessage.set(null);
 
@@ -68,11 +69,11 @@ export class ListComponent implements OnInit {
     });
   }
 
-  onPlay(group: any): void {
+  onPlay(group: GrupoComParticipacao): void {
     this.router.navigate([`/sorteio/${group.id}/jogo`]);
   }
 
-  onCardClick(group: any): void {
+  onCardClick(group: GrupoComParticipacao): void {
     if (!group.sorteado) {
       this.router.navigate([`/sorteio/${group.id}`]);
     } else if (!group.jogado) {

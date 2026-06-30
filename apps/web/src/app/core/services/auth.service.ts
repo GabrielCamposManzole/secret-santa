@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { from, Observable, tap, map, switchMap, throwError, of } from 'rxjs';
+import { from, Observable, tap, map, switchMap, throwError } from 'rxjs';
 import { Usuario } from '../models';
 import { environment } from '../../../environments/environment';
 
