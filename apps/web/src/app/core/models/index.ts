@@ -30,3 +30,19 @@ export interface UsuarioGrupo {
   resultado: boolean;
   chute_id: string | null;
 }
+
+export interface GrupoComParticipacao extends Grupo {
+  usuarioGrupoId: string;
+  jogado: boolean;
+  resultado: boolean;
+  preenchido_caracteristicas: boolean;
+  id_pessoa_sorteada: string | null;
+  participantsCount: number;
+}
+
+export interface ParticipanteGrupo extends Usuario {
+  preenchido_caracteristicas: boolean;
+  jogado: boolean;
+  resultado: boolean;
+  membershipId: string;
+}

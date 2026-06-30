@@ -5,10 +5,10 @@ import { CommonModule } from '@angular/common';
 import { GroupService } from '../../../../core/services/group.service';
 import { MembershipService } from '../../../../core/services/membership.service';
 import { AuthService } from '../../../../core/services/auth.service';
-import { Grupo, Usuario, UsuarioGrupo } from '../../../../core/models';
+import { Grupo, Usuario, UsuarioGrupo, ParticipanteGrupo } from '../../../../core/models';
 import { environment } from '../../../../../environments/environment';
-import { from, of } from 'rxjs';
-import { switchMap, map } from 'rxjs/operators';
+import { from } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-editar',
@@ -26,7 +26,7 @@ export class EditarComponent implements OnInit {
   readonly id = input<string>(); // Vinculação automática do parâmetro :id da URL
   readonly groupId = signal<string | null>(null);
   readonly group = signal<Grupo | null>(null);
-  readonly participants = signal<any[]>([]);
+  readonly participants = signal<ParticipanteGrupo[]>([]);
 
   // Form fields
   readonly groupName = signal('');
@@ -82,7 +82,7 @@ export class EditarComponent implements OnInit {
       .toUpperCase();
   }
 
-  onRemoveParticipant(participant: any): void {
+  onRemoveParticipant(participant: ParticipanteGrupo): void {
     if (this.group()?.sorteado) {
       this.errorMessage.set('Não é possível remover participantes após o sorteio ser realizado.');
       return;
@@ -174,7 +174,7 @@ export class EditarComponent implements OnInit {
           this.successMessage.set('Participante adicionado com sucesso!');
           setTimeout(() => this.successMessage.set(null), 3000);
         },
-        error: (err: any) => {
+        error: (err: Error) => {
           this.isLoading.set(false);
           this.errorMessage.set(err.message || 'Erro ao adicionar participante.');
         },

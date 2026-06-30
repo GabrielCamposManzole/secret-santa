@@ -3,7 +3,7 @@ import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { GroupService } from '../../../../core/services/group.service';
 import { AuthService } from '../../../../core/services/auth.service';
-import { Grupo } from '../../../../core/models';
+import { Grupo, ParticipanteGrupo } from '../../../../core/models';
 import { MaskEmailPipe } from '../../../../shared/pipes/mask-email.pipe';
 
 @Component({
@@ -21,8 +21,8 @@ export class DetailComponent implements OnInit {
   readonly groupId = signal<string | null>(null);
   readonly currentUserId = signal<string | null>(null);
   readonly group = signal<Grupo | null>(null);
-  readonly participants = signal<any[]>([]);
-  readonly currentUserMembership = signal<any | null>(null);
+  readonly participants = signal<ParticipanteGrupo[]>([]);
+  readonly currentUserMembership = signal<ParticipanteGrupo | null>(null);
 
   readonly isLoading = signal(false);
   readonly errorMessage = signal<string | null>(null);
@@ -51,7 +51,7 @@ export class DetailComponent implements OnInit {
 
         // Find current user's membership details
         const currentUserId = this.currentUserId();
-        const membership = data.participants.find((p: any) => p.id === currentUserId);
+        const membership = data.participants.find((p: ParticipanteGrupo) => p.id === currentUserId);
         this.currentUserMembership.set(membership || null);
 
         this.isLoading.set(false);

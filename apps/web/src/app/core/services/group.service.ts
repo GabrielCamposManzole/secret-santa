@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { from, Observable, forkJoin, of, throwError } from 'rxjs';
-import { switchMap, map, tap, catchError } from 'rxjs/operators';
-import { Grupo, Usuario, UsuarioGrupo } from '../models';
+import { switchMap, map, catchError } from 'rxjs/operators';
+import { Grupo, Usuario, UsuarioGrupo, GrupoComParticipacao, ParticipanteGrupo } from '../models';
 import { environment } from '../../../environments/environment';
 
 @Injectable({
@@ -19,7 +19,7 @@ export class GroupService {
     );
   }
 
-  getGroupsForUser(userId: string): Observable<any[]> {
+  getGroupsForUser(userId: string): Observable<GrupoComParticipacao[]> {
     return this.fetchJson<UsuarioGrupo[]>(`${this.apiUrl}/usuario_grupo`).pipe(
       switchMap((allMemberships) => {
         const memberships = allMemberships.filter((m) => String(m.usuario_id) === String(userId));
@@ -56,7 +56,9 @@ export class GroupService {
     );
   }
 
-  getGroupDetails(groupId: string): Observable<{ group: Grupo; participants: any[] }> {
+  getGroupDetails(
+    groupId: string,
+  ): Observable<{ group: Grupo; participants: ParticipanteGrupo[] }> {
     return forkJoin({
       group: this.fetchJson<Grupo>(`${this.apiUrl}/grupos/${groupId}`),
       allMemberships: this.fetchJson<UsuarioGrupo[]>(`${this.apiUrl}/usuario_grupo`),
@@ -177,7 +179,7 @@ export class GroupService {
     );
   }
 
-  performDraw(groupId: string): Observable<any> {
+  performDraw(groupId: string): Observable<Grupo> {
     return this.fetchJson<UsuarioGrupo[]>(`${this.apiUrl}/usuario_grupo`).pipe(
       switchMap((allMemberships) => {
         const memberships = allMemberships.filter((m) => String(m.grupo_id) === String(groupId));
@@ -217,7 +219,7 @@ export class GroupService {
 
         return forkJoin(updates).pipe(
           switchMap(() => this.fetchJson<Grupo>(`${this.apiUrl}/grupos/${groupId}`)),
-          switchMap((group) =>
+          switchMap(() =>
             this.fetchJson<Grupo>(`${this.apiUrl}/grupos/${groupId}`, {
               method: 'PATCH',
               headers: { 'Content-Type': 'application/json' },
@@ -257,7 +259,7 @@ export class GroupService {
     );
   }
 
-  deleteGroup(groupId: string): Observable<any> {
+  deleteGroup(groupId: string): Observable<void> {
     return this.fetchJson<UsuarioGrupo[]>(`${this.apiUrl}/usuario_grupo`).pipe(
       switchMap((allMemberships) => {
         const memberships = allMemberships.filter((m) => String(m.grupo_id) === String(groupId));

@@ -23,7 +23,7 @@
 
     @for (group of groups(); track group.id) {
 
-    <app-card [group]="group" [isOwner]="isGroupOwner(group)" (startDraw)="onStartDraw(group)" (play)="onPlay(group)"
+    <app-card [group]="group" [isOwner]="isGroupOwner(group)" (startDraw)="onStartDraw(group)" (playQuest)="onPlay(group)"
       (click)="onCardClick(group)">
     </app-card>
 
