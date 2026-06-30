@@ -1,5 +1,7 @@
 <h1 align="center">🎅 SecretSanta (UTF-Secret)</h1>
 
+[![Continuous Integration](https://github.com/GabrielCamposManzole/secret-santa/actions/workflows/ci.yml/badge.svg)](https://github.com/GabrielCamposManzole/secret-santa/actions/workflows/ci.yml)
+
 <p align="center">
   <strong>Sistema Gamificado de Amigo Secreto para o Portal UTFApps</strong>
 </p>
