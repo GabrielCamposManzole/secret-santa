@@ -3,6 +3,7 @@ import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { GroupService } from '../../../../core/services/group.service';
 import { AuthService } from '../../../../core/services/auth.service';
+import { EmailService } from '../../../../core/services/email.service';
 import { Grupo, ParticipanteGrupo } from '../../../../core/models';
 import { MaskEmailPipe } from '../../../../shared/pipes/mask-email.pipe';
 
@@ -16,6 +17,7 @@ export class DetailComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly groupService = inject(GroupService);
   private readonly authService = inject(AuthService);
+  private readonly emailService = inject(EmailService);
 
   readonly id = input<string>(); // Vinculação automática do parâmetro :id da URL
   readonly groupId = signal<string | null>(null);
@@ -128,5 +130,48 @@ export class DetailComponent implements OnInit {
     const id = this.groupId();
     if (!id) return;
     this.router.navigate([`/sorteio/${id}/resultado`]);
+  }
+
+  /**
+   * Envia por e-mail o token do sorteio e a senha de acesso para cada participante do grupo.
+   * Deve ser chamado após o sorteio ser realizado com sucesso.
+   */
+  sendDrawTokenToParticipants(): void {
+    const grp = this.group();
+    const participantes = this.participants();
+
+    if (!grp || participantes.length === 0) {
+      this.errorMessage.set('Nenhum participante encontrado para notificar.');
+      return;
+    }
+
+    this.isLoading.set(true);
+    this.errorMessage.set(null);
+
+    let completedCount = 0;
+    let hasError = false;
+
+    participantes.forEach((participante) => {
+      // A senha do participante não está no modelo ParticipanteGrupo (por segurança).
+      // Aqui usamos o token do grupo como credencial de acesso ao resultado.
+      this.emailService.sendDrawToken(participante.email, grp.token, grp.token).subscribe({
+        next: () => {
+          completedCount++;
+          if (completedCount === participantes.length && !hasError) {
+            this.isLoading.set(false);
+            this.successMessage.set('E-mails enviados com sucesso a todos os participantes!');
+            setTimeout(() => this.successMessage.set(null), 4000);
+          }
+        },
+        error: (err: Error) => {
+          hasError = true;
+          completedCount++;
+          this.isLoading.set(false);
+          this.errorMessage.set(
+            `Erro ao notificar ${participante.email}: ${err.message}`,
+          );
+        },
+      });
+    });
   }
 }
