@@ -1,124 +1,216 @@
-import { Injectable } from '@angular/core';
-import { from, Observable, forkJoin, of, throwError } from 'rxjs';
-import { switchMap, map, catchError } from 'rxjs/operators';
-import { Grupo, Usuario, UsuarioGrupo, GrupoComParticipacao, ParticipanteGrupo } from '../models';
-import { environment } from '../../../environments/environment';
+import { Injectable, inject } from '@angular/core';
+import { from, Observable } from 'rxjs';
+import { SupabaseClient } from '@supabase/supabase-js';
+import { Grupo, UsuarioGrupo, GrupoComParticipacao, ParticipanteGrupo } from '../models';
+import { SupabaseService } from './supabase';
+import { Database } from '../../../types/supabase';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GroupService {
-  private readonly apiUrl = environment.apiUrl;
+  private readonly supabase = inject(SupabaseService);
 
-  private fetchJson<T>(url: string, options?: RequestInit): Observable<T> {
-    return from(
-      fetch(url, options).then((res) => {
-        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-        return res.json();
-      }),
-    );
+  private get db(): SupabaseClient<Database> {
+    return this.supabase.client;
   }
 
   getGroupsForUser(userId: string): Observable<GrupoComParticipacao[]> {
-    return this.fetchJson<UsuarioGrupo[]>(`${this.apiUrl}/usuario_grupo`).pipe(
-      switchMap((allMemberships) => {
-        const memberships = allMemberships.filter((m) => String(m.usuario_id) === String(userId));
-        if (memberships.length === 0) return of([]);
+    return from(
+      (async () => {
+        // Fetch all memberships of the user
+        const { data: memberships, error: mError } = await this.db
+          .from('usuario_grupo')
+          .select('*')
+          .eq('usuario_id', userId);
+        if (mError) throw new Error(mError.message);
+        if (!memberships || memberships.length === 0) return [];
 
-        const groupRequests = memberships.map((m) => {
-          return forkJoin({
-            membership: of(m),
-            group: this.fetchJson<Grupo>(`${this.apiUrl}/grupos/${m.grupo_id}`).pipe(
-              catchError(() => of(null)),
-            ),
-            allParticipants: of(
-              allMemberships.filter((x) => String(x.grupo_id) === String(m.grupo_id)),
-            ),
-          });
-        });
+        const groupIds = memberships.map((m) => m.grupo_id);
 
-        return forkJoin(groupRequests).pipe(
-          map((results) => {
-            return results
-              .filter((r) => r.group !== null)
-              .map((r) => ({
-                ...r.group!,
-                usuarioGrupoId: r.membership.id,
-                jogado: r.membership.jogado,
-                resultado: r.membership.resultado,
-                preenchido_caracteristicas: r.membership.preenchido_caracteristicas,
-                id_pessoa_sorteada: r.membership.id_pessoa_sorteada,
-                participantsCount: r.allParticipants.length,
-              }));
-          }),
-        );
-      }),
+        // Fetch the groups
+        const { data: groups, error: gError } = await this.db
+          .from('grupos')
+          .select('*')
+          .in('id', groupIds);
+        if (gError) throw new Error(gError.message);
+
+        // Fetch participation counts for all these groups
+        const { data: allMemberships, error: amError } = await this.db
+          .from('usuario_grupo')
+          .select('*')
+          .in('grupo_id', groupIds);
+        if (amError) throw new Error(amError.message);
+
+        return memberships
+          .map((m) => {
+            const group = groups?.find((g) => g.id === m.grupo_id);
+            const groupParticipants =
+              allMemberships?.filter((am) => am.grupo_id === m.grupo_id) || [];
+            if (!group) return null;
+            return {
+              ...group,
+              usuarioGrupoId: m.id,
+              jogado: m.jogado,
+              resultado: m.resultado,
+              preenchido_caracteristicas: m.preenchido_caracteristicas,
+              id_pessoa_sorteada: m.id_pessoa_sorteada,
+              participantsCount: groupParticipants.length,
+            } as GrupoComParticipacao;
+          })
+          .filter((g): g is GrupoComParticipacao => g !== null);
+      })(),
     );
   }
 
   getGroupDetails(
     groupId: string,
   ): Observable<{ group: Grupo; participants: ParticipanteGrupo[] }> {
-    return forkJoin({
-      group: this.fetchJson<Grupo>(`${this.apiUrl}/grupos/${groupId}`),
-      allMemberships: this.fetchJson<UsuarioGrupo[]>(`${this.apiUrl}/usuario_grupo`),
-    }).pipe(
-      switchMap(({ group, allMemberships }) => {
-        const memberships = allMemberships.filter((m) => String(m.grupo_id) === String(groupId));
-        if (memberships.length === 0) {
-          return of({ group, participants: [] });
+    return from(
+      (async () => {
+        // Fetch group
+        const { data: group, error: gError } = await this.db
+          .from('grupos')
+          .select('*')
+          .eq('id', groupId)
+          .single();
+        if (gError) throw new Error(gError.message);
+
+        // Fetch memberships for this group
+        const { data: memberships, error: mError } = await this.db
+          .from('usuario_grupo')
+          .select('*')
+          .eq('grupo_id', groupId);
+        if (mError) throw new Error(mError.message);
+
+        if (!memberships || memberships.length === 0) {
+          return { group: group as Grupo, participants: [] };
         }
 
-        const userRequests = memberships.map((m) =>
-          this.fetchJson<Usuario>(`${this.apiUrl}/usuarios/${m.usuario_id}`).pipe(
-            map((user) => ({
-              ...user,
-              preenchido_caracteristicas: m.preenchido_caracteristicas,
-              jogado: m.jogado,
-              resultado: m.resultado,
-              membershipId: m.id,
-            })),
-          ),
-        );
+        const userIds = memberships.map((m) => m.usuario_id);
 
-        return forkJoin(userRequests).pipe(
-          map((participants) => ({
-            group,
-            participants,
-          })),
-        );
-      }),
+        // Fetch users
+        const { data: users, error: uError } = await this.db
+          .from('usuarios')
+          .select('*')
+          .in('id', userIds);
+        if (uError) throw new Error(uError.message);
+
+        const participants: ParticipanteGrupo[] = memberships.map((m) => {
+          const user = users?.find((u) => u.id === m.usuario_id) || {
+            id: m.usuario_id,
+            nome_completo: 'Desconhecido',
+            email: '',
+          };
+          return {
+            ...user,
+            preenchido_caracteristicas: m.preenchido_caracteristicas,
+            jogado: m.jogado,
+            resultado: m.resultado,
+            membershipId: m.id,
+          } as ParticipanteGrupo;
+        });
+
+        return { group: group as Grupo, participants };
+      })(),
     );
   }
 
   getMembership(userId: string, groupId: string): Observable<UsuarioGrupo | null> {
-    return this.fetchJson<UsuarioGrupo[]>(
-      `${this.apiUrl}/usuario_grupo?usuario_id=${userId}&grupo_id=${groupId}`,
-    ).pipe(map((data) => (data.length > 0 ? data[0] : null)));
+    return from(
+      (async () => {
+        const { data, error } = await this.db
+          .from('usuario_grupo')
+          .select('*')
+          .eq('usuario_id', userId)
+          .eq('grupo_id', groupId)
+          .maybeSingle();
+        if (error) throw new Error(error.message);
+        return data as UsuarioGrupo | null;
+      })(),
+    );
   }
 
   createGroup(nome: string, token: string, donoId: string): Observable<Grupo> {
-    return this.fetchJson<Grupo[]>(`${this.apiUrl}/grupos?token=${token}`).pipe(
-      switchMap((groups) => {
-        if (groups.length > 0) {
-          return throwError(() => new Error('Este token de convite já está sendo usado.'));
+    return from(
+      (async () => {
+        // Check if group token already exists
+        const { data: existingGroups, error: checkError } = await this.db
+          .from('grupos')
+          .select('*')
+          .eq('token', token);
+        if (checkError) throw new Error(checkError.message);
+        if (existingGroups && existingGroups.length > 0) {
+          throw new Error('Este token de convite já está sendo usado.');
         }
-        const newGroup: Omit<Grupo, 'id'> = {
+
+        // Insert new group
+        const newGroup = {
           nome,
           token,
           sorteado: false,
           finalizado: false,
           dono_id: donoId,
         };
-        return this.fetchJson<Grupo>(`${this.apiUrl}/grupos`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(newGroup),
-        });
-      }),
-      switchMap((group) => {
-        const membership: Omit<UsuarioGrupo, 'id'> = {
+        const { data: createdGroup, error: insertError } = await this.db
+          .from('grupos')
+          .insert(newGroup)
+          .select()
+          .single();
+        if (insertError) throw new Error(insertError.message);
+
+        // Insert membership for the owner
+        const membership = {
           usuario_id: donoId,
+          grupo_id: createdGroup.id,
+          id_pessoa_sorteada: null,
+          preenchido_caracteristicas: false,
+          jogado: false,
+          resultado: false,
+          chute_id: null,
+        };
+        const { error: mError } = await this.db.from('usuario_grupo').insert(membership);
+        if (mError) throw new Error(mError.message);
+
+        return createdGroup as Grupo;
+      })(),
+    );
+  }
+
+  joinGroup(token: string, userId: string): Observable<UsuarioGrupo> {
+    return from(
+      (async () => {
+        // Find group by token
+        const { data: groups, error: gError } = await this.db
+          .from('grupos')
+          .select('*')
+          .eq('token', token);
+        if (gError) throw new Error(gError.message);
+        if (!groups || groups.length === 0) {
+          throw new Error('Grupo não encontrado com o token fornecido.');
+        }
+        const group = groups[0];
+
+        if (group.sorteado) {
+          throw new Error('Este sorteio já foi realizado. Não é possível entrar.');
+        }
+
+        // Check if user is already a member
+        const { data: existingMembership, error: mError } = await this.db
+          .from('usuario_grupo')
+          .select('*')
+          .eq('usuario_id', userId)
+          .eq('grupo_id', group.id)
+          .maybeSingle();
+        if (mError) throw new Error(mError.message);
+
+        if (existingMembership) {
+          return existingMembership as UsuarioGrupo;
+        }
+
+        // Create new membership
+        const newMembership = {
+          usuario_id: userId,
           grupo_id: group.id,
           id_pessoa_sorteada: null,
           preenchido_caracteristicas: false,
@@ -126,155 +218,120 @@ export class GroupService {
           resultado: false,
           chute_id: null,
         };
-        return this.fetchJson<UsuarioGrupo>(`${this.apiUrl}/usuario_grupo`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(membership),
-        }).pipe(map(() => group));
-      }),
-    );
-  }
+        const { data: created, error: createError } = await this.db
+          .from('usuario_grupo')
+          .insert(newMembership)
+          .select()
+          .single();
+        if (createError) throw new Error(createError.message);
 
-  joinGroup(token: string, userId: string): Observable<UsuarioGrupo> {
-    return this.fetchJson<Grupo[]>(`${this.apiUrl}/grupos?token=${token}`).pipe(
-      switchMap((groups) => {
-        if (groups.length === 0) {
-          return throwError(() => new Error('Grupo não encontrado com o token fornecido.'));
-        }
-        const group = groups[0];
-
-        if (group.sorteado) {
-          return throwError(
-            () => new Error('Este sorteio já foi realizado. Não é possível entrar.'),
-          );
-        }
-
-        return this.fetchJson<UsuarioGrupo[]>(`${this.apiUrl}/usuario_grupo`).pipe(
-          switchMap((allMemberships) => {
-            const memberships = allMemberships.filter(
-              (m) =>
-                String(m.usuario_id) === String(userId) && String(m.grupo_id) === String(group.id),
-            );
-            if (memberships.length > 0) {
-              return of(memberships[0]);
-            }
-
-            const newMembership: Omit<UsuarioGrupo, 'id'> = {
-              usuario_id: userId,
-              grupo_id: group.id,
-              id_pessoa_sorteada: null,
-              preenchido_caracteristicas: false,
-              jogado: false,
-              resultado: false,
-              chute_id: null,
-            };
-            return this.fetchJson<UsuarioGrupo>(`${this.apiUrl}/usuario_grupo`, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(newMembership),
-            });
-          }),
-        );
-      }),
+        return created as UsuarioGrupo;
+      })(),
     );
   }
 
   performDraw(groupId: string): Observable<Grupo> {
-    return this.fetchJson<UsuarioGrupo[]>(`${this.apiUrl}/usuario_grupo`).pipe(
-      switchMap((allMemberships) => {
-        const memberships = allMemberships.filter((m) => String(m.grupo_id) === String(groupId));
-        if (memberships.length < 3) {
-          return throwError(() => new Error('O sorteio necessita de pelo menos 3 participantes.'));
+    return from(
+      (async () => {
+        // Fetch all memberships of the group
+        const { data: memberships, error: mError } = await this.db
+          .from('usuario_grupo')
+          .select('*')
+          .eq('grupo_id', groupId);
+        if (mError) throw new Error(mError.message);
+        if (!memberships || memberships.length < 3) {
+          throw new Error('O sorteio necessita de pelo menos 3 participantes.');
         }
 
         const notFilled = memberships.filter((m) => !m.preenchido_caracteristicas);
         if (notFilled.length > 0) {
-          return throwError(
-            () =>
-              new Error(
-                'Todos os participantes devem preencher suas características antes de sortear.',
-              ),
+          throw new Error(
+            'Todos os participantes devem preencher suas características antes de sortear.',
           );
         }
 
+        // Shuffle
         const shuffled = [...memberships];
         for (let i = shuffled.length - 1; i > 0; i--) {
           const j = Math.floor(Math.random() * (i + 1));
           [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
         }
 
-        const updates = shuffled.map((m, index) => {
-          const nextIndex = (index + 1) % shuffled.length;
+        // Perform reciprocal/random draw updates
+        for (let i = 0; i < shuffled.length; i++) {
+          const nextIndex = (i + 1) % shuffled.length;
+          const current = shuffled[i];
           const recipient = shuffled[nextIndex];
-          const updatedMembership = {
-            ...m,
-            id_pessoa_sorteada: recipient.usuario_id,
-          };
-          return this.fetchJson<UsuarioGrupo>(`${this.apiUrl}/usuario_grupo/${m.id}`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(updatedMembership),
-          });
-        });
 
-        return forkJoin(updates).pipe(
-          switchMap(() => this.fetchJson<Grupo>(`${this.apiUrl}/grupos/${groupId}`)),
-          switchMap(() =>
-            this.fetchJson<Grupo>(`${this.apiUrl}/grupos/${groupId}`, {
-              method: 'PATCH',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ sorteado: true }),
-            }),
-          ),
-        );
-      }),
+          const { error: updateError } = await this.db
+            .from('usuario_grupo')
+            .update({ id_pessoa_sorteada: recipient.usuario_id })
+            .eq('id', current.id);
+          if (updateError) throw new Error(updateError.message);
+        }
+
+        // Update group draw status
+        const { data: updatedGroup, error: groupUpdateError } = await this.db
+          .from('grupos')
+          .update({ sorteado: true })
+          .eq('id', groupId)
+          .select()
+          .single();
+        if (groupUpdateError) throw new Error(groupUpdateError.message);
+
+        return updatedGroup as Grupo;
+      })(),
     );
   }
 
   submitGuess(groupId: string, userId: string, guessedUserId: string): Observable<UsuarioGrupo> {
-    return this.fetchJson<UsuarioGrupo[]>(`${this.apiUrl}/usuario_grupo`).pipe(
-      switchMap((allMemberships) => {
-        const memberships = allMemberships.filter(
-          (m) => String(m.usuario_id) === String(userId) && String(m.grupo_id) === String(groupId),
-        );
-        if (memberships.length === 0) {
-          return throwError(() => new Error('Participante não cadastrado neste grupo.'));
+    return from(
+      (async () => {
+        // Get membership
+        const { data: membership, error: mError } = await this.db
+          .from('usuario_grupo')
+          .select('*')
+          .eq('usuario_id', userId)
+          .eq('grupo_id', groupId)
+          .maybeSingle();
+        if (mError) throw new Error(mError.message);
+        if (!membership) {
+          throw new Error('Participante não cadastrado neste grupo.');
         }
-        const membership = memberships[0];
+
         const isCorrect = String(membership.id_pessoa_sorteada) === String(guessedUserId);
 
-        const updatedMembership = {
-          ...membership,
-          jogado: true,
-          resultado: isCorrect,
-          chute_id: guessedUserId,
-        };
+        const { data: updated, error: updateError } = await this.db
+          .from('usuario_grupo')
+          .update({
+            jogado: true,
+            resultado: isCorrect,
+            chute_id: guessedUserId,
+          })
+          .eq('id', membership.id)
+          .select()
+          .single();
+        if (updateError) throw new Error(updateError.message);
 
-        return this.fetchJson<UsuarioGrupo>(`${this.apiUrl}/usuario_grupo/${membership.id}`, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(updatedMembership),
-        });
-      }),
+        return updated as UsuarioGrupo;
+      })(),
     );
   }
 
   deleteGroup(groupId: string): Observable<void> {
-    return this.fetchJson<UsuarioGrupo[]>(`${this.apiUrl}/usuario_grupo`).pipe(
-      switchMap((allMemberships) => {
-        const memberships = allMemberships.filter((m) => String(m.grupo_id) === String(groupId));
-        const deleteRequests = memberships.map((m) =>
-          this.fetchJson<void>(`${this.apiUrl}/usuario_grupo/${m.id}`, { method: 'DELETE' }),
-        );
-        if (deleteRequests.length === 0) {
-          return this.fetchJson<void>(`${this.apiUrl}/grupos/${groupId}`, { method: 'DELETE' });
-        }
-        return forkJoin(deleteRequests).pipe(
-          switchMap(() =>
-            this.fetchJson<void>(`${this.apiUrl}/grupos/${groupId}`, { method: 'DELETE' }),
-          ),
-        );
-      }),
+    return from(
+      (async () => {
+        // Delete all memberships first
+        const { error: mError } = await this.db
+          .from('usuario_grupo')
+          .delete()
+          .eq('grupo_id', groupId);
+        if (mError) throw new Error(mError.message);
+
+        // Delete group
+        const { error: gError } = await this.db.from('grupos').delete().eq('id', groupId);
+        if (gError) throw new Error(gError.message);
+      })(),
     );
   }
 }

@@ -4,8 +4,8 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../../core/services/auth.service';
 import { GroupService } from '../../../../core/services/group.service';
 import { MembershipService } from '../../../../core/services/membership.service';
+import { SupabaseService } from '../../../../core/services/supabase';
 import { Usuario, Grupo } from '../../../../core/models';
-import { environment } from '../../../../../environments/environment';
 import { switchMap } from 'rxjs/operators';
 import { from } from 'rxjs';
 
@@ -26,7 +26,11 @@ export class GameComponent implements OnInit {
   private readonly authService = inject(AuthService);
   private readonly groupService = inject(GroupService);
   private readonly membershipService = inject(MembershipService);
-  private readonly apiUrl = environment.apiUrl;
+  private readonly supabaseService = inject(SupabaseService);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private get db(): any {
+    return this.supabaseService.client;
+  }
 
   readonly id = input<string>(); // Vinculação automática do parâmetro :id da URL
   readonly groupId = signal<string | null>(null);
@@ -73,12 +77,16 @@ export class GameComponent implements OnInit {
             this.router.navigate([`/sorteio/${id}/resultado`]);
           }
 
-          // Using native fetch wrapped in from() for the direct user detail call
           return from(
-            fetch(`${this.apiUrl}/usuarios/${membership.id_pessoa_sorteada}`).then((res) => {
-              if (!res.ok) throw new Error('Erro ao carregar sorteado');
-              return res.json();
-            }),
+            (async () => {
+              const { data, error } = await this.db
+                .from('usuarios')
+                .select('*')
+                .eq('id', membership.id_pessoa_sorteada!)
+                .single();
+              if (error) throw new Error('Erro ao carregar sorteado');
+              return data as Usuario;
+            })(),
           );
         }),
       )

@@ -1,56 +1,53 @@
 import { Component, inject, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../../core/services/auth.service';
 
 @Component({
   selector: 'app-cadastro',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './cadastro.component.html',
 })
 export class CadastroComponent {
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
+  private readonly fb = inject(FormBuilder);
 
-  readonly nomeCompleto = signal('');
-  readonly idade = signal<number | null>(null);
-  readonly email = signal('');
-  readonly senha = signal('');
+  readonly cadastroForm: FormGroup = this.fb.group({
+    nomeCompleto: ['', [Validators.required, Validators.minLength(3)]],
+    idade: [null, [Validators.required, Validators.min(18)]],
+    email: ['', [Validators.required, Validators.email]],
+    senha: ['', [Validators.required, Validators.minLength(6)]],
+  });
+
   readonly errorMessage = signal<string | null>(null);
   readonly isLoading = signal(false);
 
-  onSubmit(): void {
-    if (!this.nomeCompleto() || !this.email() || !this.senha() || this.idade() === null) {
-      this.errorMessage.set('Por favor, preencha todos os campos.');
+  async onSubmit(): Promise<void> {
+    if (this.cadastroForm.invalid) {
+      this.errorMessage.set('Por favor, preencha todos os campos corretamente.');
       return;
     }
 
     this.isLoading.set(true);
     this.errorMessage.set(null);
 
-    const newUserData = {
-      nome_completo: this.nomeCompleto(),
-      idade: Number(this.idade()),
-      email: this.email(),
-      senha: this.senha(),
-      cabelo_cor: '',
-      cabelo_tipo: '',
-      cabelo_comprimento: '',
-      olhos_cor: '',
-      altura: 170, // default height in cm
-    };
+    const { email, senha, nomeCompleto } = this.cadastroForm.value;
 
-    this.authService.register(newUserData).subscribe({
-      next: () => {
-        this.isLoading.set(false);
-        this.router.navigate(['/sorteios']);
-      },
-      error: (err) => {
-        this.isLoading.set(false);
-        this.errorMessage.set(err.message || 'Erro ao criar conta.');
-      },
-    });
+    const { error } = await this.authService.cadastrar(
+      email,
+      senha,
+      nomeCompleto,
+    );
+
+    this.isLoading.set(false);
+
+    if (error) {
+      this.errorMessage.set(error.message || 'Erro ao criar conta.');
+    } else {
+      this.router.navigate(['/sorteios']);
+    }
   }
 }

@@ -9,10 +9,9 @@ describe('BottomNavComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [BottomNavComponent],
-      providers: [provideRouter([{ path: '**', children: [] }])]
-    })
-    .compileComponents();
-    
+      providers: [provideRouter([{ path: '**', children: [] }])],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(BottomNavComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

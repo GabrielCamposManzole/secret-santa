@@ -5,10 +5,11 @@ import { CommonModule } from '@angular/common';
 import { GroupService } from '../../../../core/services/group.service';
 import { MembershipService } from '../../../../core/services/membership.service';
 import { AuthService } from '../../../../core/services/auth.service';
+import { SupabaseService } from '../../../../core/services/supabase';
 import { Grupo, Usuario, UsuarioGrupo, ParticipanteGrupo } from '../../../../core/models';
-import { environment } from '../../../../../environments/environment';
 import { from } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { EmailService } from '../../../../core/services/email.service';
 
 @Component({
   selector: 'app-editar',
@@ -21,7 +22,12 @@ export class EditarComponent implements OnInit {
   private readonly groupService = inject(GroupService);
   private readonly authService = inject(AuthService);
   private readonly membershipService = inject(MembershipService);
-  private readonly apiUrl = environment.apiUrl;
+  private readonly supabaseService = inject(SupabaseService);
+  private readonly emailService = inject(EmailService);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private get db(): any {
+    return this.supabaseService.client;
+  }
 
   readonly id = input<string>(); // Vinculação automática do parâmetro :id da URL
   readonly groupId = signal<string | null>(null);
@@ -97,11 +103,13 @@ export class EditarComponent implements OnInit {
     this.errorMessage.set(null);
 
     from(
-      fetch(`${this.apiUrl}/usuario_grupo/${participant.membershipId}`, {
-        method: 'DELETE',
-      }).then((res) => {
-        if (!res.ok) throw new Error('Erro ao remover participante');
-      }),
+      (async () => {
+        const { error } = await this.db
+          .from('usuario_grupo')
+          .delete()
+          .eq('id', participant.membershipId);
+        if (error) throw new Error(error.message);
+      })(),
     ).subscribe({
       next: () => {
         this.loadGroupDetails();
@@ -129,23 +137,21 @@ export class EditarComponent implements OnInit {
     this.isLoading.set(true);
     this.errorMessage.set(null);
 
-    // 1. Check if user already exists
+    // 1. Verifica se usuário já existe, senão cria
     from(
-      fetch(`${this.apiUrl}/usuarios?email=${email}`).then((res) => {
-        if (!res.ok) throw new Error('Erro ao buscar usuário');
-        return res.json();
-      }),
+      (async () => {
+        const { data: users } = await this.db.from('usuarios').select('*').eq('email', email);
+        return (users as Usuario[]) ?? [];
+      })(),
     )
       .pipe(
         switchMap((users: Usuario[]) => {
           if (users.length > 0) {
             return this.addMembership(users[0].id, id);
           } else {
-            // Create new user
             const newUser: Omit<Usuario, 'id'> = {
               nome_completo: nome,
               email: email,
-              senha: '123',
               idade: 18,
               cabelo_cor: '',
               cabelo_tipo: '',
@@ -154,14 +160,15 @@ export class EditarComponent implements OnInit {
               altura: 170,
             };
             return from(
-              fetch(`${this.apiUrl}/usuarios`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(newUser),
-              }).then((res) => {
-                if (!res.ok) throw new Error('Erro ao criar usuário');
-                return res.json();
-              }),
+              (async () => {
+                const { data: created, error } = await this.db
+                  .from('usuarios')
+                  .insert(newUser)
+                  .select()
+                  .single();
+                if (error) throw new Error(error.message);
+                return created as Usuario;
+              })(),
             ).pipe(switchMap((createdUser: Usuario) => this.addMembership(createdUser.id, id)));
           }
         }),
@@ -197,14 +204,15 @@ export class EditarComponent implements OnInit {
           chute_id: null,
         };
         return from(
-          fetch(`${this.apiUrl}/usuario_grupo`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(newMembership),
-          }).then((res) => {
-            if (!res.ok) throw new Error('Erro ao adicionar participante ao grupo');
-            return res.json();
-          }),
+          (async () => {
+            const { data: created, error } = await this.db
+              .from('usuario_grupo')
+              .insert(newMembership)
+              .select()
+              .single();
+            if (error) throw new Error(error.message);
+            return created;
+          })(),
         );
       }),
     );
@@ -224,14 +232,10 @@ export class EditarComponent implements OnInit {
     this.errorMessage.set(null);
 
     from(
-      fetch(`${this.apiUrl}/grupos/${id}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ nome }),
-      }).then((res) => {
-        if (!res.ok) throw new Error('Erro ao salvar grupo');
-        return res.json();
-      }),
+      (async () => {
+        const { error } = await this.db.from('grupos').update({ nome }).eq('id', id);
+        if (error) throw new Error(error.message);
+      })(),
     ).subscribe({
       next: () => {
         this.isLoading.set(false);
@@ -274,5 +278,27 @@ export class EditarComponent implements OnInit {
         this.errorMessage.set(err.message || 'Erro ao excluir o grupo.');
       },
     });
+  }
+
+  onResendInvitation(participant: ParticipanteGrupo): void {
+    this.isLoading.set(true);
+    this.errorMessage.set(null);
+    this.successMessage.set(null);
+
+    this.emailService
+      .sendInvitation(participant.email, participant.nome_completo, this.groupName())
+      .subscribe({
+        next: () => {
+          this.isLoading.set(false);
+          this.successMessage.set(
+            `Convite re-enviado com sucesso para ${participant.nome_completo}!`,
+          );
+          setTimeout(() => this.successMessage.set(null), 3000);
+        },
+        error: (err) => {
+          this.isLoading.set(false);
+          this.errorMessage.set(err.message || 'Erro ao re-enviar convite.');
+        },
+      });
   }
 }

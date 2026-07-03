@@ -6,7 +6,7 @@
 </header>
 
 <!-- Main Container -->
-<main class="flex-grow flex flex-col items-center px-8 py-10 w-full md:p-8">
+<main class="grow flex flex-col items-center px-8 py-10 w-full md:p-8">
   <!-- Desktop Logo -->
   <div class="hidden md:flex items-center justify-center mb-6" data-purpose="logo-desktop">
     <span class="text-[#D42426] font-extrabold text-3xl tracking-tighter font-heading">SecretSanta</span>
@@ -28,7 +28,7 @@
     </div>
   }
 
-  <form (ngSubmit)="onSubmit()" class="w-full space-y-4">
+  <form [formGroup]="cadastroForm" (ngSubmit)="onSubmit()" class="w-full space-y-4">
     <!-- Name Field -->
     <div class="space-y-1.5">
       <label for="nomeCompleto" class="block text-[10px] font-bold text-gray-500 uppercase tracking-wider ml-4">Nome Completo</label>
@@ -40,14 +40,15 @@
         </div>
         <input
           id="nomeCompleto"
-          class="block w-full bg-gray-100 border border-transparent rounded-full py-4 pl-12 pr-4 text-sm focus:bg-white focus:border-[#D42426] focus:ring-2 focus:ring-[#D42426]/20 focus:outline-none placeholder-gray-400"
+          class="block w-full bg-gray-100 border border-transparent rounded-full py-4 pl-12 pr-4 text-sm focus:bg-white focus:border-[#D42426] focus:ring-2 focus:ring-[#D42426]/20 focus:outline-none placeholder-gray-400 font-body"
           placeholder="Como quer ser chamado?"
           type="text"
-          name="nomeCompleto"
-          [(ngModel)]="nomeCompleto"
-          required
+          formControlName="nomeCompleto"
         />
       </div>
+      @if (cadastroForm.get('nomeCompleto')?.invalid && cadastroForm.get('nomeCompleto')?.touched) {
+        <span class="text-xs text-[#D42426] font-bold ml-4 block font-body">Nome completo deve ter pelo menos 3 caracteres.</span>
+      }
     </div>
 
     <!-- Age Field -->
@@ -61,14 +62,15 @@
         </div>
         <input
           id="idade"
-          class="block w-full bg-gray-100 border border-transparent rounded-full py-4 pl-12 pr-4 text-sm focus:bg-white focus:border-[#D42426] focus:ring-2 focus:ring-[#D42426]/20 focus:outline-none placeholder-gray-400"
+          class="block w-full bg-gray-100 border border-transparent rounded-full py-4 pl-12 pr-4 text-sm focus:bg-white focus:border-[#D42426] focus:ring-2 focus:ring-[#D42426]/20 focus:outline-none placeholder-gray-400 font-body"
           placeholder="Sua idade"
           type="number"
-          name="idade"
-          [(ngModel)]="idade"
-          required
+          formControlName="idade"
         />
       </div>
+      @if (cadastroForm.get('idade')?.invalid && cadastroForm.get('idade')?.touched) {
+        <span class="text-xs text-[#D42426] font-bold ml-4 block font-body">Você deve ter 18 anos ou mais.</span>
+      }
     </div>
 
     <!-- E-mail Field -->
@@ -82,14 +84,15 @@
         </div>
         <input
           id="email"
-          class="block w-full bg-gray-100 border border-transparent rounded-full py-4 pl-12 pr-4 text-sm focus:bg-white focus:border-[#D42426] focus:ring-2 focus:ring-[#D42426]/20 focus:outline-none placeholder-gray-400"
+          class="block w-full bg-gray-100 border border-transparent rounded-full py-4 pl-12 pr-4 text-sm focus:bg-white focus:border-[#D42426] focus:ring-2 focus:ring-[#D42426]/20 focus:outline-none placeholder-gray-400 font-body"
           placeholder="seu@email.com"
           type="email"
-          name="email"
-          [(ngModel)]="email"
-          required
+          formControlName="email"
         />
       </div>
+      @if (cadastroForm.get('email')?.invalid && cadastroForm.get('email')?.touched) {
+        <span class="text-xs text-[#D42426] font-bold ml-4 block font-body">Insira um e-mail válido.</span>
+      }
     </div>
 
     <!-- Password Field -->
@@ -103,22 +106,23 @@
         </div>
         <input
           id="senha"
-          class="block w-full bg-gray-100 border border-transparent rounded-full py-4 pl-12 pr-4 text-sm focus:bg-white focus:border-[#D42426] focus:ring-2 focus:ring-[#D42426]/20 focus:outline-none placeholder-gray-400"
+          class="block w-full bg-gray-100 border border-transparent rounded-full py-4 pl-12 pr-4 text-sm focus:bg-white focus:border-[#D42426] focus:ring-2 focus:ring-[#D42426]/20 focus:outline-none placeholder-gray-400 font-body"
           placeholder="........."
           type="password"
-          name="senha"
-          [(ngModel)]="senha"
-          required
+          formControlName="senha"
         />
       </div>
+      @if (cadastroForm.get('senha')?.invalid && cadastroForm.get('senha')?.touched) {
+        <span class="text-xs text-[#D42426] font-bold ml-4 block font-body">A senha deve ter pelo menos 6 caracteres.</span>
+      }
     </div>
 
     <!-- Submit Button -->
     <div class="pt-4">
       <button
-        class="w-full bg-[#D42426] hover:bg-[#b01e20] text-white font-bold py-4 rounded-full flex items-center justify-center gap-2 shadow-[0_10px_15px_-3px_rgba(212,36,38,0.3)] active:scale-[0.98] transition-all duration-200"
+        class="w-full bg-[#D42426] hover:bg-[#b01e20] text-white font-bold py-4 rounded-full flex items-center justify-center gap-2 shadow-[0_10px_15px_-3px_rgba(212,36,38,0.3)] active:scale-[0.98] transition-all duration-200 disabled:bg-gray-400 disabled:cursor-not-allowed"
         type="submit"
-        [disabled]="isLoading()"
+        [disabled]="isLoading() || cadastroForm.invalid"
       >
         @if (isLoading()) {
           <span class="loading loading-spinner loading-md"></span>

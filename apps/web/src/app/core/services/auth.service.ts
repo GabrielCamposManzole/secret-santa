@@ -1,25 +1,19 @@
-import { Injectable, signal } from '@angular/core';
-import { from, Observable, tap, map, switchMap, throwError } from 'rxjs';
-import { Usuario } from '../models';
-import { environment } from '../../../environments/environment';
+import { Injectable, inject, signal } from '@angular/core';
+import { User } from '@supabase/supabase-js';
+import { SupabaseService } from './supabase';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class AuthService {
-  private readonly apiUrl = environment.apiUrl;
+  private supabase = inject(SupabaseService);
 
-  readonly currentUser = signal<Usuario | null>(null);
+  // Usamos um Signal para armazenar o estado reativo do usuário logado
+  currentUser = signal<User | null>(null);
 
   constructor() {
-    const savedUser = localStorage.getItem('currentUser');
-    if (savedUser) {
-      try {
-        this.currentUser.set(JSON.parse(savedUser));
-      } catch {
-        localStorage.removeItem('currentUser');
-      }
-    }
+    // Escuta mudanças de estado (login, logout, token expirado) em tempo real
+    this.supabase.client.auth.onAuthStateChange((_event, session) => {
+      this.currentUser.set(session?.user ?? null);
+    });
   }
 
   isAuthenticated(): boolean {
@@ -27,94 +21,26 @@ export class AuthService {
   }
 
   getCurrentUserId(): string | null {
-    return this.currentUser()?.id || null;
+    return this.currentUser()?.id ?? null;
   }
 
-  login(email: string, senha: string): Observable<Usuario> {
-    return from(
-      fetch(`${this.apiUrl}/usuarios?email=${email}`).then((res) => {
-        if (!res.ok) throw new Error('Erro ao buscar usuário');
-        return res.json();
-      }),
-    ).pipe(
-      map((users: Usuario[]) => {
-        if (users.length === 0) {
-          throw new Error('Usuário não encontrado');
-        }
-        const user = users[0];
-        if (user.senha !== senha) {
-          throw new Error('Senha incorreta');
-        }
-        return user;
-      }),
-      tap((user) => {
-        const userWithoutPassword = { ...user };
-        delete userWithoutPassword.senha;
-        this.currentUser.set(userWithoutPassword);
-        localStorage.setItem('currentUser', JSON.stringify(userWithoutPassword));
-      }),
-    );
+  async cadastrar(email: string, password: string, nomeCompleto: string) {
+    return this.supabase.client.auth.signUp({
+      email,
+      password,
+      options: {
+        data: {
+          nome_completo: nomeCompleto,
+        },
+      },
+    });
   }
 
-  register(userData: Partial<Usuario>): Observable<Usuario> {
-    return from(
-      fetch(`${this.apiUrl}/usuarios?email=${userData.email}`).then((res) => {
-        if (!res.ok) throw new Error('Erro ao validar e-mail');
-        return res.json();
-      }),
-    ).pipe(
-      map((users: Usuario[]) => {
-        if (users.length > 0) {
-          throw new Error('E-mail já cadastrado');
-        }
-        return true;
-      }),
-      switchMap(() => {
-        return from(
-          fetch(`${this.apiUrl}/usuarios`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(userData),
-          }).then((res) => {
-            if (!res.ok) throw new Error('Erro ao cadastrar usuário');
-            return res.json();
-          }),
-        );
-      }),
-      tap((user: Usuario) => {
-        const userWithoutPassword = { ...user };
-        delete userWithoutPassword.senha;
-        this.currentUser.set(userWithoutPassword);
-        localStorage.setItem('currentUser', JSON.stringify(userWithoutPassword));
-      }),
-    );
+  async login(email: string, password: string) {
+    return this.supabase.client.auth.signInWithPassword({ email, password });
   }
 
-  updateProfile(userData: Partial<Usuario>): Observable<Usuario> {
-    const userId = this.getCurrentUserId();
-    if (!userId) return throwError(() => new Error('Usuário não autenticado'));
-
-    return from(
-      fetch(`${this.apiUrl}/usuarios/${userId}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(userData),
-      }).then((res) => {
-        if (!res.ok) throw new Error('Erro ao atualizar perfil');
-        return res.json();
-      }),
-    ).pipe(
-      tap((user: Usuario) => {
-        const userWithoutPassword = { ...user };
-        delete userWithoutPassword.senha;
-        this.currentUser.set(userWithoutPassword);
-        localStorage.setItem('currentUser', JSON.stringify(userWithoutPassword));
-      }),
-    );
-  }
-
-  logout(): void {
-    this.currentUser.set(null);
-    localStorage.removeItem('currentUser');
+  async logout() {
+    return this.supabase.client.auth.signOut();
   }
 }

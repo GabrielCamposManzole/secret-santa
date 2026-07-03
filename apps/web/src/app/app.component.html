@@ -1,3 +1,10 @@
+@if (isOffline()) {
+  <div class="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-[#D42426] text-white px-6 py-3 rounded-full shadow-lg flex items-center gap-2 border border-[#b01e20] font-bold text-xs animate-bounce font-heading">
+    <span class="material-symbols-outlined text-sm">wifi_off</span>
+    <span>Conectividade perdida. Você está navegando offline.</span>
+  </div>
+}
+
 @if (isAuthPage()) {
   <div class="min-h-screen flex justify-center items-center md:py-12 p-0 sm:p-4">
     <div class="w-full max-w-[480px] bg-white min-h-screen md:min-h-0 md:rounded-[32px] relative flex flex-col overflow-hidden md:shadow-xl md:border md:border-gray-100/50">
@@ -8,12 +15,14 @@
   <div class="min-h-screen flex flex-col">
     <app-header />
 
-    <main class="flex-grow flex flex-col w-full">
+    <main class="grow flex flex-col w-full">
       <router-outlet />
     </main>
 
     <!-- Desktop footer for all non-auth pages -->
-    <app-footer class="hidden md:block" />
+    @defer (on timer(1s)) {
+      <app-footer class="hidden md:block" />
+    }
 
     <!-- Mobile bottom nav only for authenticated users -->
     @if (isLoggedPage()) {
@@ -21,4 +30,5 @@
     }
   </div>
 }
+
 

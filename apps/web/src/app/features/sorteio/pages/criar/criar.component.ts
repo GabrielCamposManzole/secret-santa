@@ -4,11 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { GroupService } from '../../../../core/services/group.service';
 import { AuthService } from '../../../../core/services/auth.service';
+import { Button } from '../../../../shared/components/button/button';
 
 @Component({
   selector: 'app-criar',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, Button],
   templateUrl: './criar.component.html',
 })
 export class CriarComponent implements OnInit {
@@ -17,6 +18,7 @@ export class CriarComponent implements OnInit {
   private readonly router = inject(Router);
 
   readonly groupName = signal('');
+  readonly buttonLabel = signal('Salvar e Criar Grupo');
   readonly errorMessage = signal<string | null>(null);
   readonly isLoading = signal(false);
   readonly currentUserId = signal<string | null>(null);

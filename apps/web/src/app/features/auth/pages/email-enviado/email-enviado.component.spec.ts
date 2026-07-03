@@ -9,10 +9,9 @@ describe('EmailEnviadoComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [EmailEnviadoComponent],
-      providers: [provideRouter([{ path: '**', children: [] }])]
-    })
-    .compileComponents();
-    
+      providers: [provideRouter([{ path: '**', children: [] }])],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(EmailEnviadoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

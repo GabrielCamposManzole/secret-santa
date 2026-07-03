@@ -1,5 +1,8 @@
 import { Component, inject, signal, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
+import { toSignal, toObservable } from '@angular/core/rxjs-interop';
+import { BehaviorSubject, combineLatest, of } from 'rxjs';
+import { filter, switchMap, catchError, finalize } from 'rxjs/operators';
 import { GroupService } from '../../../../core/services/group.service';
 import { AuthService } from '../../../../core/services/auth.service';
 
@@ -18,10 +21,29 @@ export class ListComponent implements OnInit {
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
 
-  readonly groups = signal<GrupoComParticipacao[]>([]);
   readonly isLoading = signal(false);
   readonly errorMessage = signal<string | null>(null);
   readonly currentUserId = signal<string | null>(null);
+
+  private readonly refreshSubject = new BehaviorSubject<void>(undefined);
+  private readonly userId$ = toObservable(this.currentUserId);
+
+  readonly groups = toSignal(
+    combineLatest([this.userId$, this.refreshSubject]).pipe(
+      filter(([userId]) => userId !== null),
+      switchMap(([userId]) => {
+        this.isLoading.set(true);
+        return this.groupService.getGroupsForUser(userId!).pipe(
+          catchError((err) => {
+            this.errorMessage.set(err.message || 'Erro ao carregar grupos.');
+            return of([]);
+          }),
+          finalize(() => this.isLoading.set(false))
+        );
+      })
+    ),
+    { initialValue: [] as GrupoComParticipacao[] }
+  );
 
   ngOnInit(): void {
     const userId = this.authService.getCurrentUserId();
@@ -30,24 +52,10 @@ export class ListComponent implements OnInit {
       return;
     }
     this.currentUserId.set(userId);
-    this.loadGroups();
   }
 
   loadGroups(): void {
-    const userId = this.currentUserId();
-    if (!userId) return;
-
-    this.isLoading.set(true);
-    this.groupService.getGroupsForUser(userId).subscribe({
-      next: (data) => {
-        this.groups.set(data);
-        this.isLoading.set(false);
-      },
-      error: (err) => {
-        this.errorMessage.set(err.message || 'Erro ao carregar grupos.');
-        this.isLoading.set(false);
-      },
-    });
+    this.refreshSubject.next();
   }
 
   isGroupOwner(group: GrupoComParticipacao): boolean {

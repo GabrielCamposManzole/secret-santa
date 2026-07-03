@@ -9,10 +9,9 @@ describe('ChuteComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ChuteComponent],
-      providers: [provideRouter([{ path: '**', children: [] }])]
-    })
-    .compileComponents();
-    
+      providers: [provideRouter([{ path: '**', children: [] }])],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(ChuteComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

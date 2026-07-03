@@ -4,10 +4,10 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../../core/services/auth.service';
 import { GroupService } from '../../../../core/services/group.service';
 import { MembershipService } from '../../../../core/services/membership.service';
+import { SupabaseService } from '../../../../core/services/supabase';
 import { Usuario, UsuarioGrupo, Grupo } from '../../../../core/models';
-import { environment } from '../../../../../environments/environment';
 import { switchMap } from 'rxjs/operators';
-import { of, from } from 'rxjs';
+import { from } from 'rxjs';
 
 @Component({
   selector: 'app-reveal',
@@ -20,7 +20,11 @@ export class RevealComponent implements OnInit {
   private readonly authService = inject(AuthService);
   private readonly groupService = inject(GroupService);
   private readonly membershipService = inject(MembershipService);
-  private readonly apiUrl = environment.apiUrl;
+  private readonly supabaseService = inject(SupabaseService);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private get db(): any {
+    return this.supabaseService.client;
+  }
 
   readonly id = input<string>(); // Vinculação automática do parâmetro :id da URL
   readonly groupId = signal<string | null>(null);
@@ -66,25 +70,26 @@ export class RevealComponent implements OnInit {
             this.router.navigate([`/sorteio/${id}/jogo`]);
           }
 
-          // Fetch the drawn person (target user)
           return from(
-            fetch(`${this.apiUrl}/usuarios/${m.id_pessoa_sorteada}`).then((res) => {
-              if (!res.ok) throw new Error('Erro ao carregar sorteado');
-              return res.json();
-            }),
-          ).pipe(
-            switchMap((target: Usuario) => {
-              this.targetUser.set(target);
+            (async () => {
+              const { data: target, error: e1 } = await this.db
+                .from('usuarios')
+                .select('*')
+                .eq('id', m.id_pessoa_sorteada)
+                .single();
+              if (e1) throw new Error('Erro ao carregar sorteado');
+              this.targetUser.set(target as Usuario);
               if (m.chute_id) {
-                return from(
-                  fetch(`${this.apiUrl}/usuarios/${m.chute_id}`).then((res) => {
-                    if (!res.ok) throw new Error('Erro ao carregar palpite');
-                    return res.json();
-                  }),
-                );
+                const { data: guess, error: e2 } = await this.db
+                  .from('usuarios')
+                  .select('*')
+                  .eq('id', m.chute_id)
+                  .single();
+                if (e2) throw new Error('Erro ao carregar palpite');
+                return guess as Usuario;
               }
-              return of(null);
-            }),
+              return null;
+            })(),
           );
         }),
       )

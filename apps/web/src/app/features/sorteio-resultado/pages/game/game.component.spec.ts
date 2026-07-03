@@ -9,10 +9,9 @@ describe('GameComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [GameComponent],
-      providers: [provideRouter([{ path: '**', children: [] }])]
-    })
-    .compileComponents();
-    
+      providers: [provideRouter([{ path: '**', children: [] }])],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(GameComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -9,10 +9,9 @@ describe('CadastroComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [CadastroComponent],
-      providers: [provideRouter([{ path: '**', children: [] }])]
-    })
-    .compileComponents();
-    
+      providers: [provideRouter([{ path: '**', children: [] }])],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(CadastroComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
