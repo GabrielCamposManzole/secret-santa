@@ -1,6 +1,8 @@
 {
-  "name": "web",
-  "short_name": "web",
+  "name": "SecretSanta",
+  "short_name": "SecretSanta",
+  "theme_color": "#D42426",
+  "background_color": "#f8f9f9",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",

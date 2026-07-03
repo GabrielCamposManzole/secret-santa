@@ -1,6 +1,6 @@
 
 <!-- MainContent -->
-<main class="flex-grow px-6 pt-8 pb-24 w-full">
+<main class="grow px-6 pt-8 pb-24 w-full">
   <!-- TitleSection -->
   <section class="mb-8">
     <h2 class="text-3xl font-extrabold text-gray-900 mb-2 font-heading">Criar Novo Grupo</h2>
@@ -20,7 +20,7 @@
   <!-- Form -->
   <form (ngSubmit)="onSubmit()" class="space-y-6">
     <!-- GroupNameInput -->
-    <section class="bg-white rounded-[2rem] p-8 shadow-sm border border-gray-100 font-body">
+    <section class="bg-white rounded-4xl p-8 shadow-sm border border-gray-100 font-body">
       <label class="block text-[#D42426] font-bold text-sm mb-3 font-heading" for="group-name">Nome do Grupo</label>
       <input
         class="w-full bg-gray-100 border border-transparent rounded-full py-4 px-6 focus:bg-white focus:border-[#D42426] focus:ring-2 focus:ring-[#D42426]/20 focus:outline-none text-gray-700 placeholder-gray-400"
@@ -35,20 +35,11 @@
 
     <!-- ActionButtons -->
     <section class="text-center">
-      <button
+      <app-button
+        [(label)]="buttonLabel"
         type="submit"
         [disabled]="isLoading()"
-        class="w-full bg-[#D42426] hover:bg-[#b01e20] text-white font-bold text-lg py-4 rounded-full flex items-center justify-center gap-3 shadow-md active:scale-95 transition-all duration-200 font-heading"
-      >
-        @if (isLoading()) {
-          <span class="loading loading-spinner loading-md"></span>
-        } @else {
-          <span>Salvar e Criar Grupo</span>
-          <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path>
-          </svg>
-        }
-      </button>
+      ></app-button>
       <p class="text-gray-400 text-xs mt-4 font-medium px-4 font-body">
         Após criar, você poderá copiar o link de convite para compartilhar com os participantes.
       </p>

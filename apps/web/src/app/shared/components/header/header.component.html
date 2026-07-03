@@ -32,14 +32,14 @@
         <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar hover:bg-gray-100">
           <div
             class="w-10 h-10 rounded-full bg-[#D42426] text-white flex items-center justify-center font-bold text-sm shadow-sm select-none">
-            {{ getInitials(authService.currentUser()?.nome_completo) }}
+            {{ getInitials(authService.currentUser()?.user_metadata?.['nome_completo']) }}
           </div>
         </div>
         <ul tabindex="0"
-          class="menu menu-sm dropdown-content bg-base rounded-box z-[100] mt-3 w-56 p-2 shadow-lg border border-gray-100">
+          class="menu menu-sm dropdown-content bg-base rounded-box z-100 mt-3 w-56 p-2 shadow-lg border border-gray-100">
           <li class="px-4 py-2 border-b border-gray-100 mb-1 select-none">
             <p class="font-bold text-gray-800 text-sm leading-tight truncate">
-              {{ authService.currentUser()?.nome_completo | titlecase }}
+              {{ authService.currentUser()?.user_metadata?.['nome_completo'] | titlecase }}
             </p>
             <p class="text-xs text-gray-500 truncate mt-0.5">
               {{ authService.currentUser()?.email }}

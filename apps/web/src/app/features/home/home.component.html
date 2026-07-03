@@ -10,6 +10,17 @@
         Transforme sua troca de presentes em uma jornada de mistério. Envie pistas e descubra quem é seu amigo através de uma experiência editorial premium.
       </p>
 
+      <!-- Christmas advice/quote -->
+      @if (adviceMessage()) {
+        <div class="mb-8 p-6 bg-white border border-gray-100 rounded-3xl shadow-sm text-left max-w-lg font-body flex items-start gap-4">
+          <span class="material-symbols-outlined text-[#D42426] shrink-0">celebration</span>
+          <div>
+            <span class="text-xs uppercase tracking-widest text-[#D42426] font-bold block mb-1 font-heading">Inspiração de Natal</span>
+            <p class="text-gray-600 text-sm italic">"{{ adviceMessage() }}"</p>
+          </div>
+        </div>
+      }
+
       <!-- Error message -->
       @if (errorMessage()) {
         <div class="p-4 mb-6 text-sm text-white bg-red-600 rounded-full flex items-center justify-between shadow-md max-w-sm">
@@ -26,7 +37,7 @@
             name="groupCode" 
             [(ngModel)]="groupCode"
             placeholder="Código do Grupo" 
-            class="bg-transparent border-0 focus:ring-0 flex-grow py-3 px-6 text-base font-semibold text-gray-800 placeholder:text-gray-400 focus:outline-none"
+            class="bg-transparent border-0 focus:ring-0 grow py-3 px-6 text-base font-semibold text-gray-800 placeholder:text-gray-400 focus:outline-none"
           />
           <button 
             type="submit" 

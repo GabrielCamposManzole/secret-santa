@@ -2,6 +2,7 @@ import { Component, inject, computed } from '@angular/core';
 import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map, filter } from 'rxjs/operators';
+import { merge, fromEvent } from 'rxjs';
 import { AuthService } from './core/services/auth.service';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
@@ -23,6 +24,14 @@ export class App {
       map(() => this.router.url),
     ),
     { initialValue: '/' },
+  );
+
+  readonly isOffline = toSignal(
+    merge(
+      fromEvent(window, 'online').pipe(map(() => false)),
+      fromEvent(window, 'offline').pipe(map(() => true)),
+    ),
+    { initialValue: !navigator.onLine },
   );
 
   readonly isLandingPage = computed(() => {

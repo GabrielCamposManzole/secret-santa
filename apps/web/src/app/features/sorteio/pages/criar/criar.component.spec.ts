@@ -9,10 +9,9 @@ describe('CriarComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [CriarComponent],
-      providers: [provideRouter([{ path: '**', children: [] }])]
-    })
-    .compileComponents();
-    
+      providers: [provideRouter([{ path: '**', children: [] }])],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(CriarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

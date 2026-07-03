@@ -42,7 +42,7 @@ export class LoginComponent {
     });
   }
 
-  onSubmit(): void {
+  async onSubmit(): Promise<void> {
     if (!this.email() || !this.password()) {
       this.errorMessage.set('Por favor, preencha todos os campos.');
       return;
@@ -51,15 +51,14 @@ export class LoginComponent {
     this.isLoading.set(true);
     this.errorMessage.set(null);
 
-    this.authService.login(this.email(), this.password()).subscribe({
-      next: () => {
-        this.isLoading.set(false);
-        this.router.navigate(['/sorteios']);
-      },
-      error: (err) => {
-        this.isLoading.set(false);
-        this.errorMessage.set(err.message || 'Erro ao realizar login.');
-      },
-    });
+    const { error } = await this.authService.login(this.email(), this.password());
+
+    this.isLoading.set(false);
+
+    if (error) {
+      this.errorMessage.set(error.message || 'Erro ao realizar login.');
+    } else {
+      this.router.navigate(['/sorteios']);
+    }
   }
 }

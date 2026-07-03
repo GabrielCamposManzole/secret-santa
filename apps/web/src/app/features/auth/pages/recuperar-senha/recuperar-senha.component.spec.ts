@@ -9,10 +9,9 @@ describe('RecuperarSenhaComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [RecuperarSenhaComponent],
-      providers: [provideRouter([{ path: '**', children: [] }])]
-    })
-    .compileComponents();
-    
+      providers: [provideRouter([{ path: '**', children: [] }])],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(RecuperarSenhaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -1,9 +1,10 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 import { GroupService } from '../../core/services/group.service';
+import { AdviceService } from '../../core/services/advice.service';
 
 @Component({
   selector: 'app-home',
@@ -11,14 +12,23 @@ import { GroupService } from '../../core/services/group.service';
   imports: [CommonModule, FormsModule],
   templateUrl: './home.component.html',
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   private readonly authService = inject(AuthService);
   private readonly groupService = inject(GroupService);
+  private readonly adviceService = inject(AdviceService);
   private readonly router = inject(Router);
 
   groupCode = '';
   errorMessage = signal<string | null>(null);
   isLoading = signal(false);
+  adviceMessage = signal<string | null>(null);
+
+  ngOnInit(): void {
+    this.adviceService.getAdvice().subscribe({
+      next: (advice) => this.adviceMessage.set(advice),
+      error: () => this.adviceMessage.set('Dica: Compartilhe o amor de Natal participando do sorteio.'),
+    });
+  }
 
   onPlay(): void {
     if (!this.groupCode.trim()) {

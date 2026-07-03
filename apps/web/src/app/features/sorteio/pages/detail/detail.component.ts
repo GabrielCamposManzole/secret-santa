@@ -1,8 +1,10 @@
 import { Component, inject, signal, OnInit, input } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { forkJoin } from 'rxjs';
 import { GroupService } from '../../../../core/services/group.service';
 import { AuthService } from '../../../../core/services/auth.service';
+import { EmailService } from '../../../../core/services/email.service';
 import { Grupo, ParticipanteGrupo } from '../../../../core/models';
 import { MaskEmailPipe } from '../../../../shared/pipes/mask-email.pipe';
 
@@ -16,8 +18,10 @@ export class DetailComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly groupService = inject(GroupService);
   private readonly authService = inject(AuthService);
+  private readonly emailService = inject(EmailService);
 
   readonly id = input<string>(); // Vinculação automática do parâmetro :id da URL
+  readonly groupDetails = input<{ group: Grupo; participants: ParticipanteGrupo[] }>();
   readonly groupId = signal<string | null>(null);
   readonly currentUserId = signal<string | null>(null);
   readonly group = signal<Grupo | null>(null);
@@ -107,9 +111,56 @@ export class DetailComponent implements OnInit {
 
     this.groupService.performDraw(id).subscribe({
       next: () => {
-        this.loadDetails();
-        this.successMessage.set('Sorteio realizado com sucesso!');
-        setTimeout(() => this.successMessage.set(null), 3000);
+        // Após o sorteio, recarrega os detalhes para ter os dados atualizados
+        // e dispara os e-mails para todos os participantes
+        this.groupService.getGroupDetails(id).subscribe({
+          next: (data) => {
+            this.group.set(data.group);
+            this.participants.set(data.participants);
+
+            const grupo = data.group;
+            const emailObservables = data.participants
+              .filter((p) => !!p.email)
+              .map((p) =>
+                this.emailService.sendGameTokenAndCredentials({
+                  to: p.email!,
+                  nome: p.nome_completo ?? undefined,
+                  token: grupo.token,
+                  // `p.senha` existirá apenas para participantes novos (sem cadastro prévio).
+                  // O campo é opcional: se undefined, o e-mail não exibirá a seção de senha.
+                  senha: (p as ParticipanteGrupo & { senha?: string }).senha,
+                  grupoNome: grupo.nome,
+                }),
+              );
+
+            if (emailObservables.length > 0) {
+              forkJoin(emailObservables).subscribe({
+                next: () => {
+                  this.successMessage.set(
+                    'Sorteio realizado! E-mails enviados aos participantes. 🎅',
+                  );
+                  setTimeout(() => this.successMessage.set(null), 5000);
+                },
+                error: () => {
+                  // O sorteio ocorreu, apenas o envio de e-mail falhou
+                  this.successMessage.set('Sorteio realizado! (Falha ao enviar alguns e-mails)');
+                  setTimeout(() => this.successMessage.set(null), 5000);
+                },
+              });
+            } else {
+              this.successMessage.set('Sorteio realizado com sucesso!');
+              setTimeout(() => this.successMessage.set(null), 3000);
+            }
+
+            this.isLoading.set(false);
+          },
+          error: () => {
+            // O sorteio ocorreu mas falhou ao recarregar
+            this.loadDetails();
+            this.successMessage.set('Sorteio realizado com sucesso!');
+            setTimeout(() => this.successMessage.set(null), 3000);
+          },
+        });
       },
       error: (err) => {
         this.isLoading.set(false);

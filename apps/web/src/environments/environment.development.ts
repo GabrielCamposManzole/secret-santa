@@ -1,4 +1,5 @@
 export const environment = {
-  apiUrl: 'http://localhost:3000',
-  googleClientId: 'INSERIR_CLIENT_ID_AQUI',
+  production: false,
+  supabaseUrl: 'https://abcsvexnftdbcsmxnmfv.supabase.co',
+  supabaseKey: 'sb_publishable_sTGK2pLbtdP4iswZ6syf0w_-lW0xkTQ',
 };

@@ -1,6 +1,15 @@
-import { Routes } from '@angular/router';
+import { inject } from '@angular/core';
+import { Routes, ResolveFn } from '@angular/router';
 import { authGuard } from './core/guards/auth.guard';
 import { guestGuard } from './core/guards/guest.guard';
+import { GroupService } from './core/services/group.service';
+import { Grupo, ParticipanteGrupo } from './core/models';
+
+export const groupDetailsResolver: ResolveFn<{ group: Grupo; participants: ParticipanteGrupo[] } | null> = (route) => {
+  const id = route.paramMap.get('id');
+  if (!id) return null;
+  return inject(GroupService).getGroupDetails(id);
+};
 
 export const routes: Routes = [
   {
@@ -41,54 +50,62 @@ export const routes: Routes = [
   {
     path: 'sorteios',
     canActivate: [authGuard],
-    loadComponent: () =>
-      import('./features/sorteio/pages/list/list.component').then((m) => m.ListComponent),
-  },
-  {
-    path: 'sorteios/criar',
-    canActivate: [authGuard],
-    loadComponent: () =>
-      import('./features/sorteio/pages/criar/criar.component').then((m) => m.CriarComponent),
-  },
-  {
-    path: 'sorteios/editar/:id',
-    canActivate: [authGuard],
-    loadComponent: () =>
-      import('./features/sorteio/pages/editar/editar.component').then((m) => m.EditarComponent),
+    children: [
+      {
+        path: '',
+        loadComponent: () =>
+          import('./features/sorteio/pages/list/list.component').then((m) => m.ListComponent),
+      },
+      {
+        path: 'criar',
+        loadComponent: () =>
+          import('./features/sorteio/pages/criar/criar.component').then((m) => m.CriarComponent),
+      },
+      {
+        path: 'editar/:id',
+        loadComponent: () =>
+          import('./features/sorteio/pages/editar/editar.component').then((m) => m.EditarComponent),
+      },
+    ],
   },
   {
     path: 'sorteio/:id',
     canActivate: [authGuard],
-    loadComponent: () =>
-      import('./features/sorteio/pages/detail/detail.component').then((m) => m.DetailComponent),
+    children: [
+      {
+        path: '',
+        resolve: { groupDetails: groupDetailsResolver },
+        loadComponent: () =>
+          import('./features/sorteio/pages/detail/detail.component').then((m) => m.DetailComponent),
+      },
+      {
+        path: 'jogo',
+        loadComponent: () =>
+          import('./features/sorteio-resultado/pages/game/game.component').then(
+            (m) => m.GameComponent,
+          ),
+      },
+      {
+        path: 'chute',
+        loadComponent: () =>
+          import('./features/sorteio-resultado/pages/chute/chute.component').then(
+            (m) => m.ChuteComponent,
+          ),
+      },
+      {
+        path: 'resultado',
+        loadComponent: () =>
+          import('./features/sorteio-resultado/pages/reveal/reveal.component').then(
+            (m) => m.RevealComponent,
+          ),
+      },
+    ],
   },
   {
     path: 'convite/:token',
     canActivate: [authGuard],
     loadComponent: () =>
       import('./features/sorteio/pages/invite/invite.component').then((m) => m.InviteComponent),
-  },
-  {
-    path: 'sorteio/:id/jogo',
-    canActivate: [authGuard],
-    loadComponent: () =>
-      import('./features/sorteio-resultado/pages/game/game.component').then((m) => m.GameComponent),
-  },
-  {
-    path: 'sorteio/:id/chute',
-    canActivate: [authGuard],
-    loadComponent: () =>
-      import('./features/sorteio-resultado/pages/chute/chute.component').then(
-        (m) => m.ChuteComponent,
-      ),
-  },
-  {
-    path: 'sorteio/:id/resultado',
-    canActivate: [authGuard],
-    loadComponent: () =>
-      import('./features/sorteio-resultado/pages/reveal/reveal.component').then(
-        (m) => m.RevealComponent,
-      ),
   },
   {
     path: 'perfil',
