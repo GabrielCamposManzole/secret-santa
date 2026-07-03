@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1783048725513,
+  "timestamp": 1783050277478,
   "index": "/secret-santa/index.html",
   "assetGroups": [
     {
@@ -11,7 +11,6 @@
         "ignoreVary": true
       },
       "urls": [
-        "/secret-santa/chunk-2XZJTGQW.js",
         "/secret-santa/chunk-3YJXKYPR.js",
         "/secret-santa/chunk-5DMB3LXZ.js",
         "/secret-santa/chunk-BHXOVL3K.js",
@@ -21,6 +20,7 @@
         "/secret-santa/chunk-FVEHXSJX.js",
         "/secret-santa/chunk-GAUNXJT5.js",
         "/secret-santa/chunk-GF6E2AMA.js",
+        "/secret-santa/chunk-HHOMIIWV.js",
         "/secret-santa/chunk-HWZE4QIW.js",
         "/secret-santa/chunk-JIPBOI7W.js",
         "/secret-santa/chunk-JOS6HYP2.js",
@@ -37,7 +37,7 @@
         "/secret-santa/chunk-ZDL6LQMI.js",
         "/secret-santa/favicon.ico",
         "/secret-santa/index.html",
-        "/secret-santa/main-DWEUBOAR.js",
+        "/secret-santa/main-ENLRELCP.js",
         "/secret-santa/manifest.webmanifest",
         "/secret-santa/styles-S5FUYNAN.css"
       ],
@@ -65,7 +65,6 @@
   ],
   "dataGroups": [],
   "hashTable": {
-    "/secret-santa/chunk-2XZJTGQW.js": "cb7c8c3fe6c3430d246c9fbe9efc0263af5e9bb9",
     "/secret-santa/chunk-3YJXKYPR.js": "cd260f180535b3a95fc11dcc65ee067a78f60a96",
     "/secret-santa/chunk-5DMB3LXZ.js": "b17c9e3d5bc85ba68908b3af87850866b0033057",
     "/secret-santa/chunk-BHXOVL3K.js": "8e66f79ddf87ef0ed932251cd71168d798f94a9b",
@@ -75,6 +74,7 @@
     "/secret-santa/chunk-FVEHXSJX.js": "e880b1528f59752616304a0b3523ec8ee4a94b4a",
     "/secret-santa/chunk-GAUNXJT5.js": "4993ca45cf63d4bf1a3bf715b76a77d6108648ce",
     "/secret-santa/chunk-GF6E2AMA.js": "f8ea484b138d6132be27993fe54aff53ad1126d5",
+    "/secret-santa/chunk-HHOMIIWV.js": "1525bccbdf89529e22325ad6e499c90616ed2f16",
     "/secret-santa/chunk-HWZE4QIW.js": "f645574332595b66916f6ff6b75c7e37a0bc7a0a",
     "/secret-santa/chunk-JIPBOI7W.js": "a5251385411fa543f0644894d4dcade81db41db2",
     "/secret-santa/chunk-JOS6HYP2.js": "1e61a93f306ebd6f9192ec4f4aed064cba8ff52a",
@@ -98,8 +98,8 @@
     "/secret-santa/icons/icon-512x512.png": "1de182f76f7329dfa8f9fcdd1fdcdd695bea6a99",
     "/secret-santa/icons/icon-72x72.png": "aa88a6096bd973be7f6d7a5489bfa6bc2463f8c4",
     "/secret-santa/icons/icon-96x96.png": "7fb8f59c30ce2ff12c700321a0b39e14b3dc8f95",
-    "/secret-santa/index.html": "1b0b48fc2ea757769ab2f6de32f45fe6c1ee09ae",
-    "/secret-santa/main-DWEUBOAR.js": "283f1dd5794ad911abecd61a9110d3f38552340f",
+    "/secret-santa/index.html": "80c822dd9afd081345a643265e33b3eb421920fa",
+    "/secret-santa/main-ENLRELCP.js": "4e7990775e28bb7a9c7a2801403f9f016944e596",
     "/secret-santa/manifest.webmanifest": "5d8578cc91b6dff731ec13bd67c00c9de6476af7",
     "/secret-santa/styles-S5FUYNAN.css": "c266cdbd8e04e3b8b5b61c9b8e9957b22e2e8a50"
   },
