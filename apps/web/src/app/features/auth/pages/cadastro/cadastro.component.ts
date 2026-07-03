@@ -3,6 +3,7 @@ import { Router, RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../../core/services/auth.service';
+import { SupabaseService } from '../../../../core/services/supabase';
 
 @Component({
   selector: 'app-cadastro',
@@ -12,6 +13,7 @@ import { AuthService } from '../../../../core/services/auth.service';
 })
 export class CadastroComponent {
   private readonly authService = inject(AuthService);
+  private readonly supabaseService = inject(SupabaseService);
   private readonly router = inject(Router);
   private readonly fb = inject(FormBuilder);
 
@@ -36,18 +38,34 @@ export class CadastroComponent {
 
     const { email, senha, nomeCompleto } = this.cadastroForm.value;
 
-    const { error } = await this.authService.cadastrar(
-      email,
-      senha,
-      nomeCompleto,
-    );
+    try {
+      const { error } = await this.authService.cadastrar(
+        email,
+        senha,
+        nomeCompleto,
+      );
 
-    this.isLoading.set(false);
+      this.isLoading.set(false);
 
-    if (error) {
-      this.errorMessage.set(error.message || 'Erro ao criar conta.');
-    } else {
-      this.router.navigate(['/sorteios']);
+      if (error) {
+        if (
+          error.message.includes('already registered') ||
+          error.message.includes('already exists') ||
+          error.message.includes('registered')
+        ) {
+          this.errorMessage.set(
+            'Este e-mail já está cadastrado no sistema. Tente fazer login.',
+          );
+        } else {
+          this.errorMessage.set(error.message || 'Erro ao criar conta.');
+        }
+      } else {
+        this.router.navigate(['/sorteios']);
+      }
+    } catch (e) {
+      const errorObj = e as Error;
+      this.isLoading.set(false);
+      this.errorMessage.set(errorObj.message || 'Um erro inesperado ocorreu.');
     }
   }
 }

@@ -24,6 +24,13 @@ export class ProfileComponent implements OnInit {
   readonly email = signal('');
   readonly idade = signal<number | null>(null);
 
+  // New password fields
+  readonly novaSenha = signal('');
+  readonly confirmarNovaSenha = signal('');
+  readonly isUpdatingPassword = signal(false);
+  readonly passwordSuccessMessage = signal<string | null>(null);
+  readonly passwordErrorMessage = signal<string | null>(null);
+
   // Characteristics fields
   readonly cabeloCor = signal('');
   readonly cabeloTipo = signal('');
@@ -67,8 +74,18 @@ export class ProfileComponent implements OnInit {
       this.altura() !== null
     );
 
-    // Atualiza user_metadata no Supabase Auth
-    const { error } = await this.supabaseService.client.auth.updateUser({
+    // Preparar objeto de atualização sem any
+    const updatePayload: {
+      data: {
+        nome_completo: string;
+        idade: number | null;
+        cabelo_cor: string;
+        cabelo_tipo: string;
+        cabelo_comprimento: string;
+        olhos_cor: string;
+        altura: number | null;
+      };
+    } = {
       data: {
         nome_completo: this.nomeCompleto(),
         idade: this.idade(),
@@ -78,7 +95,10 @@ export class ProfileComponent implements OnInit {
         olhos_cor: this.olhosCor(),
         altura: this.altura(),
       },
-    });
+    };
+
+    // Atualiza user_metadata no Supabase Auth
+    const { error } = await this.supabaseService.client.auth.updateUser(updatePayload);
 
     if (error) {
       this.isLoading.set(false);
@@ -118,6 +138,46 @@ export class ProfileComponent implements OnInit {
       this.isLoading.set(false);
       this.successMessage.set('Perfil atualizado com sucesso!');
       setTimeout(() => this.successMessage.set(null), 3000);
+    }
+  }
+
+  async onUpdatePassword(): Promise<void> {
+    const senhaLimpa = this.novaSenha().trim();
+    const confirmacaoLimpa = this.confirmarNovaSenha().trim();
+
+    if (!senhaLimpa) {
+      this.passwordErrorMessage.set('A senha não pode ser vazia.');
+      return;
+    }
+
+    if (senhaLimpa !== confirmacaoLimpa) {
+      this.passwordErrorMessage.set('As senhas digitadas não coincidem.');
+      return;
+    }
+
+    if (senhaLimpa.length < 6) {
+      this.passwordErrorMessage.set('A nova senha deve ter no mínimo 6 caracteres.');
+      return;
+    }
+
+    this.isUpdatingPassword.set(true);
+    this.passwordSuccessMessage.set(null);
+    this.passwordErrorMessage.set(null);
+
+    // Atualiza a senha nova direto no banco de dados (Supabase Auth)
+    const { error } = await this.supabaseService.client.auth.updateUser({
+      password: senhaLimpa,
+    });
+
+    this.isUpdatingPassword.set(false);
+
+    if (error) {
+      this.passwordErrorMessage.set(error.message || 'Erro ao atualizar a senha.');
+    } else {
+      this.passwordSuccessMessage.set('Senha alterada direto no banco com sucesso!');
+      this.novaSenha.set('');
+      this.confirmarNovaSenha.set('');
+      setTimeout(() => this.passwordSuccessMessage.set(null), 3000);
     }
   }
 

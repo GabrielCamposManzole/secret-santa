@@ -59,12 +59,13 @@ ALTER TABLE public.caracteristicas ENABLE ROW LEVEL SECURITY;
 -- Tabela: public.usuarios
 DROP POLICY IF EXISTS "Permitir select, insert, update, delete apenas para o proprio usuario" ON public.usuarios;
 DROP POLICY IF EXISTS "Permitir select de usuarios para autenticados" ON public.usuarios;
+DROP POLICY IF EXISTS "Permitir select de usuarios para todos" ON public.usuarios;
 DROP POLICY IF EXISTS "Permitir insert para autenticados" ON public.usuarios;
 DROP POLICY IF EXISTS "Permitir update apenas para o proprio usuario" ON public.usuarios;
 DROP POLICY IF EXISTS "Permitir delete apenas para o proprio usuario" ON public.usuarios;
 
-CREATE POLICY "Permitir select de usuarios para autenticados" ON public.usuarios
-    FOR SELECT TO authenticated USING (true);
+CREATE POLICY "Permitir select de usuarios para todos" ON public.usuarios
+    FOR SELECT USING (true);
 
 CREATE POLICY "Permitir insert para autenticados" ON public.usuarios
     FOR INSERT TO authenticated WITH CHECK (true);

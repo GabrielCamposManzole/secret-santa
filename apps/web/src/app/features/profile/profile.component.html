@@ -66,6 +66,64 @@
         </div>
       </div>
 
+      <!-- Card Segurança (Alterar Senha) -->
+      <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm space-y-6">
+        <h3 class="text-lg font-bold text-gray-900 flex items-center gap-2 font-heading">
+          <span class="material-symbols-outlined text-[#D42426]">lock</span>
+          Alterar Senha
+        </h3>
+
+        <!-- Alerts Locais da Senha -->
+        @if (passwordSuccessMessage()) {
+          <div class="p-3 text-sm text-white bg-green-600 rounded-full flex items-center justify-between shadow-sm">
+            <span class="font-medium px-4">{{ passwordSuccessMessage() }}</span>
+            <button (click)="passwordSuccessMessage.set(null)" class="text-white hover:text-gray-200 focus:outline-none pr-4">✕</button>
+          </div>
+        }
+        @if (passwordErrorMessage()) {
+          <div class="p-3 text-sm text-white bg-red-600 rounded-full flex items-center justify-between shadow-sm">
+            <span class="font-medium px-4">{{ passwordErrorMessage() }}</span>
+            <button (click)="passwordErrorMessage.set(null)" class="text-white hover:text-gray-200 focus:outline-none pr-4">✕</button>
+          </div>
+        }
+
+        <div class="space-y-4">
+          <div class="group">
+            <label for="novaSenha" class="block text-sm font-semibold text-gray-600 mb-2 ml-4">Nova Senha</label>
+            <input
+              id="novaSenha"
+              class="w-full h-12 px-6 rounded-full border border-gray-200 bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#D42426]/20 focus:border-[#D42426] transition-all text-gray-800 placeholder:text-gray-400"
+              type="password"
+              name="novaSenha"
+              [(ngModel)]="novaSenha"
+              placeholder="Digite a nova senha"
+            />
+          </div>
+          <div class="group">
+            <label for="confirmarNovaSenha" class="block text-sm font-semibold text-gray-600 mb-2 ml-4">Confirmar Nova Senha</label>
+            <input
+              id="confirmarNovaSenha"
+              class="w-full h-12 px-6 rounded-full border border-gray-200 bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#D42426]/20 focus:border-[#D42426] transition-all text-gray-800 placeholder:text-gray-400"
+              type="password"
+              name="confirmarNovaSenha"
+              [(ngModel)]="confirmarNovaSenha"
+              placeholder="Repita a nova senha"
+            />
+          </div>
+          <button
+            (click)="onUpdatePassword()"
+            [disabled]="isUpdatingPassword()"
+            class="w-full bg-[#D42426] hover:bg-[#b01e20] text-white h-12 rounded-full font-bold shadow-[0px_4px_12px_rgba(212,36,38,0.15)] active:scale-95 transition-all duration-200 flex items-center justify-center font-heading text-sm"
+          >
+            @if (isUpdatingPassword()) {
+              <span class="loading loading-spinner loading-sm"></span>
+            } @else {
+              Atualizar Senha
+            }
+          </button>
+        </div>
+      </div>
+
       <!-- Action Buttons -->
       <div class="space-y-3">
         <button

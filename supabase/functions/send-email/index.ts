@@ -1,3 +1,4 @@
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 import { serve } from 'https://deno.land/std@0.168.0/http/server.ts';
 
 const SENDGRID_API_URL = 'https://api.sendgrid.com/v3/mail/send';
@@ -26,6 +27,8 @@ serve(async (req: Request) => {
     const SENDGRID_API_KEY = Deno.env.get('SENDGRID_API_KEY');
     const FROM_EMAIL = Deno.env.get('FROM_EMAIL') ?? 'noreply@secretsanta.app';
     const FROM_NAME = Deno.env.get('FROM_NAME') ?? 'Secret Santa 🎅';
+    const SUPABASE_URL = Deno.env.get('SUPABASE_URL');
+    const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
 
     if (!SENDGRID_API_KEY) {
       return new Response(JSON.stringify({ error: 'SENDGRID_API_KEY não configurada.' }), {
@@ -41,6 +44,55 @@ serve(async (req: Request) => {
     let htmlContent = '';
 
     if (type === 'password_recovery') {
+      if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) {
+        return new Response(JSON.stringify({ error: 'SUPABASE_URL ou SUPABASE_SERVICE_ROLE_KEY não configuradas.' }), {
+          status: 500,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        });
+      }
+
+      if (!token) {
+        return new Response(JSON.stringify({ error: 'Token de recuperação não fornecido.' }), {
+          status: 400,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        });
+      }
+
+      const supabaseAdmin = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
+
+      // Buscar o ID correspondente ao email
+      const { data: usuario, error: dbError } = await supabaseAdmin
+        .from('usuarios')
+        .select('id')
+        .eq('email', to)
+        .maybeSingle();
+
+      if (dbError) {
+        return new Response(JSON.stringify({ error: 'Erro ao consultar usuário no banco.', detail: dbError.message }), {
+          status: 500,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        });
+      }
+
+      if (!usuario) {
+        return new Response(JSON.stringify({ error: 'Nenhum usuário encontrado com este e-mail.' }), {
+          status: 404,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        });
+      }
+
+      // Atualiza a senha no Auth
+      const { error: authError } = await supabaseAdmin.auth.admin.updateUserById(usuario.id, {
+        password: token,
+      });
+
+      if (authError) {
+        return new Response(JSON.stringify({ error: 'Erro ao atualizar a senha no Auth.', detail: authError.message }), {
+          status: 500,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        });
+      }
+
       subject = '🔑 Recuperação de Senha — Secret Santa';
       htmlContent = `
         <div style="font-family: Inter, sans-serif; max-width: 600px; margin: 0 auto; background: #f8f9f9; padding: 32px; border-radius: 16px;">
