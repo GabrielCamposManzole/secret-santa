@@ -1,0 +1,180 @@
+
+<main class="flex-grow px-5 pt-6 pb-24 w-full scroll-area font-body md:max-w-6xl md:mx-auto md:px-8 md:pt-10">
+  <!-- Desktop Back Button -->
+  <div class="hidden md:flex items-center gap-2 mb-6">
+    <button routerLink="/sorteios" class="flex items-center gap-2 text-gray-500 hover:text-gray-900 transition-colors font-semibold text-sm">
+      <span class="material-symbols-outlined text-[18px]">arrow_back</span>
+      <span>Voltar para Grupos</span>
+    </button>
+  </div>
+
+  <!-- Alerts -->
+  @if (successMessage()) {
+    <div class="p-4 mb-6 text-sm text-white bg-green-600 rounded-full flex items-center justify-between shadow-md">
+      <span class="font-medium px-4">{{ successMessage() }}</span>
+      <button (click)="successMessage.set(null)" class="text-white pr-4">✕</button>
+    </div>
+  }
+  @if (errorMessage()) {
+    <div class="p-4 mb-6 text-sm text-white bg-red-600 rounded-full flex items-center justify-between shadow-md">
+      <span class="font-medium px-4">{{ errorMessage() }}</span>
+      <button (click)="errorMessage.set(null)" class="text-white pr-4">✕</button>
+    </div>
+  }
+
+  <!-- Loading State -->
+  @if (isLoading() && !group()) {
+    <div class="flex justify-center items-center py-12">
+      <span class="loading loading-spinner loading-lg text-[#D42426]"></span>
+    </div>
+  }
+
+  @if (group()) {
+    <!-- Hero / Title -->
+    <section class="text-center mb-8 md:text-left md:mb-10">
+      @if (!group()?.sorteado) {
+        <span class="text-[10px] font-bold uppercase tracking-widest text-[#D42426] mb-1 block font-heading">
+          Aguardando Sorteio
+        </span>
+      } @else if (group()?.sorteado && !currentUserMembership()?.jogado) {
+        <span class="text-[10px] font-bold uppercase tracking-widest text-[#D42426] mb-1 block font-heading">
+          Aguardando Jogo
+        </span>
+      } @else {
+        <span class="text-[10px] font-bold uppercase tracking-widest text-emerald-700 mb-1 block font-heading font-semibold">
+          Sorteio Realizado
+        </span>
+      }
+      <h2 class="text-3xl font-extrabold text-gray-900 mb-2 font-heading md:text-4xl">{{ group()?.nome }}</h2>
+      <p class="text-gray-500 text-sm leading-relaxed font-body">
+        Criado por você ou outro participante. Acompanhe abaixo o andamento.
+      </p>
+    </section>
+
+    <!-- Two Column Grid for Desktop -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+      <!-- Left Column: Participants -->
+      <div class="lg:col-span-2 space-y-6">
+        <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-xs font-bold text-gray-500 uppercase tracking-widest font-heading">
+              Participantes ({{ participants().length }})
+            </h3>
+          </div>
+
+          <div class="space-y-3">
+            @for (participant of participants(); track participant.id) {
+              <div class="flex items-center bg-gray-50 p-3.5 rounded-2xl border border-gray-100">
+                <div class="w-10 h-10 bg-white text-[#D42426] rounded-full flex items-center justify-center font-bold mr-4 font-heading text-xs shadow-sm border border-gray-100">
+                  {{ getInitials(participant.nome_completo) }}
+                </div>
+                <div class="flex-1 min-w-0">
+                  <p class="text-gray-900 font-bold text-sm truncate font-heading">{{ participant.nome_completo }}</p>
+                  <p class="text-gray-400 text-[9px] uppercase truncate">{{ participant.email | maskEmail }}</p>
+                </div>
+                <div class="mr-2">
+                  @if (participant.preenchido_caracteristicas) {
+                    <span class="bg-green-100 text-green-700 text-[9px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">
+                      Perfil OK
+                    </span>
+                  } @else {
+                    <span class="bg-amber-100 text-amber-700 text-[9px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">
+                      Pendente
+                    </span>
+                  }
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Invites & Actions -->
+      <div class="space-y-6">
+        <!-- Invite Link Card (If not drawn) -->
+        @if (!group()?.sorteado) {
+          <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="material-symbols-outlined text-[#D42426]">share</span>
+              <h3 class="text-xs font-bold text-gray-700 uppercase tracking-wider font-heading">Convidar Amigos</h3>
+            </div>
+            <p class="text-xs text-gray-500 mb-4 leading-relaxed">
+              Compartilhe o link abaixo para que outras pessoas possam entrar no grupo e preencher suas características.
+            </p>
+            <div class="flex flex-col gap-2">
+              <input
+                type="text"
+                readonly
+                [value]="getInviteLink()"
+                class="w-full h-12 px-4 rounded-full bg-gray-50 border border-gray-200 text-xs text-gray-600 focus:outline-none truncate"
+              />
+              <button
+                (click)="copyInviteLink()"
+                class="w-full h-12 bg-[#D42426] hover:bg-[#b01e20] text-white rounded-full font-bold text-xs active:scale-95 transition-all duration-150 font-heading flex items-center justify-center gap-1.5"
+              >
+                <span class="material-symbols-outlined text-sm">content_copy</span>
+                Copiar Link
+              </button>
+            </div>
+          </div>
+        }
+
+        <!-- Play/Result CTA Section -->
+        @if (group()?.sorteado) {
+          <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm text-center flex flex-col items-center">
+            @if (!currentUserMembership()?.jogado) {
+              <span class="material-symbols-outlined text-5xl text-[#D42426] mb-3">redeem</span>
+              <h3 class="text-lg font-bold text-gray-900 mb-2 font-heading">O Sorteio foi Realizado!</h3>
+              <p class="text-xs text-gray-500 mb-4 leading-relaxed max-w-xs">
+                Chegou a hora de descobrir as características do seu amigo secreto e fazer o seu palpite.
+              </p>
+              <button
+                (click)="onPlay()"
+                class="w-full bg-[#D42426] hover:bg-[#b01e20] text-white py-3.5 rounded-full font-bold shadow-md active:scale-95 transition-transform font-heading text-sm"
+              >
+                Iniciar Jogo
+              </button>
+            } @else {
+              <span class="material-symbols-outlined text-5xl text-emerald-600 mb-3">celebration</span>
+              <h3 class="text-lg font-bold text-gray-900 mb-2 font-heading">Você já jogou!</h3>
+              <p class="text-xs text-gray-500 mb-4 leading-relaxed max-w-xs">
+                Você já enviou o seu palpite. Clique abaixo para ver quem era o seu amigo secreto e se você acertou.
+              </p>
+              <button
+                (click)="onViewResult()"
+                class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3.5 rounded-full font-bold shadow-md active:scale-95 transition-transform font-heading text-sm"
+              >
+                Ver Resultado
+              </button>
+            }
+          </div>
+        }
+
+        <!-- Owner Actions -->
+        @if (isOwner()) {
+          <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm space-y-3">
+            <h3 class="text-xs font-bold text-gray-500 uppercase tracking-widest font-heading mb-3">
+              Ações do Criador
+            </h3>
+            @if (!group()?.sorteado) {
+              <button
+                (click)="onStartDraw()"
+                [disabled]="isLoading()"
+                class="w-full bg-[#D42426] hover:bg-[#b01e20] text-white h-12 rounded-full font-bold shadow-sm active:scale-95 transition-all duration-200 flex items-center justify-center gap-2 font-heading text-sm"
+              >
+                <span class="material-symbols-outlined text-[20px]">celebration</span>
+                Iniciar Sorteio
+              </button>
+            }
+            <button
+              [routerLink]="['/sorteios/editar', group()?.id]"
+              class="w-full bg-gray-100 text-gray-700 h-12 rounded-full font-bold hover:bg-gray-200 active:scale-95 transition-all duration-200 font-heading text-sm"
+            >
+              Editar Grupo
+            </button>
+          </div>
+        }
+      </div>
+    </div>
+  }
+</main>

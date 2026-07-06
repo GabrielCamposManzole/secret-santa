@@ -1,0 +1,110 @@
+
+<main class="flex-grow px-6 py-8 flex flex-col items-center w-full max-w-md md:max-w-lg mx-auto font-body md:pt-10">
+  <!-- Desktop Back Button -->
+  <div class="hidden md:flex w-full items-center gap-2 mb-6">
+    <button routerLink="/sorteios" class="flex items-center gap-2 text-gray-500 hover:text-gray-900 transition-colors font-semibold text-sm">
+      <span class="material-symbols-outlined text-[18px]">arrow_back</span>
+      <span>Voltar para Grupos</span>
+    </button>
+  </div>
+
+  <!-- Loading State -->
+  @if (isLoading()) {
+    <div class="flex flex-col items-center justify-center py-12">
+      <span class="loading loading-spinner loading-lg text-[#D42426]"></span>
+      <p class="text-sm text-gray-500 mt-4">Carregando características do seu amigo secreto...</p>
+    </div>
+  }
+
+  <!-- Error State -->
+  @if (errorMessage()) {
+    <div class="p-4 bg-red-100 text-red-700 rounded-full text-sm font-semibold w-full my-4 text-center">
+      {{ errorMessage() }}
+    </div>
+    <a
+      routerLink="/sorteios"
+      class="w-full bg-[#D42426] hover:bg-[#b01e20] text-white font-bold py-4 rounded-full text-base transition-colors flex items-center justify-center mt-6 font-heading"
+    >
+      Ir para Meus Grupos
+    </a>
+  }
+
+  @if (targetUser() && steps().length > 0) {
+    <!-- Hero Text -->
+    <div class="text-center mb-6">
+      <h1 class="text-2xl font-extrabold text-slate-900 leading-tight font-heading md:text-3xl">Descubra seu Amigo Secreto</h1>
+      <p class="text-slate-500 mt-2 text-sm">Revele as características uma a uma.</p>
+    </div>
+
+    <!-- Progress Dots -->
+    <div class="flex items-center justify-center gap-2 mb-8">
+      @for (step of steps(); track $index) {
+        <div
+          class="h-1.5 rounded-full transition-all duration-300"
+          [ngClass]="{
+            'bg-[#D42426] w-8': $index === currentStepIndex(),
+            'bg-gray-300 w-1.5': $index !== currentStepIndex()
+          }"
+        ></div>
+      }
+    </div>
+
+    <!-- Characteristic Card -->
+    <section class="bg-white rounded-[40px] shadow-sm border border-gray-100 w-full p-8 relative mb-8">
+      <!-- Top Eye Icon (Abstract Decoration) -->
+      <div class="absolute top-6 right-8 opacity-10">
+        <span class="material-symbols-outlined text-5xl text-gray-400">visibility</span>
+      </div>
+
+      <div class="text-center">
+        <span class="text-[#D42426] text-[11px] font-bold tracking-widest uppercase mb-2 block font-heading">
+          Característica {{ currentStepIndex() + 1 }} de {{ steps().length }}
+        </span>
+        <h2 class="text-2xl font-bold text-slate-800 mb-8 font-heading">
+          {{ steps()[currentStepIndex()].label }}
+        </h2>
+
+        <!-- Central Icon Area -->
+        <div class="flex justify-center mb-8">
+          <div class="border-2 border-dashed border-gray-300 w-32 h-32 rounded-full flex items-center justify-center bg-emerald-50 bg-opacity-30">
+            <span class="material-symbols-outlined text-4xl text-emerald-700">
+              {{ steps()[currentStepIndex()].icon }}
+            </span>
+          </div>
+        </div>
+
+        <!-- Result Value Box -->
+        <div class="bg-gray-100 rounded-2xl py-5 mb-6 border border-gray-200">
+          <span class="text-slate-800 font-bold text-lg font-heading">
+            {{ steps()[currentStepIndex()].value }}
+          </span>
+        </div>
+
+        <!-- Next Button -->
+        <button
+          (click)="nextStep()"
+          class="w-full bg-gray-200 hover:bg-gray-300 text-slate-800 font-bold py-4 rounded-2xl flex items-center justify-center transition-colors font-heading text-sm"
+        >
+          {{ currentStepIndex() === steps().length - 1 ? 'Ir para Chute Final' : 'Próxima Característica' }}
+          <span class="material-symbols-outlined text-sm ml-2">arrow_forward</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Final Guess Section -->
+    <div class="w-full">
+      <button
+        (click)="goToGuess()"
+        class="w-full bg-[#D42426] hover:bg-[#b01e20] text-white font-extrabold py-5 rounded-full flex items-center justify-center gap-2 shadow-md transition-all active:scale-95 font-heading text-base"
+      >
+        CHUTE FINAL
+        <span class="material-symbols-outlined text-lg">star</span>
+      </button>
+      <p class="text-[11px] text-slate-500 text-center mt-4 flex items-center justify-center gap-1 font-body">
+        <span class="material-symbols-outlined text-xs text-slate-400">info</span>
+        Cuidado: você só tem uma chance no chute final!
+      </p>
+    </div>
+  }
+</main>
+

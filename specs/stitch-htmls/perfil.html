@@ -1,0 +1,193 @@
+<!DOCTYPE html><html lang="pt-BR" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Meu Perfil - The Quest</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;family=Plus+Jakarta+Sans:wght@100..900&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary": "#ffffff",
+                        "on-background": "#281716",
+                        "surface-dim": "#f2d3cf",
+                        "surface-container-low": "#fff0ef",
+                        "primary-fixed-dim": "#ffb4ac",
+                        "surface-bright": "#fff8f7",
+                        "on-primary-fixed": "#410002",
+                        "on-secondary-container": "#606161",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed": "#ffdad6",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "surface-container-high": "#ffe2de",
+                        "inverse-surface": "#3f2c2a",
+                        "tertiary-container": "#6c6e6e",
+                        "surface-container": "#ffe9e6",
+                        "secondary-container": "#dddddd",
+                        "primary-container": "#d42426",
+                        "surface-variant": "#fbdbd8",
+                        "on-tertiary-container": "#f1f1f0",
+                        "on-surface": "#281716",
+                        "on-primary-container": "#ffedeb",
+                        "on-secondary-fixed-variant": "#454747",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed": "#1a1c1c",
+                        "background": "#fff8f7",
+                        "surface-tint": "#bd0e19",
+                        "surface-container-highest": "#fbdbd8",
+                        "on-primary-fixed-variant": "#93000d",
+                        "outline": "#916f6b",
+                        "tertiary-fixed": "#e2e2e2",
+                        "secondary-fixed-dim": "#c6c6c6",
+                        "on-primary": "#ffffff",
+                        "inverse-primary": "#ffb4ac",
+                        "inverse-on-surface": "#ffedea",
+                        "surface": "#fff8f7",
+                        "error": "#ba1a1a",
+                        "primary": "#ae0012",
+                        "on-surface-variant": "#5c403d",
+                        "error-container": "#ffdad6",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "tertiary-fixed-dim": "#c6c6c6",
+                        "tertiary": "#545655",
+                        "secondary": "#5d5f5f",
+                        "outline-variant": "#e5bdb9",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed": "#e2e2e2"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "display": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .brand-font { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .active-nav-pill {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="py-6 px-4 flex border-b border-gray-100 sticky top-0 z-50" style="background-color: rgb(248, 249, 249);">
+<div class="flex items-center" data-purpose="logo">
+<span class="text-primary font-extrabold text-2xl tracking-tighter font-heading">SecretSanta</span>
+</div>
+</header>
+<main class="pt-20 px-5 max-w-md mx-auto">
+<!-- Title Section -->
+<section class="mt-4 mb-8">
+<h2 class="text-2xl font-bold text-on-surface">Meu Perfil</h2>
+<p class="text-on-surface-variant text-sm mt-1">Configure seus detalhes para o Amigo Secreto</p>
+</section>
+<!-- Profile Avatar Placeholder from IMAGE_14 context -->
+
+<!-- Informações Pessoais -->
+<section class="mb-8 space-y-4">
+<h3 class="text-lg font-bold text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined">person</span>
+                Informações Pessoais
+            </h3>
+<div class="space-y-4">
+<div class="group">
+<label class="block text-sm font-semibold text-on-surface-variant mb-2 ml-1">Nome</label>
+<input class="w-full h-12 px-6 rounded-full border border-outline-variant bg-surface-container-low focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-on-surface" type="text" value="Ricardo Silva">
+</div>
+<div class="group">
+<label class="block text-sm font-semibold text-on-surface-variant mb-2 ml-1">E-mail</label>
+<input class="w-full h-12 px-6 rounded-full border border-outline-variant bg-surface-container-low focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-on-surface" type="email" value="ricardo.silva@email.com">
+</div>
+<div class="group">
+<label class="block text-sm font-semibold text-on-surface-variant mb-2 ml-1">Idade</label>
+<input class="w-full h-12 px-6 rounded-full border border-outline-variant bg-surface-container-low focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-on-surface" type="number" value="28">
+</div>
+</div>
+</section>
+<!-- Minhas Características -->
+<section class="mb-10 space-y-4">
+<h3 class="text-lg font-bold text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined">psychology</span>
+                Minhas Características
+            </h3>
+<!-- Tip Box -->
+<div class="bg-surface-container-highest rounded-xl p-4 flex gap-3 items-start border border-primary/10">
+<span class="material-symbols-outlined text-primary">lightbulb</span>
+<p class="text-xs text-on-surface-variant leading-relaxed">
+                    Dica: Essas informações ajudam nas pistas para "A Missão" do Amigo Secreto!
+                </p>
+</div>
+<div class="space-y-4">
+<div class="group">
+<label class="block text-sm font-semibold text-on-surface-variant mb-2 ml-1">Cor do Cabelo</label>
+<input class="w-full h-12 px-6 rounded-full border border-outline-variant bg-surface-container-low focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-on-surface placeholder:text-outline" placeholder="Ex: Castanho, Loiro..." type="text">
+</div>
+<div class="group">
+<label class="block text-sm font-semibold text-on-surface-variant mb-2 ml-1">Tipo de Cabelo</label>
+<input class="w-full h-12 px-6 rounded-full border border-outline-variant bg-surface-container-low focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-on-surface placeholder:text-outline" placeholder="Ex: Liso, Cacheado..." type="text">
+</div>
+<div class="group">
+<label class="block text-sm font-semibold text-on-surface-variant mb-2 ml-1">Comprimento do Cabelo</label>
+<input class="w-full h-12 px-6 rounded-full border border-outline-variant bg-surface-container-low focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-on-surface placeholder:text-outline" placeholder="Ex: Curto, Médio, Longo..." type="text">
+</div>
+<div class="group">
+<label class="block text-sm font-semibold text-on-surface-variant mb-2 ml-1">Cor dos Olhos</label>
+<input class="w-full h-12 px-6 rounded-full border border-outline-variant bg-surface-container-low focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-on-surface placeholder:text-outline" placeholder="Ex: Verdes" type="text">
+</div>
+<div class="group">
+<label class="block text-sm font-semibold text-on-surface-variant mb-2 ml-1">Altura (cm)</label>
+<input class="w-full h-12 px-6 rounded-full border border-outline-variant bg-surface-container-low focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-on-surface placeholder:text-outline" placeholder="Ex: 175" type="number">
+</div>
+</div>
+</section>
+<!-- Action Buttons -->
+<div class="space-y-3 mb-12">
+<button class="w-full bg-primary text-on-primary h-14 rounded-full font-bold shadow-[0px_4px_12px_rgba(212,36,38,0.15)] active:scale-95 transition-all duration-200">
+                Salvar Perfil
+            </button>
+<button class="w-full bg-secondary-container text-on-secondary-container h-14 rounded-full font-bold active:scale-95 transition-all duration-200">
+                Sair da Conta
+            </button>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 bg-surface dark:bg-surface-dim shadow-[0px_-2px_8px_rgba(26,28,28,0.04)] flex justify-around items-center px-4 py-2 pb-safe border-t border-outline-variant/20">
+<!-- Início -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-secondary-fixed-variant px-5 py-1 hover:bg-surface-container-high transition-all active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="text-label-md font-medium mt-1">Início</span>
+</a>
+<!-- Grupos -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-secondary-fixed-variant px-5 py-1 hover:bg-surface-container-high transition-all active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-label-md font-medium mt-1">Grupos</span>
+</a>
+<!-- Perfil (Active) -->
+<a class="flex flex-col items-center justify-center bg-primary-container dark:bg-on-primary-fixed-variant text-on-primary-container dark:text-on-primary rounded-full px-5 py-1 transition-all active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined active-nav-pill">person</span>
+<span class="text-label-md font-bold mt-1">Perfil</span>
+</a>
+</nav>
+
+
+</body></html>

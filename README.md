@@ -1,30 +1,69 @@
-# secret-santa
-# 📍 Tô Aqui! (AutoPresence UTFPR)
+<h1 align="center">🎅 SecretSanta (UTF-Secret)</h1>
 
-🔗 **Link em Produção:** [Aguardando Deploy na Nuvem]
-👨‍💻 **Autores:** [Seu Nome, Nome do Colega B, Nome do Colega C]
+[![Continuous Integration](https://github.com/GabrielCamposManzole/secret-santa/actions/workflows/ci.yml/badge.svg)](https://github.com/GabrielCamposManzole/secret-santa/actions/workflows/ci.yml)
+
+<p align="center">
+  <strong>Sistema Gamificado de Amigo Secreto para o Portal UTFApps</strong>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Angular-21+-DD0031?style=for-the-badge&logo=angular" alt="Angular">
+  <img src="https://img.shields.io/badge/Supabase-Auth%20%26%20DB-3ECF8E?style=for-the-badge&logo=supabase" alt="Supabase">
+  <img src="https://img.shields.io/badge/Tailwind-CSS-38B2AC?style=for-the-badge&logo=tailwind-css" alt="Tailwind">
+  <img src="https://img.shields.io/badge/Status-Entrega%201-orange?style=for-the-badge" alt="Status">
+</p>
+
+---
+
+## 🔗 Informações Gerais
+
+- **🌐 Link em Produção:** [Aguardando Deploy no GitHub Pages/Vercel]
+- **Prototipação:** https://www.figma.com/design/9nGp0mNqjyH0X3mUH2SR3f/SecretSanta?node-id=35-2&m=dev&t=J3b5kwTG5DVzmoRu-1
+- **Kanban:** https://github.com/users/GabrielCamposManzole/projects/2/views/1
+- **👤 Autores:** Emilly Zatti, Gabriel Campos Manzole e Marcos Vinicius Olenka de Macedo
+- **🎓 Instituição:** UTFPR - Campus Guarapuava (TSI)
+- **🚀 Status:** Entrega 1 - Concepção e Planejamento
 
 ---
 
 ## 🎯 1. Visão Geral
-Sistema Full-Cycle de registro de presenças acadêmicas utilizando QR Code dinâmico. O sistema permite que o professor projete um QR Code rotativo diretamente do sistema acadêmico da UTFPR via extensão de navegador. Os alunos escaneiam, fazem login com o e-mail institucional do Google, e a presença é validada e preenchida automaticamente na pauta.
+
+O **SecretSanta** é uma aplicação web progressiva (PWA) que reinventa a dinâmica do Amigo Secreto. Em vez de apenas revelar um nome, o sistema introduz o conceito de **"The Quest"**: um jogo de dedução onde o participante deve adivinhar quem tirou através de pistas baseadas em características pessoais.
+
+A aplicação utiliza o ecossistema **Angular 21** para garantir uma experiência reativa e fluida, integrada ao **Supabase** para autenticação e banco de dados em tempo real.
+
+---
 
 ## 📚 2. Documentação Oficial (Docs as Code)
-Toda a especificação do sistema está versionada na pasta `/docs`:
-* 📄 **[PRD (Product Requirements Document)](./docs/prd.md):** Visão do produto e User Stories.
-* 📐 **[SDD (Software Design Document)](./docs/sdd.md):** Diagrama de banco de dados e contratos de API.
-* ✅ **[Checklist de Avaliação](./docs/checklist.md):** Controle de entrega dos IDs e RAs.
 
-## 🛠 3. Stack Tecnológica
-* **Arquitetura:** Monorepo (Back, Front e Extensão no mesmo repositório).
-* **Backend (API):** NestJS, TypeScript, JWT, Google OAuth.
-* **Banco de Dados:** PostgreSQL gerenciado via Prisma ORM.
-* **Frontend (Web/Mobile):** Angular.
-* **Integração:** Extensão de Navegador (Chrome) com manipulação de DOM.
+Toda a engenharia do sistema está detalhada na pasta `/docs`:
 
-## 🚀 4. Quick Start (Como Executar)
+- [📄 **PRD (Product Requirements Document)**](./docs/prd.md)
+- [📐 **SDD (Software Design Document)**](./docs/sdd.md)
+- [🎨 **Protótipo no Figma**] https://www.figma.com/design/9nGp0mNqjyH0X3mUH2SR3f/SecretSanta?node-id=35-2&m=dev&t=J3b5kwTG5DVzmoRu-1
 
-**1. Clone o repositório:**
-```bash
-git clone [https://github.com/](https://github.com/)[seu-usuario]/to-aqui.git
-cd to-aqui
+---
+
+## 📊 3. Stack Tecnológica
+
+- **Arquitetura:** Monorepo (Back, Front e Extensão no mesmo repositório).
+- **Backend (API):** TypeScript
+- **Banco de Dados:** PostgreSQL (Nuvem) com supabase.
+- **Frontend (Mobile App):** Angular.
+
+## 🚀 5. Início Rápido (Desenvolvimento Local)
+
+Clonar o repositório:
+
+```Bash
+git clone https://github.com/GabrielCamposManzole/secret-santa.git
+cd secret-santa
+Instalar dependências:
+Bash
+npm install
+
+Executar o projeto:
+Bash
+npm run dev:web
+Acesse http://localhost:4200 no seu navegador.
+```

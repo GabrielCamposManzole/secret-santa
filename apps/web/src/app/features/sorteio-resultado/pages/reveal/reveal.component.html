@@ -1,0 +1,88 @@
+
+<main class="flex-grow px-5 pt-8 pb-24 w-full max-w-md md:max-w-lg mx-auto font-body md:pt-10">
+  <!-- Desktop Back Button -->
+  <div class="hidden md:flex w-full items-center gap-2 mb-6">
+    <button routerLink="/sorteios" class="flex items-center gap-2 text-gray-500 hover:text-gray-900 transition-colors font-semibold text-sm">
+      <span class="material-symbols-outlined text-[18px]">arrow_back</span>
+      <span>Voltar para Grupos</span>
+    </button>
+  </div>
+
+  <!-- Loading State -->
+  @if (isLoading()) {
+    <div class="flex justify-center items-center py-12">
+      <span class="loading loading-spinner loading-lg text-[#D42426]"></span>
+    </div>
+  }
+
+  <!-- Error State -->
+  @if (errorMessage()) {
+    <div class="p-4 bg-red-100 text-red-700 rounded-full text-sm font-semibold w-full my-4 text-center">
+      {{ errorMessage() }}
+    </div>
+    <a
+      routerLink="/sorteios"
+      class="w-full bg-[#D42426] hover:bg-[#b01e20] text-white font-bold py-4 rounded-full text-base transition-colors flex items-center justify-center mt-6 font-heading"
+    >
+      Ir para Meus Grupos
+    </a>
+  }
+
+  @if (membership() && targetUser()) {
+    <!-- Result Card -->
+    <div class="bg-white rounded-[2rem] p-8 shadow-sm border border-gray-100 flex flex-col items-center text-center">
+      
+      <!-- Success/Fail Check Icon -->
+      @switch (membership()?.resultado) {
+        @case (true) {
+          <div class="w-20 h-20 bg-emerald-600 rounded-full flex items-center justify-center mb-6 shadow-md shadow-green-100">
+            <span class="material-symbols-outlined text-white text-4xl font-bold">check</span>
+          </div>
+          <p class="text-emerald-600 font-bold text-xs tracking-[0.2em] uppercase mb-2 font-heading">Sorteio Realizado</p>
+          <h2 class="text-gray-900 text-3xl font-extrabold mb-4 font-heading">Você Acertou!</h2>
+        }
+        @case (false) {
+          <div class="w-20 h-20 bg-red-600 rounded-full flex items-center justify-center mb-6 shadow-md shadow-red-100">
+            <span class="material-symbols-outlined text-white text-4xl font-bold">close</span>
+          </div>
+          <p class="text-red-600 font-bold text-xs tracking-[0.2em] uppercase mb-2 font-heading">Sorteio Realizado</p>
+          <h2 class="text-gray-900 text-3xl font-extrabold mb-4 font-heading">Você Errou!</h2>
+          <p class="text-xs text-gray-500 mb-4 font-body">
+            Seu chute foi em: <span class="font-bold text-gray-700">{{ guessUser()?.nome_completo }}</span>
+          </p>
+        }
+      }
+
+      <p class="text-gray-500 text-sm leading-relaxed mb-8 max-w-[240px]">
+        O momento que todos esperavam chegou. <br> Seu amigo secreto é:
+      </p>
+
+      <!-- Person Reveal Card -->
+      <div class="w-full bg-gray-50 rounded-[2rem] py-10 px-6 flex flex-col items-center border border-gray-100 font-body">
+        <!-- Avatar with Red Border -->
+        <div class="relative mb-4">
+          <div class="w-24 h-24 rounded-full border-[6px] border-[#D42426] p-1 flex items-center justify-center bg-white shadow-sm">
+            <div class="w-full h-full bg-[#D42426]/10 rounded-full flex items-center justify-center font-bold text-[#D42426] text-xl font-heading">
+              {{ getInitials(targetUser()!.nome_completo) }}
+            </div>
+          </div>
+        </div>
+        <!-- Person Details -->
+        <h3 class="text-[#D42426] text-xl font-bold mb-1 font-heading">{{ targetUser()?.nome_completo }}</h3>
+        <p class="text-gray-400 text-xs font-semibold tracking-wider uppercase font-body">{{ targetUser()?.email }}</p>
+      </div>
+
+    </div>
+
+    <!-- Back to List button -->
+    <div class="pt-8 font-heading">
+      <a
+        routerLink="/sorteios"
+        class="w-full bg-[#D42426] hover:bg-[#b01e20] text-white py-4 rounded-full font-bold shadow-md active:scale-95 transition-transform flex items-center justify-center text-sm"
+      >
+        Voltar para Meus Grupos
+      </a>
+    </div>
+  }
+</main>
+

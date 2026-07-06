@@ -1,0 +1,48 @@
+
+<!-- MainContent -->
+<main class="grow px-6 pt-8 pb-24 w-full">
+  <!-- TitleSection -->
+  <section class="mb-8">
+    <h2 class="text-3xl font-extrabold text-gray-900 mb-2 font-heading">Criar Novo Grupo</h2>
+    <p class="text-gray-500 font-medium leading-relaxed font-body text-sm">
+      Comece sua tradição de Natal reunindo as pessoas que você ama.
+    </p>
+  </section>
+
+  <!-- Error Alert -->
+  @if (errorMessage()) {
+    <div class="p-4 mb-6 text-sm text-white bg-red-600 rounded-full flex items-center justify-between shadow-md">
+      <span class="font-medium px-4">{{ errorMessage() }}</span>
+      <button (click)="errorMessage.set(null)" class="text-white pr-4">✕</button>
+    </div>
+  }
+
+  <!-- Form -->
+  <form (ngSubmit)="onSubmit()" class="space-y-6">
+    <!-- GroupNameInput -->
+    <section class="bg-white rounded-4xl p-8 shadow-sm border border-gray-100 font-body">
+      <label class="block text-[#D42426] font-bold text-sm mb-3 font-heading" for="group-name">Nome do Grupo</label>
+      <input
+        class="w-full bg-gray-100 border border-transparent rounded-full py-4 px-6 focus:bg-white focus:border-[#D42426] focus:ring-2 focus:ring-[#D42426]/20 focus:outline-none text-gray-700 placeholder-gray-400"
+        id="group-name"
+        name="groupName"
+        [(ngModel)]="groupName"
+        placeholder="Ex: Família Silva 2024"
+        type="text"
+        required
+      />
+    </section>
+
+    <!-- ActionButtons -->
+    <section class="text-center">
+      <app-button
+        [(label)]="buttonLabel"
+        type="submit"
+        [disabled]="isLoading()"
+      ></app-button>
+      <p class="text-gray-400 text-xs mt-4 font-medium px-4 font-body">
+        Após criar, você poderá copiar o link de convite para compartilhar com os participantes.
+      </p>
+    </section>
+  </form>
+</main>

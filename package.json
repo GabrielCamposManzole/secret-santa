@@ -1,0 +1,41 @@
+{
+  "name": "nome-do-seu-projeto-monorepo",
+  "version": "1.0.0",
+  "description": "Monorepo do projeto da disciplina",
+  "private": true,
+  "engines": {
+    "node": ">=22.23.1"
+  },
+  "workspaces": [
+    "apps/*",
+    "libs/*"
+  ],
+  "scripts": {
+    "dev:api": "echo 'Backend não configurado. Rode o Workflow 2.'",
+    "dev:web": "npm run start -w apps/web",
+    "build:web": "npm run build -w apps/web",
+    "deploy:web": "cd apps/web && npx ng build --configuration production --base-href /secret-santa/ && npx angular-cli-ghpages --dir=dist/web/browser",
+    "test:web": "npm run test -w apps/web",
+    "lint": "npm run lint -w apps/web",
+    "format": "prettier --write \"**/*.{ts,js,json,css,scss,md}\"",
+    "server": "json-server --watch db.json --port 3000"
+  },
+  "keywords": [
+    "angular",
+    "supabase",
+    "monorepo"
+  ],
+  "author": "Sua Equipe",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.2.4",
+    "json-server": "^1.0.0-beta.15",
+    "postcss": "^8.5.14",
+    "prettier": "^3.8.3",
+    "supabase": "^2.108.0",
+    "tailwindcss": "^4.2.4"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.110.0"
+  }
+}

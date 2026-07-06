@@ -1,0 +1,26 @@
+@import 'tailwindcss';
+@plugin "daisyui";
+
+@plugin "daisyui/theme" {
+  --color-primary: #d42426; /* Vermelho Festivo */
+  --color-secondary: #e6e6e6; /* Cinza */
+  --color-tertiary: #1a1c1c; /* Preto */
+  --color-quaternary: #f8f9f9; /* Cinza Claro */
+  --color-base: #f5f5f5; /* Cinza background */
+
+  /* Arredondamentos (Estilo Pílula) */
+  --radius-btn: 2rem; /* Bordas dos botões */
+  --radius-card: 1.5rem;
+}
+
+/* Opcional: Configurar o DaisyUI para usar essas cores */
+:root {
+  --p: var(--color-primary);
+  --s: var(--color-secondary);
+  --b1: var(--color-surface);
+  --rounded-btn: var(--radius-btn);
+}
+
+.bg-base {
+  background-color: var(--color-base);
+}

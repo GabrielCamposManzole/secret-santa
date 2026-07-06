@@ -1,0 +1,187 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary": "#5d5f5f",
+                        "inverse-on-surface": "#ffedea",
+                        "surface": "#fff8f7",
+                        "outline": "#916f6b",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed-variant": "#454747",
+                        "on-tertiary-container": "#f1f1f0",
+                        "surface-tint": "#bd0e19",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "surface-container-highest": "#fbdbd8",
+                        "on-secondary-container": "#606161",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#545655",
+                        "surface-bright": "#fff8f7",
+                        "outline-variant": "#e5bdb9",
+                        "error": "#ba1a1a",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "secondary-container": "#dddddd",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "surface-container": "#ffe9e6",
+                        "tertiary-fixed": "#e2e2e2",
+                        "secondary-fixed-dim": "#c6c6c6",
+                        "on-surface-variant": "#5c403d",
+                        "on-primary-fixed": "#410002",
+                        "tertiary-container": "#6c6e6e",
+                        "secondary-fixed": "#e2e2e2",
+                        "on-surface": "#281716",
+                        "error-container": "#ffdad6",
+                        "primary": "#ae0012",
+                        "inverse-surface": "#3f2c2a",
+                        "on-error": "#ffffff",
+                        "primary-container": "#d42426",
+                        "on-secondary-fixed": "#1a1c1c",
+                        "on-primary": "#ffffff",
+                        "surface-dim": "#f2d3cf",
+                        "inverse-primary": "#ffb4ac",
+                        "surface-container-low": "#fff0ef",
+                        "on-primary-container": "#ffedeb",
+                        "primary-fixed": "#ffdad6",
+                        "tertiary-fixed-dim": "#c6c6c6",
+                        "surface-container-high": "#ffe2de",
+                        "on-background": "#281716",
+                        "on-primary-fixed-variant": "#93000d",
+                        "background": "#fff8f7",
+                        "surface-variant": "#fbdbd8",
+                        "primary-fixed-dim": "#ffb4ac"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "display": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .font-headline { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bg-pattern {
+            background-image: radial-gradient(circle at 2px 2px, #ffe2de 1px, transparent 0);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen pb-32">
+<!-- TopAppBar Execution -->
+<header class="sticky top-0 z-50 bg-surface-container-low shadow-sm flex items-center w-full px-5 h-16">
+<h1 class="text-headline-md font-headline font-bold text-primary">Secret Santa</h1>
+</header>
+<main class="max-w-md mx-auto px-5 py-8 space-y-8 bg-pattern">
+<!-- Main Content Area -->
+<div class="space-y-6">
+<h1 class="text-3xl font-extrabold text-on-surface leading-tight text-center tracking-tight">
+                Quem é o seu Amigo Secreto?
+            </h1>
+<!-- Warning Banner -->
+<div class="bg-error-container text-on-error-container p-4 rounded-xl flex items-center gap-3 shadow-sm border border-error/10">
+<span class="material-symbols-outlined text-error" data-icon="warning" style="font-variation-settings: 'FILL' 1;">warning</span>
+<p class="text-xs font-bold leading-tight uppercase tracking-wider">
+                    CUIDADO: VOCÊ SÓ TEM UMA CHANCE NO CHUTE FINAL!
+                </p>
+</div>
+<!-- Search Bar -->
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant" data-icon="search">search</span>
+<input class="w-full pl-12 pr-4 py-4 bg-surface-container-lowest border-none rounded-full shadow-sm focus:ring-2 focus:ring-primary text-body-md placeholder:text-on-surface-variant/60" placeholder="Procurar participante..." type="text">
+</div>
+<!-- Participant List -->
+<div class="space-y-3">
+<!-- Selected Participant -->
+<button class="w-full flex items-center justify-between p-4 bg-primary-container text-on-primary rounded-full shadow-lg transform active:scale-95 transition-all duration-200">
+<span class="font-headline font-semibold text-lg ml-4">Henrique Silva</span>
+<div class="bg-yellow-400 rounded-full p-1 flex items-center justify-center">
+<span class="material-symbols-outlined text-black text-sm font-bold" data-icon="check">check</span>
+</div>
+</button>
+<!-- Inactive Participants -->
+<div class="space-y-3">
+<button class="w-full flex items-center p-4 bg-surface-container-lowest text-on-surface rounded-full shadow-sm border border-outline-variant/30 hover:bg-surface-container transition-colors active:scale-95 duration-150">
+<span class="font-headline font-medium text-lg ml-4">Beatriz Oliveira</span>
+</button>
+<button class="w-full flex items-center p-4 bg-surface-container-lowest text-on-surface rounded-full shadow-sm border border-outline-variant/30 hover:bg-surface-container transition-colors active:scale-95 duration-150">
+<span class="font-headline font-medium text-lg ml-4">Ricardo Santos</span>
+</button>
+<button class="w-full flex items-center p-4 bg-surface-container-lowest text-on-surface rounded-full shadow-sm border border-outline-variant/30 hover:bg-surface-container transition-colors active:scale-95 duration-150">
+<span class="font-headline font-medium text-lg ml-4">Mariana Lima</span>
+</button>
+<button class="w-full flex items-center p-4 bg-surface-container-lowest text-on-surface rounded-full shadow-sm border border-outline-variant/30 hover:bg-surface-container transition-colors active:scale-95 duration-150">
+<span class="font-headline font-medium text-lg ml-4">Gabriel Costa</span>
+</button>
+<button class="w-full flex items-center p-4 bg-surface-container-lowest text-on-surface rounded-full shadow-sm border border-outline-variant/30 hover:bg-surface-container transition-colors active:scale-95 duration-150">
+<span class="font-headline font-medium text-lg ml-4">Juliana Rocha</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Footer Action Button -->
+<div class="pt-6">
+<button class="w-full bg-primary py-5 rounded-full flex items-center justify-center gap-3 text-on-primary font-headline font-bold text-lg shadow-[0px_4px_12px_rgba(212,36,38,0.25)] active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="verified" style="font-variation-settings: 'FILL' 1;">verified</span>
+                Confirmar Chute
+            </button>
+</div>
+</main>
+<!-- BottomNavBar Execution -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 pb-6 bg-surface dark:bg-surface-dim shadow-[0px_-2px_8px_rgba(26,28,28,0.04)] rounded-t-lg">
+<!-- Tab: Início (Active) -->
+<a class="flex flex-col items-center justify-center bg-primary-container dark:bg-on-primary-fixed-variant text-on-primary-container dark:text-on-primary rounded-full px-5 py-1 hover:bg-surface-container-high transition-all active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="home" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="text-label-md font-medium">Início</span>
+</a>
+<!-- Tab: Grupos -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-secondary-fixed-variant px-5 py-1 hover:bg-surface-container-high transition-all active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="text-label-md font-medium">Grupos</span>
+</a>
+<!-- Tab: Perfil -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-secondary-fixed-variant px-5 py-1 hover:bg-surface-container-high transition-all active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="text-label-md font-medium">Perfil</span>
+</a>
+</nav>
+<script>
+        // Simple search filter simulation
+        const searchInput = document.querySelector('input[type="text"]');
+        const listItems = document.querySelectorAll('.space-y-3 button');
+
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            listItems.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                if(text.includes(term)) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    </script>
+
+
+</body></html>

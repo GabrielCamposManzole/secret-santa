@@ -1,0 +1,146 @@
+<!-- TopHeader -->
+<header class="bg-[#f8f9f9] py-6 px-6 border-b border-gray-100 w-full md:hidden">
+  <div class="max-w-md mx-auto">
+    <h1 class="text-[#D42426] font-extrabold text-2xl tracking-tight font-heading">SecretSanta</h1>
+  </div>
+</header>
+
+<!-- Main Container -->
+<main class="grow flex flex-col items-center px-8 py-10 w-full md:p-8">
+  <!-- Desktop Logo -->
+  <div class="hidden md:flex items-center justify-center mb-6" data-purpose="logo-desktop">
+    <span class="text-[#D42426] font-extrabold text-3xl tracking-tighter font-heading">SecretSanta</span>
+  </div>
+
+  <!-- Section Title -->
+  <div class="text-center mb-8">
+    <h2 class="text-3xl font-bold text-gray-900 mb-1 font-heading">Criar Conta</h2>
+    <p class="text-gray-500 font-medium font-body text-sm">Junte-se à magia do amigo secreto.</p>
+  </div>
+
+  <!-- Error Alert -->
+  @if (errorMessage()) {
+    <div class="w-full p-4 mb-6 text-sm text-white bg-red-600 rounded-full flex items-center justify-between shadow-md">
+      <span class="font-medium px-4">{{ errorMessage() }}</span>
+      <button (click)="errorMessage.set(null)" class="text-white hover:text-gray-200 focus:outline-none pr-4">
+        ✕
+      </button>
+    </div>
+  }
+
+  <form [formGroup]="cadastroForm" (ngSubmit)="onSubmit()" class="w-full space-y-4">
+    <!-- Name Field -->
+    <div class="space-y-1.5">
+      <label for="nomeCompleto" class="block text-[10px] font-bold text-gray-500 uppercase tracking-wider ml-4">Nome Completo</label>
+      <div class="relative">
+        <div class="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
+          <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+          </svg>
+        </div>
+        <input
+          id="nomeCompleto"
+          class="block w-full bg-gray-100 border border-transparent rounded-full py-4 pl-12 pr-4 text-sm focus:bg-white focus:border-[#D42426] focus:ring-2 focus:ring-[#D42426]/20 focus:outline-none placeholder-gray-400 font-body"
+          placeholder="Como quer ser chamado?"
+          type="text"
+          formControlName="nomeCompleto"
+        />
+      </div>
+      @if (cadastroForm.get('nomeCompleto')?.invalid && cadastroForm.get('nomeCompleto')?.touched) {
+        <span class="text-xs text-[#D42426] font-bold ml-4 block font-body">Nome completo deve ter pelo menos 3 caracteres.</span>
+      }
+    </div>
+
+    <!-- Age Field -->
+    <div class="space-y-1.5">
+      <label for="idade" class="block text-[10px] font-bold text-gray-500 uppercase tracking-wider ml-4">Idade</label>
+      <div class="relative">
+        <div class="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
+          <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 21v-8a2 2 0 00-2-2H6a2 2 0 00-2 2v8m16 0H4m16 0a2 2 0 012 2v1H2v-1a2 2 0 012-2M12 11V7m0 0a2 2 0 110-4 2 2 0 010 4zm-5 4v-2m10 2v-2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+          </svg>
+        </div>
+        <input
+          id="idade"
+          class="block w-full bg-gray-100 border border-transparent rounded-full py-4 pl-12 pr-4 text-sm focus:bg-white focus:border-[#D42426] focus:ring-2 focus:ring-[#D42426]/20 focus:outline-none placeholder-gray-400 font-body"
+          placeholder="Sua idade"
+          type="number"
+          formControlName="idade"
+        />
+      </div>
+      @if (cadastroForm.get('idade')?.invalid && cadastroForm.get('idade')?.touched) {
+        <span class="text-xs text-[#D42426] font-bold ml-4 block font-body">Você deve ter 18 anos ou mais.</span>
+      }
+    </div>
+
+    <!-- E-mail Field -->
+    <div class="space-y-1.5">
+      <label for="email" class="block text-[10px] font-bold text-gray-500 uppercase tracking-wider ml-4">E-mail</label>
+      <div class="relative">
+        <div class="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
+          <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+          </svg>
+        </div>
+        <input
+          id="email"
+          class="block w-full bg-gray-100 border border-transparent rounded-full py-4 pl-12 pr-4 text-sm focus:bg-white focus:border-[#D42426] focus:ring-2 focus:ring-[#D42426]/20 focus:outline-none placeholder-gray-400 font-body"
+          placeholder="seu@email.com"
+          type="email"
+          formControlName="email"
+        />
+      </div>
+      @if (cadastroForm.get('email')?.invalid && cadastroForm.get('email')?.touched) {
+        <span class="text-xs text-[#D42426] font-bold ml-4 block font-body">Insira um e-mail válido.</span>
+      }
+    </div>
+
+    <!-- Password Field -->
+    <div class="space-y-1.5">
+      <label for="senha" class="block text-[10px] font-bold text-gray-500 uppercase tracking-wider ml-4">Senha</label>
+      <div class="relative">
+        <div class="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
+          <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+          </svg>
+        </div>
+        <input
+          id="senha"
+          class="block w-full bg-gray-100 border border-transparent rounded-full py-4 pl-12 pr-4 text-sm focus:bg-white focus:border-[#D42426] focus:ring-2 focus:ring-[#D42426]/20 focus:outline-none placeholder-gray-400 font-body"
+          placeholder="........."
+          type="password"
+          formControlName="senha"
+        />
+      </div>
+      @if (cadastroForm.get('senha')?.invalid && cadastroForm.get('senha')?.touched) {
+        <span class="text-xs text-[#D42426] font-bold ml-4 block font-body">A senha deve ter pelo menos 6 caracteres.</span>
+      }
+    </div>
+
+    <!-- Submit Button -->
+    <div class="pt-4">
+      <button
+        class="w-full bg-[#D42426] hover:bg-[#b01e20] text-white font-bold py-4 rounded-full flex items-center justify-center gap-2 shadow-[0_10px_15px_-3px_rgba(212,36,38,0.3)] active:scale-[0.98] transition-all duration-200 disabled:bg-gray-400 disabled:cursor-not-allowed"
+        type="submit"
+        [disabled]="isLoading() || cadastroForm.invalid"
+      >
+        @if (isLoading()) {
+          <span class="loading loading-spinner loading-md"></span>
+        } @else {
+          Cadastrar
+        }
+      </button>
+    </div>
+  </form>
+
+  <!-- Footer Redirect Link -->
+  <div class="mt-8 text-sm text-gray-500 font-medium">
+    Já tem uma conta?
+    <a class="text-[#D42426] font-bold hover:underline" routerLink="/login">Entre aqui</a>
+  </div>
+</main>
+
+<!-- Bottom Footer -->
+<footer class="bg-[#f8f9f9] py-8 px-6 text-center mt-auto w-full md:hidden">
+  <p class="text-xs text-gray-400">© 2024 Secret Santa Editorial. All rights reserved.</p>
+</footer>

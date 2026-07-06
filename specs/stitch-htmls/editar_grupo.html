@@ -1,0 +1,214 @@
+<!DOCTYPE html><html lang="pt-br"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Editar Grupo - Secret Santa</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;family=Plus+Jakarta+Sans:wght@100..900&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "surface-bright": "#fff8f7",
+                "error": "#ba1a1a",
+                "on-surface": "#281716",
+                "secondary-fixed": "#e2e2e2",
+                "on-tertiary": "#ffffff",
+                "on-secondary": "#ffffff",
+                "secondary-container": "#dddddd",
+                "on-primary": "#ffffff",
+                "primary-fixed": "#ffdad6",
+                "error-container": "#ffdad6",
+                "inverse-on-surface": "#ffedea",
+                "tertiary-container": "#6c6e6e",
+                "secondary": "#5d5f5f",
+                "on-primary-fixed-variant": "#93000d",
+                "on-background": "#281716",
+                "tertiary-fixed": "#e2e2e2",
+                "surface-tint": "#bd0e19",
+                "surface-container-highest": "#fbdbd8",
+                "on-surface-variant": "#5c403d",
+                "on-error-container": "#93000a",
+                "surface-dim": "#f2d3cf",
+                "primary-fixed-dim": "#ffb4ac",
+                "on-secondary-fixed-variant": "#454747",
+                "surface": "#fff8f7",
+                "on-tertiary-fixed": "#1a1c1c",
+                "on-primary-fixed": "#410002",
+                "outline": "#916f6b",
+                "on-secondary-container": "#606161",
+                "surface-container-low": "#fff0ef",
+                "surface-variant": "#fbdbd8",
+                "inverse-primary": "#ffb4ac",
+                "surface-container": "#ffe9e6",
+                "outline-variant": "#e5bdb9",
+                "tertiary": "#545655",
+                "tertiary-fixed-dim": "#c6c6c6",
+                "primary-container": "#d42426",
+                "secondary-fixed-dim": "#c6c6c6",
+                "surface-container-high": "#ffe2de",
+                "inverse-surface": "#3f2c2a",
+                "surface-container-lowest": "#ffffff",
+                "on-tertiary-container": "#f1f1f0",
+                "primary": "#ae0012",
+                "on-tertiary-fixed-variant": "#454747",
+                "on-primary-container": "#ffedeb",
+                "on-error": "#ffffff",
+                "background": "#fff8f7",
+                "on-secondary-fixed": "#1a1c1c"
+            },
+            "borderRadius": {
+                "DEFAULT": "1rem",
+                "lg": "2rem",
+                "xl": "3rem",
+                "full": "9999px"
+            },
+            "fontFamily": {
+                "headline": ["Plus Jakarta Sans"],
+                "display": ["Plus Jakarta Sans"],
+                "body": ["Inter"],
+                "label": ["Inter"]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fff8f7;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .app-container {
+            max-width: 480px;
+            margin: 0 auto;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: #ffffff;
+            position: relative;
+        }
+        .scroll-area {
+            flex: 1;
+            overflow-y: auto;
+            padding-bottom: 120px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface">
+<div class="app-container shadow-2xl">
+<!-- TopAppBar -->
+<header class="sticky top-0 z-50 bg-surface-container-low shadow-sm flex items-center w-full px-5 h-16">
+<h1 class="text-headline-md font-headline font-bold text-primary">Secret Santa</h1>
+</header>
+<main class="scroll-area px-5 pt-8">
+<!-- Group Name Section -->
+<div class="mb-8">
+<p class="text-center text-[10px] font-bold text-primary uppercase tracking-widest mb-3">Nome do Grupo</p>
+<div class="bg-surface-container py-5 px-6 rounded-full text-center shadow-sm">
+<span class="text-on-surface font-headline font-bold text-lg">Família Silva 2024</span>
+</div>
+</div>
+<!-- Current Participants Section -->
+<div class="mb-8">
+<p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-4">Participantes Atuais</p>
+<div class="space-y-3">
+<!-- Participant 1 -->
+<div class="flex items-center bg-surface-container-low p-3 rounded-full shadow-sm hover:bg-surface-container-high transition-colors">
+<div class="w-12 h-12 bg-primary-container rounded-full flex items-center justify-center text-on-primary font-bold mr-4">
+                            RS
+                        </div>
+<div class="flex-1">
+<p class="text-on-surface font-semibold text-sm">Ricardo Silva</p>
+<p class="text-on-surface-variant text-[10px] uppercase">RICARDO@EMAIL.COM</p>
+</div>
+<button class="p-2 text-on-surface-variant hover:text-error transition-colors active:scale-95">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+<!-- Participant 2 -->
+<div class="flex items-center bg-surface-container-low p-3 rounded-full shadow-sm hover:bg-surface-container-high transition-colors">
+<div class="w-12 h-12 bg-tertiary rounded-full flex items-center justify-center text-on-tertiary font-bold mr-4">
+                            AS
+                        </div>
+<div class="flex-1">
+<p class="text-on-surface font-semibold text-sm">Ana Silva</p>
+<p class="text-on-surface-variant text-[10px] uppercase">ANA.SILVA@EMAIL.COM</p>
+</div>
+<button class="p-2 text-on-surface-variant hover:text-error transition-colors active:scale-95">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Add New Participant Section -->
+<div class="bg-surface-container-low rounded-xl p-6 mb-10">
+<div class="flex items-center mb-6">
+<span class="material-symbols-outlined text-primary mr-2">person_add</span>
+<h3 class="text-on-surface font-bold text-xs uppercase tracking-wider">Adicionar novo participante</h3>
+</div>
+<div class="space-y-5">
+<div>
+<label class="block text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-2 ml-4">Nome</label>
+<input class="w-full h-14 bg-white border-none rounded-full px-6 text-sm focus:ring-2 focus:ring-primary/20 placeholder:text-on-surface-variant/50 shadow-sm" placeholder="Nome completo" type="text">
+</div>
+<div>
+<label class="block text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-2 ml-4">E-mail</label>
+<input class="w-full h-14 bg-white border-none rounded-full px-6 text-sm focus:ring-2 focus:ring-primary/20 placeholder:text-on-surface-variant/50 shadow-sm" placeholder="email@exemplo.com" type="email">
+</div>
+<button class="w-full h-14 bg-secondary-container text-on-secondary-container font-bold text-sm uppercase rounded-full shadow-sm hover:bg-secondary-fixed transition-all active:scale-[0.98] mt-2">
+                        Adicionar
+                    </button>
+</div>
+</div>
+<!-- Main Action Button -->
+<div class="pb-10">
+<button class="w-full h-16 bg-primary-container text-on-primary-container font-headline font-bold text-base uppercase rounded-full shadow-lg shadow-primary/20 hover:brightness-110 transition-all active:scale-95 duration-200">
+                    Salvar Alterações
+                </button>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] z-50 flex justify-around items-center px-4 py-3 pb-6 bg-surface shadow-[0px_-4px_12px_rgba(26,28,28,0.06)] rounded-t-lg">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-container-high rounded-full transition-all active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined mb-1">home</span>
+<span class="text-[10px] font-bold uppercase">Início</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-6 py-2 shadow-md" href="#">
+<span class="material-symbols-outlined mb-0.5" style="font-variation-settings: 'FILL' 1;">group</span>
+<span class="text-[10px] font-bold uppercase">Grupos</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-container-high rounded-full transition-all active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined mb-1">person</span>
+<span class="text-[10px] font-bold uppercase">Perfil</span>
+</a>
+</nav>
+</div>
+<script>
+        // Simple micro-interaction for the delete buttons
+        document.querySelectorAll('button .material-symbols-outlined').forEach(icon => {
+            if (icon.innerText === 'delete') {
+                icon.closest('button').addEventListener('click', function() {
+                    const row = this.closest('.flex');
+                    row.style.opacity = '0';
+                    row.style.transform = 'translateX(20px)';
+                    row.style.transition = 'all 0.3s ease';
+                    setTimeout(() => {
+                        row.remove();
+                    }, 300);
+                });
+            }
+        });
+    </script>
+</body></html>

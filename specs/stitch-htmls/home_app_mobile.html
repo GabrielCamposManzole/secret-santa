@@ -1,0 +1,108 @@
+<!DOCTYPE html><html class="" lang="pt-BR" style=""><head><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" class="">
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Secret Santa - The Quest</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700&amp;family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>tailwind.config = {theme: {extend: {colors: {primary: "#ae0012", background: "#fff8f7", surface: "#fff8f7", "gray-light": "#E5E7EB", "dark-btn": "#1F1F1F", "surface-container-high": "#ffe2de", "tertiary-fixed": "#e2e2e2", "on-tertiary-fixed": "#1a1c1c", "surface-tint": "#bd0e19", "on-secondary": "#ffffff", "on-primary": "#ffffff", "on-tertiary-container": "#f1f1f0", "on-tertiary": "#ffffff", "surface-container": "#ffe9e6", "on-secondary-fixed": "#1a1c1c", "surface-bright": "#fff8f7", "inverse-surface": "#3f2c2a", "secondary-container": "#dddddd", "on-surface-variant": "#5c403d", "surface-container-low": "#fff0ef", "on-secondary-fixed-variant": "#454747", "on-primary-fixed-variant": "#93000d", "on-primary-fixed": "#410002", "outline-variant": "#e5bdb9", "on-surface": "#281716", "on-secondary-container": "#606161", "primary-fixed": "#ffdad6", "secondary-fixed-dim": "#c6c6c6", "on-background": "#281716", "surface-dim": "#f2d3cf", "inverse-on-surface": "#ffedea", error: "#ba1a1a", "tertiary-fixed-dim": "#c6c6c6", "on-error": "#ffffff", "tertiary-container": "#6c6e6e", "inverse-primary": "#ffb4ac", "on-primary-container": "#ffedeb", "primary-container": "#d42426", "surface-variant": "#fbdbd8", "surface-container-lowest": "#ffffff", outline: "#916f6b", "primary-fixed-dim": "#ffb4ac", tertiary: "#545655", "on-tertiary-fixed-variant": "#454747", "on-error-container": "#93000a", secondary: "#5d5f5f", "surface-container-highest": "#fbdbd8", "error-container": "#ffdad6", "secondary-fixed": "#e2e2e2"}, fontFamily: {sans: ["Inter", "sans-serif"], heading: ["Plus Jakarta Sans", "sans-serif"], headline: ["Plus Jakarta Sans"], display: ["Plus Jakarta Sans"], body: ["Inter"], label: ["Inter"]}, borderRadius: {DEFAULT: "1rem", lg: "2rem", xl: "3rem", full: "9999px"}, fontSize: {}}}};</script>
+<style data-purpose="custom-typography">
+    h1, h2, h3 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+    .quest-text {
+      color: #D42426;
+      font-style: italic;
+    }
+    p {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="text-slate-900 overflow-x-hidden bg-surface" style="min-height: 100dvh;"><header class="py-6 px-4 flex border-b border-gray-100 sticky top-0 z-50" style="background-color: rgb(248, 249, 249);">
+<div class="flex items-center" data-purpose="logo">
+<span class="text-primary font-extrabold text-2xl tracking-tighter font-heading">SecretSanta</span>
+</div>
+</header>
+<!-- BEGIN: MainHeader -->
+
+<!-- END: MainHeader -->
+<main>
+<!-- BEGIN: HeroSection -->
+<section class="px-6 pt-16 pb-12 text-center flex flex-col items-center">
+<h1 class="text-4xl md:text-5xl font-extrabold mb-6 max-w-xs md:max-w-md">
+        O Amigo Secreto reinventado com <span class="quest-text">"The Quest"</span>.
+      </h1>
+<p class="text-slate-600 text-lg mb-10 max-w-sm">
+        Transforme sua troca de presentes em uma jornada de mistério. Envie pistas e descubra quem é seu amigo através de uma experiência editorial premium.
+      </p>
+<!-- Input Group: Join Group -->
+<div class="relative w-full max-w-sm" data-purpose="join-group-input">
+<div class="flex items-center bg-gray-100 rounded-full p-1 border border-gray-200 px-2 mx-auto">
+<input class="bg-transparent border-none focus:ring-0 flex-grow py-3 text-slate-700 placeholder-slate-400 font-medium px-4" placeholder="Código do Grupo" type="text">
+<button class="bg-dark-btn text-white py-3 rounded-full font-bold hover:bg-black transition-colors px-4">
+            Jogar
+          </button>
+</div>
+</div>
+</section>
+<!-- END: HeroSection -->
+<!-- BEGIN: FeaturesContainer -->
+<section class="bg-gray-100 rounded-t-[48px] px-6 pt-20 pb-16 mt-4">
+<div class="text-center mb-12">
+<h2 class="text-3xl font-extrabold mb-4">Como funciona a Quest?</h2>
+<p class="text-slate-500 max-w-xs mx-auto">
+          Não é apenas uma troca de nomes. É uma experiência narrativa projetada para unir as pessoas.
+        </p>
+</div>
+<!-- Feature Cards Stack -->
+<div class="space-y-6 max-w-md mx-auto">
+<!-- Card 1: Sorteio Digital -->
+<article class="bg-white rounded-[32px] p-8 shadow-sm" data-purpose="feature-card">
+<div class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center mb-6">
+<!-- Exchange Arrows Icon -->
+<svg fill="none" height="24" stroke="#D42426" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="m16 3 4 4-4 4"></path><path d="M20 7H9a4 4 0 0 0-4 4v1"></path><path d="m8 21-4-4 4-4"></path><path d="M4 17h11a4 4 0 0 0 4-4v-1"></path>
+</svg>
+</div>
+<h3 class="text-xl font-extrabold mb-4">O Sorteio Digital</h3>
+<p class="text-slate-500 text-sm leading-relaxed">
+            O sorteio é instantâneo e 100% secreto. Nosso sistema garante que cada participante receba um amigo único sem revelar as conexões para ninguém do grupo.
+          </p>
+</article>
+<!-- Card 2: Grande Final -->
+<article class="bg-white rounded-[32px] p-8 shadow-sm" data-purpose="feature-card">
+<div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center mb-6">
+<!-- Party Popper Icon -->
+<svg fill="none" height="24" stroke="#F59E0B" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M5.8 11.3 2 22l10.7-3.8Z"></path><path d="M4 3h.01"></path><path d="M22 8h.01"></path><path d="M15 2h.01"></path><path d="M22 20h.01"></path><path d="m22 2-2.24 2.24a2.73 2.73 0 0 1-3.84 0l-1.32-1.32"></path><path d="m11.35 15.65 1.76-1.76a2.73 2.73 0 0 0 0-3.84L12.5 9.5"></path>
+</svg>
+</div>
+<h3 class="text-xl font-extrabold mb-4">O Grande Final</h3>
+<p class="text-slate-500 text-sm leading-relaxed">
+            Em "The Quest", a revelação é gamificada. Use as pistas acumuladas para fazer seu palpite final e descobrir a identidade do seu Secret Santa em uma experiência interativa emocionante.
+          </p>
+</article>
+</div>
+</section>
+<!-- END: FeaturesContainer -->
+</main>
+<!-- BEGIN: Footer -->
+<footer class="py-6 px-4 border-t border-gray-100" style="background-color: rgb(248, 249, 249);"><div class="max-w-md mx-auto flex flex-col items-center space-y-6"><p class="text-slate-400 text-xs font-medium">© 2024 Secret Santa Editorial. All rights reserved.</p></div></footer>
+<!-- END: Footer -->
+
+
+
+
+</body></html>

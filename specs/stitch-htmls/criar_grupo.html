@@ -1,0 +1,173 @@
+<!DOCTYPE html><html lang="pt-BR" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>SecretSanta - Criar Novo Grupo</title>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Plus Jakarta Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'brand-red': '#d42426',
+            'brand-green': '#2d6a4f',
+            'brand-green-light': '#e8f5e9',
+            'surface-bg': '#fbfbfb',
+            'header-bg': '#f8f9f9',
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          borderRadius: {
+            'xl-custom': '2rem',
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-layout">
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #fbfbfb;
+      color: #1a1a1a;
+    }
+    .dashed-border-card {
+      background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='32' ry='32' stroke='%232D6A4FFF' stroke-width='2' stroke-dasharray='8%2c 8' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+      border-radius: 2rem;
+    }
+  </style>
+</head>
+<body class="flex flex-col min-h-screen">
+<!-- BEGIN: MainHeader -->
+<header class="bg-header-bg py-6 px-6" data-purpose="header-section">
+<h1 class="text-brand-red font-extrabold text-2xl tracking-tight">SecretSanta</h1>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: MainContent -->
+<main class="flex-grow px-6 pt-10 pb-24" data-purpose="create-group-form">
+<!-- BEGIN: TitleSection -->
+<section class="mb-10">
+<h2 class="text-4xl font-extrabold text-gray-900 mb-2">Criar Novo Grupo</h2>
+<p class="text-gray-500 font-medium leading-relaxed">
+        Comece sua tradição de Natal reunindo as pessoas que você ama.
+      </p>
+</section>
+<!-- END: TitleSection -->
+<!-- BEGIN: GroupNameInput -->
+<section class="bg-white rounded-xl-custom p-8 shadow-sm mb-10" data-purpose="group-name-container">
+<label class="block text-brand-red font-bold text-sm mb-3" for="group-name">Nome do Grupo</label>
+<input class="w-full bg-gray-100 border-none rounded-full py-4 px-6 focus:ring-2 focus:ring-brand-red text-gray-700 placeholder-gray-400" id="group-name" placeholder="Ex: Família Silva 2024" type="text">
+</section>
+<!-- END: GroupNameInput -->
+<!-- BEGIN: ParticipantsSection -->
+<section class="mb-8" data-purpose="participants-list">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-2xl font-bold text-gray-900">Participantes</h3>
+<span class="bg-green-100 text-green-700 text-xs font-bold px-3 py-1.5 rounded-full tracking-wider">3 ADICIONADOS</span>
+</div>
+<!-- Participant Cards -->
+<div class="space-y-4">
+<!-- Participant 1 -->
+<div class="flex items-center bg-white p-4 rounded-full shadow-sm">
+<div class="w-12 h-12 rounded-full bg-pink-100 flex items-center justify-center text-pink-700 font-bold mr-4">AM</div>
+<div class="flex-grow">
+<h4 class="font-bold text-gray-900 text-sm">Ana Maria</h4>
+<p class="text-gray-400 text-xs">ana.maria@email.com</p>
+</div>
+<button class="p-2 text-red-200 hover:text-red-500 transition-colors">
+<svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+</div>
+<!-- Participant 2 -->
+<div class="flex items-center bg-white p-4 rounded-full shadow-sm">
+<div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-green-700 font-bold mr-4">JP</div>
+<div class="flex-grow">
+<h4 class="font-bold text-gray-900 text-sm">João Pedro</h4>
+<p class="text-gray-400 text-xs">jp.silva@email.com</p>
+</div>
+<button class="p-2 text-red-200 hover:text-red-500 transition-colors">
+<svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+</div>
+<!-- Participant 3 -->
+<div class="flex items-center bg-white p-4 rounded-full shadow-sm">
+<div class="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center text-orange-700 font-bold mr-4">RC</div>
+<div class="flex-grow">
+<h4 class="font-bold text-gray-900 text-sm">Ricardo Costa</h4>
+<p class="text-gray-400 text-xs">ricardo.c@email.com</p>
+</div>
+<button class="p-2 text-red-200 hover:text-red-500 transition-colors">
+<svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+</div>
+</div>
+</section>
+<!-- END: ParticipantsSection -->
+<!-- BEGIN: AddParticipantCard -->
+<section class="dashed-border-card bg-brand-green-light p-8 mb-12" data-purpose="add-participant-form">
+<div class="flex items-start gap-3 mb-6">
+<div class="mt-1">
+<svg class="h-6 w-6 text-brand-green" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<h3 class="text-xl font-bold text-brand-green leading-tight">Adicionar novo participante</h3>
+</div>
+<div class="space-y-4">
+<input class="w-full bg-white border-none rounded-full py-4 px-6 focus:ring-2 focus:ring-brand-green text-gray-700 placeholder-gray-400" placeholder="Nome do Participante" type="text">
+<input class="w-full bg-white border-none rounded-full py-4 px-6 focus:ring-2 focus:ring-brand-green text-gray-700 placeholder-gray-400" placeholder="E-mail do Participante" type="email">
+<button class="w-full bg-brand-green text-white font-bold py-4 rounded-full flex items-center justify-center gap-2 mt-4 active:scale-95 transition-transform">
+<span class="">+</span>
+<span class="">Adicionar</span>
+</button>
+</div>
+</section>
+<!-- END: AddParticipantCard -->
+<!-- BEGIN: ActionButtons -->
+<section class="text-center">
+<button class="w-full bg-brand-red text-white font-bold text-lg py-5 rounded-full flex items-center justify-center gap-3 shadow-xl active:scale-95 transition-transform">
+<span class="">Salvar e Criar Grupo</span>
+<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path>
+</svg>
+</button>
+<p class="text-gray-500 text-sm mt-4 font-medium px-4">
+        Os convites serão enviados automaticamente por e-mail.
+      </p>
+</section>
+<!-- END: ActionButtons -->
+</main>
+<!-- END: MainContent -->
+<!-- BEGIN: BottomNavBar -->
+
+<!-- END: BottomNavBar -->
+
+
+
+
+
+
+<nav class="fixed bottom-0 left-0 w-full z-50 bg-white shadow-[0px_-2px_8px_rgba(26,28,28,0.04)] px-4 py-2 flex justify-around items-center">
+<button class="flex flex-col items-center justify-center text-gray-500 px-5 py-1 hover:bg-gray-100 transition-all active:scale-90 duration-150">
+<span class="material-symbols-outlined">home</span>
+<span class="text-xs font-medium mt-1">Início</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-brand-red text-white rounded-full px-6 py-1.5 active:scale-90 duration-150">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">group</span>
+<span class="text-xs font-bold mt-0.5">Grupos</span>
+</button>
+<button class="flex flex-col items-center justify-center text-gray-500 px-5 py-1 hover:bg-gray-100 transition-all active:scale-90 duration-150">
+<span class="material-symbols-outlined">person</span>
+<span class="text-xs font-medium mt-1">Perfil</span>
+</button>
+</nav></body></html>

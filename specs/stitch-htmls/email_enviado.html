@@ -1,0 +1,110 @@
+<!DOCTYPE html><html lang="pt-br"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>SecretSanta - E-mail Enviado</title>
+<!-- Tailwind CSS CDN with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Plus Jakarta Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              red: '#d42426',
+              headerBg: '#f8f9f9',
+              background: '#f8f9f9',
+              surface: '#ffffff',
+              info: '#f1f1f1'
+            }
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          borderRadius: {
+            'xl': '1.5rem',
+            '2xl': '2rem',
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-styling">
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+    /* Shadow for the main card */
+    .card-shadow {
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+    }
+  </style>
+</head>
+<body class="bg-brand-background min-h-screen flex flex-col text-slate-800">
+<!-- BEGIN: MainHeader -->
+<header class="bg-brand-headerBg px-6 py-6 flex items-center justify-start border-b border-gray-100">
+<h1 class="text-brand-red font-extrabold text-2xl tracking-tight">SecretSanta</h1>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: MainContent -->
+<main class="flex-grow flex flex-col items-center justify-center px-6 py-10">
+<!-- BEGIN: SuccessCard -->
+<div class="bg-white w-full max-w-md rounded-[2.5rem] p-8 card-shadow flex flex-col items-center text-center" data-purpose="success-message-container">
+<!-- Icon Illustration -->
+<div class="relative mb-8">
+<!-- Sparkle icons -->
+<div class="absolute -top-2 -right-2 text-yellow-400">
+<svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 2l2.4 7.2 7.6 0-6.15 4.47L18.25 21 12 16.5 5.75 21l2.4-7.33L2 9.2l7.6 0z"></path>
+</svg>
+</div>
+<!-- Circle Red Envelope -->
+<div class="w-24 h-24 bg-brand-red rounded-full flex items-center justify-center shadow-lg shadow-red-200">
+<svg class="text-white w-12 h-12" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+</div>
+<!-- Text Content -->
+<h2 class="text-3xl font-extrabold mb-4 text-slate-900">E-mail Enviado!</h2>
+<p class="text-slate-500 text-lg leading-relaxed mb-10 px-2">
+        Enviamos um link de recuperação para o seu e-mail. Verifique sua caixa de entrada e siga as instruções.
+      </p>
+<!-- Primary Action -->
+<a class="w-full bg-brand-red hover:bg-red-700 text-white font-bold py-4 rounded-full text-lg transition-colors mb-6 flex items-center justify-center shadow-md" href="#">
+        Voltar para o Login
+      </a>
+<!-- Secondary Action -->
+<button class="flex items-center gap-2 text-emerald-600 font-semibold hover:text-emerald-700 transition-colors py-2">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>Não recebeu? Reenviar e-mail</span>
+</button>
+</div>
+<!-- END: SuccessCard -->
+<!-- BEGIN: InfoNotice -->
+<div class="mt-8 w-full max-w-md bg-slate-100 rounded-3xl p-6 flex gap-4 items-start" data-purpose="info-alert">
+<div class="bg-brand-red/10 p-2 rounded-full mt-1">
+<svg class="w-5 h-5 text-brand-red" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<p class="text-slate-600 text-sm leading-snug">
+        Se você não encontrar o e-mail em alguns minutos, verifique sua pasta de Spam ou Promoções.
+      </p>
+</div>
+<!-- END: InfoNotice -->
+</main>
+<!-- END: MainContent -->
+<!-- BEGIN: MainFooter -->
+<footer class="bg-brand-headerBg py-8 px-6 text-center">
+<p class="text-slate-400 text-sm">
+      © 2024 Secret Santa Editorial. All rights reserved.
+    </p>
+</footer>
+<!-- END: MainFooter -->
+</body></html>

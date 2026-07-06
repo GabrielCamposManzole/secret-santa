@@ -1,0 +1,114 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>SecretSanta - Recuperar Senha</title>
+<!-- Tailwind CSS v3 with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Plus Jakarta Sans Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'brand-red': '#d42426',
+            'surface-light': '#f8f9f9',
+            'input-bg': '#e9e9e9',
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          borderRadius: {
+            'full': '9999px',
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-typography">
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #f8f9f9;
+    }
+    .text-title {
+      font-weight: 800;
+      color: #1a1a1a;
+    }
+  </style>
+</head>
+<body class="flex flex-col min-h-screen">
+<!-- BEGIN: MainHeader -->
+<header class="bg-surface-light px-6 py-5 border-b border-gray-100" data-purpose="app-header">
+<div class="max-w-md mx-auto w-full">
+<h1 class="text-2xl font-extrabold text-brand-red tracking-tight">SecretSanta</h1>
+</div>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: MainContent -->
+<main class="flex-grow flex flex-col items-center justify-center px-6 py-12" data-purpose="recovery-content">
+<div class="w-full max-w-md space-y-8 flex flex-col items-center">
+<!-- Icon Container -->
+<div class="relative" data-purpose="status-icon">
+<div class="w-24 h-24 bg-brand-red rounded-full flex items-center justify-center shadow-lg shadow-red-200">
+<!-- Refresh/Lock Icon Simulation -->
+<svg class="h-10 w-10 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" stroke-linecap="round" stroke-linejoin="round"></path>
+<path class="opacity-0" d="M12 11v2m0 0v2m0-2h-1m1 0h1" stroke-linecap="round" stroke-linejoin="round"></path>
+<circle class="scale-50 translate-y-1" cx="12" cy="13" fill="white" r="2" stroke="white"></circle>
+</svg>
+</div>
+</div>
+<!-- Text Header -->
+<div class="text-center space-y-3">
+<h2 class="text-3xl text-title">Recuperar Senha</h2>
+<p class="text-gray-500 text-base max-w-[280px] mx-auto">
+          Digite seu e-mail para receber as instruções de recuperação.
+        </p>
+</div>
+<!-- Recovery Form -->
+<form class="w-full space-y-6" data-purpose="recovery-form">
+<!-- Email Input Group -->
+<div class="relative pt-2">
+<label class="absolute left-8 px-2 bg-white text-brand-red text-xs font-bold z-10 rounded -top-3" for="email">
+            E-mail
+          </label>
+<div class="relative flex items-center">
+<div class="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
+<svg class="h-5 w-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+</svg>
+</div>
+<input class="block w-full pl-12 pr-4 py-5 bg-input-bg border-none rounded-full text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-brand-red focus:bg-white transition-all duration-200" id="email" placeholder="seu@email.com" type="email">
+</div>
+</div>
+<!-- Submit Button -->
+<button class="w-full flex items-center justify-center gap-2 py-5 bg-brand-red text-white font-bold text-lg rounded-full shadow-lg shadow-red-200 hover:bg-red-700 active:scale-[0.98] transition-all duration-200" type="submit">
+<span class="">Enviar Link</span>
+<svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" fill-rule="evenodd"></path>
+</svg>
+</button>
+</form>
+<!-- Navigation Link -->
+<div class="pt-4 text-center">
+<p class="text-gray-600 font-medium">
+          Lembrou a senha? <a class="text-brand-red font-bold hover:underline" href="#">Fazer Login</a>
+</p>
+</div>
+</div>
+</main>
+<!-- END: MainContent -->
+<!-- BEGIN: MainFooter -->
+<footer class="bg-surface-light py-8 px-6 border-t border-gray-100 fixed bottom-0 w-full" data-purpose="app-footer">
+<div class="max-w-md mx-auto text-center">
+<p class="text-gray-400 text-sm font-medium">
+        © 2023 SecretSanta. Todos os direitos reservados.
+      </p>
+</div>
+</footer>
+<!-- END: MainFooter -->
+
+
+</body></html>

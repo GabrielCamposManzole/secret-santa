@@ -1,0 +1,122 @@
+{
+  "usuarios": [
+    {
+      "nome_completo": "Gabriel Campos Manzoli",
+      "idade": 29,
+      "email": "gh987181127@gmail.com",
+      "senha": "123",
+      "cabelo_cor": "Castanho",
+      "cabelo_tipo": "Liso",
+      "cabelo_comprimento": "Curto ",
+      "olhos_cor": "Verdes",
+      "altura": 190,
+      "id": "yTL59CyQFI8"
+    },
+    {
+      "nome_completo": "Roni",
+      "idade": 18,
+      "email": "Roni@exemple.com",
+      "senha": "123",
+      "cabelo_cor": "Preto",
+      "cabelo_tipo": "Cacheado",
+      "cabelo_comprimento": "Médio ",
+      "olhos_cor": "Preto",
+      "altura": 100,
+      "id": "huECPuZ9GNk"
+    },
+    {
+      "nome_completo": "Neymar",
+      "idade": 32,
+      "email": "Ney@exemple.com",
+      "senha": "123",
+      "cabelo_cor": "Rosas",
+      "cabelo_tipo": "Cacheado",
+      "cabelo_comprimento": "Moicano",
+      "olhos_cor": "Azuis",
+      "altura": 189,
+      "id": "VXOyWjaHZWc"
+    }
+  ],
+  "grupos": [
+    {
+      "nome": "Web3 o retorno",
+      "token": "ISBVS6FI",
+      "sorteado": true,
+      "finalizado": false,
+      "dono_id": "yTL59CyQFI8",
+      "id": "MNsJvPwk8WQ"
+    },
+    {
+      "nome": "Teste",
+      "token": "JPHCJ7WL",
+      "sorteado": false,
+      "finalizado": false,
+      "dono_id": "yTL59CyQFI8",
+      "id": "MIQTG5jQAck"
+    }
+  ],
+  "usuario_grupo": [
+    {
+      "usuario_id": "yTL59CyQFI8",
+      "grupo_id": "MNsJvPwk8WQ",
+      "id_pessoa_sorteada": "VXOyWjaHZWc",
+      "preenchido_caracteristicas": true,
+      "jogado": true,
+      "resultado": false,
+      "chute_id": "huECPuZ9GNk",
+      "id": "dWmqDCcdER4"
+    },
+    {
+      "usuario_id": "huECPuZ9GNk",
+      "grupo_id": "MNsJvPwk8WQ",
+      "id_pessoa_sorteada": "yTL59CyQFI8",
+      "preenchido_caracteristicas": true,
+      "jogado": true,
+      "resultado": true,
+      "chute_id": "yTL59CyQFI8",
+      "id": "DgE48sQrrFs"
+    },
+    {
+      "usuario_id": "VXOyWjaHZWc",
+      "grupo_id": "MNsJvPwk8WQ",
+      "id_pessoa_sorteada": "huECPuZ9GNk",
+      "preenchido_caracteristicas": true,
+      "jogado": false,
+      "resultado": false,
+      "chute_id": null,
+      "id": "a-Q0jfr5xB8"
+    },
+    {
+      "usuario_id": "yTL59CyQFI8",
+      "grupo_id": "MIQTG5jQAck",
+      "id_pessoa_sorteada": null,
+      "preenchido_caracteristicas": true,
+      "jogado": false,
+      "resultado": false,
+      "chute_id": null,
+      "id": "u5VL0Ba6Sbw"
+    },
+    {
+      "usuario_id": "huECPuZ9GNk",
+      "grupo_id": "MIQTG5jQAck",
+      "id_pessoa_sorteada": null,
+      "preenchido_caracteristicas": false,
+      "jogado": false,
+      "resultado": false,
+      "chute_id": null,
+      "id": "2aTRvZodtxg"
+    },
+    {
+      "usuario_id": "VXOyWjaHZWc",
+      "grupo_id": "MIQTG5jQAck",
+      "id_pessoa_sorteada": null,
+      "preenchido_caracteristicas": true,
+      "jogado": false,
+      "resultado": false,
+      "chute_id": null,
+      "id": "fF7ldCAX0DI"
+    }
+  ],
+  "sorteios": [],
+  "$schema": "./node_modules/json-server/schema.json"
+}
